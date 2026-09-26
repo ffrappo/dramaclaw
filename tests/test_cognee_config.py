@@ -162,9 +162,10 @@ def test_project_storage_context_forces_kuzu_over_legacy_neo4j_env(tmp_path, mon
     assert os.environ["GRAPH_DATABASE_PROVIDER"] == "kuzu"
 
 
-def test_newapi_cognee_env_maps_to_openai_compatible_gateway(monkeypatch):
+def test_newapi_cognee_env_maps_to_openai_compatible_gateway(monkeypatch, tmp_path):
     from novelvideo.cognee import config as cognee_config
 
+    monkeypatch.setenv("ST_CONTROL_PLANE_DSN", "postgresql://test-control-plane")
     monkeypatch.setenv("NEWAPI_BASE_URL", "http://127.0.0.1:3000/v1")
     monkeypatch.setenv("NEWAPI_API_KEY", "newapi-token")
     monkeypatch.delenv("COGNEE_LLM_ENDPOINT", raising=False)

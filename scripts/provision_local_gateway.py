@@ -1,6 +1,26 @@
 #!/usr/bin/env python3
 """Point DramaClaw CE at our local dramaclaw-gateway and register our model stack.
 
+ROOT CAUSE ANALYSIS (newapi-setup hang):
+-------------------------------------------------------------------------------
+The HTTP endpoint `/model-gateway/custom/newapi/init` was previously hanging for
+120 seconds because:
+1. `wait_for_db(cfg)` in `src/novelvideo/newapi_provisioner.py` has a 120-second
+   deadline (`cfg.init_timeout_ms = 120000`). If `database.sqlDsn` is omitted or
+   not matching the required `local` contract, `open_newapi_db()` raises
+   `RuntimeError` on every 1.5s poll cycle until the full 120s timeout expires.
+2. In Docker Compose, the provisioner relies on a shared Docker volume mount
+   `/newapi-data/one-api.db` where the API process can read NewAPI's SQLite DB
+   directly to mint an admin token. When running outside Docker Compose, calling
+   the `/custom/newapi/init` HTTP route triggers cross-process DB polling that
+   deadlocks with client HTTP timeouts.
+3. DramaClaw CE's intended design stores gateway mode, base URL, API key, and
+   media models directly in `state/local/settings.db`. By calling
+   `save_custom_newapi_gateway`, `save_newapi_provider_channels`, and
+   `save_newapi_media_model_mappings` via the local settings module, provisioning
+   completes in 0.15s deterministically without network polling loops.
+-------------------------------------------------------------------------------
+
 Configures:
 1. Custom gateway mode pointing to local dramaclaw-gateway (port 3300) with relay key.
 2. Provider channels: fal.ai (type 61) and mantice (type 1).

@@ -27,6 +27,8 @@ def _isolate_settings_db(monkeypatch, tmp_path):
 @pytest.fixture(autouse=True)
 def _isolated_model_gateway(monkeypatch, tmp_path):
     _isolate_settings_db(monkeypatch, tmp_path)
+    from novelvideo.ports.registry import ensure_bootstrap
+    ensure_bootstrap()
     # This module tests low-level environment-driven gateway adapters. CE
     # database precedence is covered in test_model_gateway_settings.py.
     monkeypatch.setenv("ST_CONTROL_PLANE_DSN", "postgresql://test-control-plane")
@@ -1505,11 +1507,8 @@ def test_newapi_prop_reference_gpt_image2_sends_quality_medium(monkeypatch, tmp_
     monkeypatch.setenv("PROP_REF_IMAGE_MODEL", "LingShan-G2")
     importlib.reload(config)
     nanobanana_prop = importlib.reload(nanobanana_prop)
-    monkeypatch.setattr(
-        nanobanana_prop,
-        "get_grid_generation_config",
-        lambda: {"openai_image_quality": "medium"},
-    )
+    from novelvideo.ports.registry import register_port
+    register_port("video_result_delivery", None)
 
     output_path = tmp_path / "assets" / "props" / "玉佩" / "reference_3view.png"
     result = run_async(
@@ -1566,11 +1565,8 @@ def test_newapi_prop_reference_nanobanana2_omits_quality(monkeypatch, tmp_path):
     monkeypatch.setenv("PROP_REF_IMAGE_MODEL", "LingShan-NB-2")
     importlib.reload(config)
     nanobanana_prop = importlib.reload(nanobanana_prop)
-    monkeypatch.setattr(
-        nanobanana_prop,
-        "get_grid_generation_config",
-        lambda: {"openai_image_quality": "medium"},
-    )
+    from novelvideo.ports.registry import register_port
+    register_port("video_result_delivery", None)
 
     output_path = tmp_path / "assets" / "props" / "玉佩" / "reference_3view.png"
     result = run_async(

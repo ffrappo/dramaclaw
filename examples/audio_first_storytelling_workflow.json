@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "name": "Audio-First Storytelling Scene Template",
+  "description": "6-node pattern: Voice Audio + Character Still + ThinkSound Ambient Bed -> MiniMax H3 Max Turbo Video -> Compose",
+  "workflow": {
+    "nodes": [
+      {
+        "id": "node_script_1",
+        "type": "script",
+        "position": { "x": 100, "y": 100 },
+        "data": {
+          "title": "Scene 1: Cold Open",
+          "character": "Elena",
+          "dialogue": "I told you not to look into the locked drawer. Some secrets are meant to stay buried.",
+          "action": "Elena stands near the window, turning slowly toward camera with a conflicted expression."
+        }
+      },
+      {
+        "id": "node_voice_audio_1",
+        "type": "audio",
+        "position": { "x": 450, "y": 50 },
+        "data": {
+          "title": "Elena Voiceover (Audio First)",
+          "audioType": "narration",
+          "prompt": "I told you not to look into the locked drawer. Some secrets are meant to stay buried.",
+          "voiceName": "Elena Studio Voice"
+        }
+      },
+      {
+        "id": "node_character_still_1",
+        "type": "image",
+        "position": { "x": 450, "y": 250 },
+        "data": {
+          "title": "Elena Character Reference (First Frame)",
+          "prompt": "Medium close-up portrait of Elena, 30s woman, sharp gaze, dark coat, cinematic soft lighting from window, photorealistic 8k"
+        }
+      },
+      {
+        "id": "node_ambient_soundbed_1",
+        "type": "audio",
+        "position": { "x": 450, "y": 450 },
+        "data": {
+          "title": "Room Ambience (ThinkSound Native)",
+          "model": "thinksound-native",
+          "prompt": "Soft rain against glass window pane, quiet antique wooden room tone, distant low rumble of thunder, no voices",
+          "duration": 6
+        }
+      },
+      {
+        "id": "node_video_gen_1",
+        "type": "video",
+        "position": { "x": 800, "y": 150 },
+        "data": {
+          "title": "Scene 1 Video (MiniMax H3 Max Turbo)",
+          "model": "MiniMax-H3MaxTurbo",
+          "prompt": "The camera slowly pushes in as Elena speaks, her lips moving naturally to her words, subtle gaze shift from window to lens, cinematic depth of field",
+          "resolution": "768P",
+          "ratio": "16:9",
+          "duration": 6
+        }
+      },
+      {
+        "id": "node_compose_1",
+        "type": "videoCompose",
+        "position": { "x": 1150, "y": 200 },
+        "data": {
+          "title": "Final Scene Conform",
+          "soundbedVolume": -33.0,
+          "dialogueVolume": 0.0
+        }
+      }
+    ],
+    "edges": [
+      { "id": "e_voice_to_video", "source": "node_voice_audio_1", "target": "node_video_gen_1", "type": "reference" },
+      { "id": "e_still_to_video", "source": "node_character_still_1", "target": "node_video_gen_1", "type": "first_frame" },
+      { "id": "e_video_to_compose", "source": "node_video_gen_1", "target": "node_compose_1", "type": "video_track" },
+      { "id": "e_voice_to_compose", "source": "node_voice_audio_1", "target": "node_compose_1", "type": "primary_audio" },
+      { "id": "e_bed_to_compose", "source": "node_ambient_soundbed_1", "target": "node_compose_1", "type": "ambient_audio" }
+    ]
+  }
+}
