@@ -1725,8 +1725,8 @@ class FreezoneTextGenerateRequest(BaseModel):
 
 class FreezoneTextTranslateData(BaseModel):
     translated_text: str
-    source_language: Literal["zh", "en"]
-    target_language: Literal["zh", "en"]
+    source_language: Literal["zh", "en", "it"]
+    target_language: Literal["zh", "en", "it"]
     node_type: Literal["generic", "image", "video", "audio", "text"]
 
 

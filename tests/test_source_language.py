@@ -35,7 +35,7 @@ from novelvideo.utils.source_language import (
         ("ESCENA 1 - SALON - DIA\nMaria abre la puerta.", "zh"),
         ("Er geht in das Zimmer.", "zh"),
         ("On entre dans la pièce.", "zh"),
-        ("Lei entra in camera.", "zh"),
+        ("Lei entra in camera.", "it"),
         ("Tú corres.", "zh"),
         ("JUAN: Tú corres.", "zh"),
         ("Tú comes.", "zh"),
@@ -62,3 +62,10 @@ def test_chinese_instruction_keeps_prose_chinese_and_names_unchanged():
 
     assert "中文" in instruction
     assert "原样" in instruction
+
+
+def test_italian_instruction_keeps_prose_italian_and_names_verbatim():
+    instruction = asset_language_instruction("it")
+
+    assert "Italian" in instruction
+    assert "verbatim" in instruction

@@ -11,7 +11,7 @@ import langid
 from langdetect import DetectorFactory, LangDetectException, detect
 import wordninja
 
-AssetLanguage = Literal["zh", "en"]
+AssetLanguage = Literal["zh", "en", "it"]
 
 DetectorFactory.seed = 0
 
@@ -76,6 +76,8 @@ def detect_asset_language(text: str) -> AssetLanguage:
     ascii_prose = unicodedata.normalize("NFKD", prose).encode("ascii", "ignore").decode()
     ascii_word_count = len(re.findall(r"[A-Za-z]+", ascii_prose))
     langid_detected = langid.classify(ascii_prose)[0] if ascii_prose.strip() else ""
+    if detected == "it" or langid_detected == "it":
+        return "it"
     if detected == "en" and (langid_detected == "en" or ascii_word_count >= 3):
         return "en"
     if langid_detected == "en" and looks_like_short_english_action:
@@ -98,6 +100,12 @@ def detect_asset_language(text: str) -> AssetLanguage:
 
 def asset_language_instruction(language: AssetLanguage) -> str:
     """Return the shared language rule appended to model requests."""
+    if language == "it":
+        return (
+            "Write every user-visible prose field in Italian. "
+            "Keep every supplied character and location name verbatim; "
+            "never translate, romanize, or rewrite a name."
+        )
     if language == "en":
         return (
             "Write every user-visible prose field in English. "

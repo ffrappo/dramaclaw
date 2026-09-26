@@ -209,10 +209,10 @@ class FreezoneTranslationResult(BaseModel):
     """Structured translation result produced by the LLM."""
 
     translated_text: str = Field(description="Translated prompt text.")
-    source_language: Literal["zh", "en"] = Field(
+    source_language: Literal["zh", "en", "it"] = Field(
         description="Dominant natural language detected from the source text."
     )
-    target_language: Literal["zh", "en"] = Field(
+    target_language: Literal["zh", "en", "it"] = Field(
         description="Opposite target language used for translation."
     )
 

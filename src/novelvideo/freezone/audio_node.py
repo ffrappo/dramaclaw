@@ -858,6 +858,27 @@ async def generate_freezone_audio_eleven_music(
     if _audio_suffix(fmt) != ".mp3":
         output_path = output_path.with_suffix(_audio_suffix(fmt))
 
+    model_name = str(model or "LingShan-MU-11").strip() or "LingShan-MU-11"
+
+    from novelvideo.audio.soundbed_provider import is_soundbed_model, get_soundbed_provider
+    if is_soundbed_model(model_name):
+        provider = get_soundbed_provider(model_name)
+        sec = max(1, min(length // 1000, 30))
+        await provider.generate(
+            prompt=clean_prompt,
+            output_path=output_path,
+            duration_seconds=sec,
+            output_format=fmt,
+        )
+        return FreezoneAudioSpeechResult(
+            audio_path=output_path,
+            duration_ms=_duration_ms(output_path) or length,
+            mime_type=_audio_mime_type(fmt),
+            model=model_name,
+            voice_source=model_name,
+            voice_sha256="",
+        )
+
     metadata: dict[str, Any] = {
         "music_length_ms": length,
         "force_instrumental": bool(force_instrumental),
@@ -865,8 +886,6 @@ async def generate_freezone_audio_eleven_music(
         "output_format": str(output_format or "mp3_44100_128").strip()
         or "mp3_44100_128",
     }
-
-    model_name = str(model or "LingShan-MU-11").strip() or "LingShan-MU-11"
     reservation_id = ""
     try:
         reservation_id = await _reserve_music_model_call(

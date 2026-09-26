@@ -1,17 +1,28 @@
 {
   "referenceValidation": {
-    "firstFrame": "First frame", "lastFrame": "Last frame",
-    "title": "Reference media does not meet model requirements", "hint": "Correct the listed media before generating. Locate opens the corresponding canvas node.", "locate": "Locate media",
-    "image": "Image", "audio": "Audio", "video": "Video",
+    "firstFrame": "First frame",
+    "lastFrame": "Last frame",
+    "title": "Reference media does not meet model requirements",
+    "hint": "Correct the listed media before generating. Locate opens the corresponding canvas node.",
+    "locate": "Locate media",
+    "image": "Image",
+    "audio": "Audio",
+    "video": "Video",
     "format": "Actual format: {{actual}}; supported: {{expected}}.",
     "unreadable": "Unable to read or identify this media. Please upload a valid file.",
     "maxMB": "Actual size: {{actual}} MB; maximum: {{expected}} MB.",
-    "minWidth": "Width: {{actual}} px; minimum: {{expected}} px.", "maxWidth": "Width: {{actual}} px; maximum: {{expected}} px.",
-    "minHeight": "Height: {{actual}} px; minimum: {{expected}} px.", "maxHeight": "Height: {{actual}} px; maximum: {{expected}} px.",
-    "minAspectRatio": "Aspect ratio: {{actual}}; minimum: {{expected}}.", "maxAspectRatio": "Aspect ratio: {{actual}}; maximum: {{expected}}.",
-    "minFPS": "Frame rate: {{actual}} fps; minimum: {{expected}} fps.", "maxFPS": "Frame rate: {{actual}} fps; maximum: {{expected}} fps.",
-    "minDuration": "Duration: {{actual}} s; each clip must be at least {{expected}} s.", "maxDuration": "Duration: {{actual}} s; each clip must be at most {{expected}} s.",
-    "totalMinDuration": "Total reference duration: {{actual}} s; minimum: {{expected}} s.", "totalMaxDuration": "Total reference duration: {{actual}} s; maximum: {{expected}} s."
+    "minWidth": "Width: {{actual}} px; minimum: {{expected}} px.",
+    "maxWidth": "Width: {{actual}} px; maximum: {{expected}} px.",
+    "minHeight": "Height: {{actual}} px; minimum: {{expected}} px.",
+    "maxHeight": "Height: {{actual}} px; maximum: {{expected}} px.",
+    "minAspectRatio": "Aspect ratio: {{actual}}; minimum: {{expected}}.",
+    "maxAspectRatio": "Aspect ratio: {{actual}}; maximum: {{expected}}.",
+    "minFPS": "Frame rate: {{actual}} fps; minimum: {{expected}} fps.",
+    "maxFPS": "Frame rate: {{actual}} fps; maximum: {{expected}} fps.",
+    "minDuration": "Duration: {{actual}} s; each clip must be at least {{expected}} s.",
+    "maxDuration": "Duration: {{actual}} s; each clip must be at most {{expected}} s.",
+    "totalMinDuration": "Total reference duration: {{actual}} s; minimum: {{expected}} s.",
+    "totalMaxDuration": "Total reference duration: {{actual}} s; maximum: {{expected}} s."
   },
   "app": {
     "title": "SuperTale",
@@ -437,7 +448,7 @@
     }
   },
   "header": {
-    "partyFounding105": "庆祝建党105周年",
+    "partyFounding105": "105th Anniversary",
     "settings": "Settings",
     "settingsWithWarning": "Settings, missing configuration",
     "settingsWarningBubble": "Missing setup",
@@ -449,7 +460,7 @@
       "changePassword": "Change password",
       "setPassword": "Set password",
       "selectLanguage": "Select language",
-      "languageChinese": "中文",
+      "languageChinese": "Chinese",
       "languageEnglish": "English",
       "languageVietnamese": "Tiếng Việt",
       "phoneBinding": {
@@ -494,7 +505,8 @@
         "save": "Save avatar",
         "saving": "Saving…",
         "error": "Avatar upload failed, please try again"
-      }
+      },
+      "languageItalian": "Italian"
     }
   },
   "organization": {
@@ -641,7 +653,7 @@
         "codeXia": "Glow shield!",
         "codeNing": "Calm buff!",
         "founderMedal": "Badge flex!",
-        "redStar": "红星闪闪！",
+        "redStar": "Red Star Shining!",
         "darkKnightMask": "Night mode!",
         "azuMask": "Mask ready!",
         "redBow": "Cute crit!",
@@ -4477,7 +4489,7 @@
   "titleBar": {
     "back": "Back",
     "switchToEnglish": "English",
-    "switchToChinese": "中文",
+    "switchToChinese": "Chinese",
     "minimize": "Minimize",
     "maximize": "Maximize",
     "close": "Close"
@@ -7417,11 +7429,11 @@
     "downloadPresetPaths": "Download Preset Paths",
     "downloadPresetPathsDesc": "Used by node toolbar download menu for quick-save directories (up to 8).",
     "storyboardGenKeepStyleConsistent": "Keep grid variants aligned with references",
-    "storyboardGenKeepStyleConsistentDesc": "When enabled, multi-variant grid prompt appends \"图片风格与参考图保持一致\".",
+    "storyboardGenKeepStyleConsistentDesc": "When enabled, multi-variant grid prompt appends \"Match style with reference image\".",
     "storyboardGenDisableTextInImage": "Disallow descriptive text in grid variants",
-    "storyboardGenDisableTextInImageDesc": "When enabled, multi-variant grid prompt appends \"禁止添加描述文本\".",
+    "storyboardGenDisableTextInImageDesc": "When enabled, multi-variant grid prompt appends \"No text description in image\".",
     "ignoreAtTagWhenCopyingAndGenerating": "Ignore @ tags when copying/saving text",
-    "ignoreAtTagWhenCopyingAndGeneratingDesc": "When enabled, copied text and embedded grid metadata remove tags like \"@图1\"; generation requests only remove \"@\" and keep \"图1\".",
+    "ignoreAtTagWhenCopyingAndGeneratingDesc": "When enabled, copied text and embedded grid metadata remove tags like \"@Image1\"; generation requests only remove \"@\" and keep \"Image1\".",
     "useUploadFilenameAsNodeTitle": "Use uploaded filename as node title",
     "useUploadFilenameAsNodeTitleDesc": "When enabled, newly uploaded images use the file name as the node title by default (still editable via double-click).",
     "downloadPathPlaceholder": "Input folder path, e.g. /Users/name/Pictures/BeatWorkbench or D:\\\\Images\\\\BeatWorkbench",
@@ -7439,7 +7451,7 @@
     "aboutVersionLabel": "Version",
     "aboutVersionUnknown": "Unknown",
     "aboutAuthorLabel": "Author",
-    "aboutAuthor": "痕继痕迹",
+    "aboutAuthor": "ClaymoreLab",
     "aboutRepositoryLabel": "Repository",
     "autoCheckUpdateOnLaunch": "Auto check updates on launch",
     "autoCheckUpdateOnLaunchDesc": "Check for updates once every time the app starts.",
@@ -7450,7 +7462,7 @@
     "showStoryboardGenAdvancedRatioControls": "Show advanced grid ratio controls",
     "showStoryboardGenAdvancedRatioControlsDesc": "When enabled, show cell/overall ratio info and the Overall/Cell mode switch. When disabled, multi-variant grid uses cell-ratio mode by default.",
     "storyboardGenAutoInferEmptyFrame": "Auto infer empty variants",
-    "storyboardGenAutoInferEmptyFrameDesc": "When enabled, empty grid cells automatically append \"依据之前的内容进行推测\" during generation prompt construction.",
+    "storyboardGenAutoInferEmptyFrameDesc": "When enabled, empty grid cells automatically append \"Infer based on previous content\" during generation prompt construction.",
     "showNodePrice": "Show node price in the header",
     "showNodePriceDesc": "Continuously estimate the current run cost from the selected model, resolution, and extra options.",
     "priceDisplayCurrencyMode": "Display currency",
