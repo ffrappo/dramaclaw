@@ -7,10 +7,9 @@ Identity: DramaFoundry is the product and assistant name. No upstream 虾导/Sup
 
 ## Environment
 
-- `FORNACE_GATEWAY_URL`: backend base, default `http://127.0.0.1:8780`
-- `FORNACE_PROJECT_ID`: bound project id (ULID from `POST /api/v1/projects`)
-- Auth: loopback needs no token; every request carries `Cookie: st_session=local`.
-  Remote deployments add `FORNACE_AGENT_TOKEN` as a Bearer token.
+- `FORNACE_GATEWAY_URL`: backend base. Team install sets `https://dramafoundry.fornace.net`; local development defaults to `http://127.0.0.1:8780`.
+- `FORNACE_AGENT_TOKEN`: persistent team credential in `~/.pi/agent/credentials/dramafoundry.json`, provisioned by `pi fornace install` and reconciled by `pi fornace update`.
+- `FORNACE_PROJECT_ID`: bound project id (ULID from `POST /api/v1/projects`). A project is selected or created after account provisioning.
 
 ## Stack this skill drives
 
@@ -23,7 +22,7 @@ Identity: DramaFoundry is the product and assistant name. No upstream 虾导/Sup
 ## Differences from the original
 
 - Env contract: `DRAMAFOUNDRY_API_URL`/`DRAMAFOUNDRY_AGENT_TOKEN`/`DRAMAFOUNDRY_PROJECT_ID`
-  reduced to `FORNACE_GATEWAY_URL`/`FORNACE_PROJECT_ID` (token only off-loopback).
+  reduced to `FORNACE_GATEWAY_URL`/`FORNACE_PROJECT_ID`, with `FORNACE_AGENT_TOKEN` provisioned for the hosted team instance.
 - Identity text: 虾导 -> DramaFoundry, DramaFoundry -> DramaFoundry, 虾料 -> 剧本上传页, 虾塘 -> 声线库.
 - Tool names: `dramaclaw_*` -> `fornace_*`; in this fork they are plain HTTP calls
   (curl semantics) against the local backend, not a hosted plugin surface.

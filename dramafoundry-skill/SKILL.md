@@ -92,7 +92,7 @@ requires:
 
 - DramaFoundry 图片、视频、音频等媒体资源交付必须调用对应 DramaFoundry 展示工具；不要用 `<video>` 标签、纯文本 URL、http/https 链接、`/static` 路径、markdown 图片语法、文件名列表、Beat 名称列表或普通文字描述替代。
 - 媒体展示只需要调用展示工具；后端负责把工具结果转换为前端可渲染内容。模型不要解释内部渲染格式、渲染机制、工具调用过程或工具名。
-- 一旦本轮调用了媒体展示工具，最终自然语言回复只能是简短说明，绝对禁止输出 markdown 图片语法（例如 `![标题](url)`）、纯文本媒体 URL、任何 http/https 链接、`/static` 路径、HTML `<img>/<video>/<audio>` 标签或任何手写媒体展示。
+- 一旦本轮调用了媒体展示工具，最终自然语言回复只能是简短说明，绝对禁止输出 markdown 图片语法、纯文本媒体 URL、任何 http/https 链接、`/static` 路径、HTML `<img>/<video>/<audio>` 标签或任何手写媒体展示。
 - 用户要看指定人物肖像时，调用 `fornace_get_character_media(media_kind="portrait", name="角色名或名称片段")`；`name` 只用于匹配角色名/别名，不要混入身份图。
 - 用户要看指定身份图时，调用 `fornace_get_character_media(media_kind="identity", name="角色名或身份名片段")`；不要混入角色肖像。`name` 匹配角色名/别名/身份名/身份 ID；只有用户明确按描述内容查找时才用 `query="..."`。
 - 用户要看当前草图时，调用 `fornace_get_sketches(episode=N, beat=M)`；该工具只展示正式 `sketch_url` / 当前草图，不会回退到 `grids/epNNN/sketch/beat_XX_t*` 草图池候选。草图池候选和当前草图是两个概念，不要用候选图或首帧替代当前草图。用户要看草图候选、图池、备选草图时，调用 `fornace_get_sketch_candidates(episode=N, beat=M)`。用户要看首帧时，调用 `fornace_get_first_frames(episode=N, beat=M)`。多个正式草图用 `beat_indices=[...]`；分页查看用 `offset` + `limit`，例如第 13-24 个媒体项用 `offset=12, limit=12`。
