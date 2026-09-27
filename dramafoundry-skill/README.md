@@ -24,7 +24,7 @@ Identity: DramaFoundry is the product and assistant name. No upstream 虾导/Sup
 - Env contract: `DRAMAFOUNDRY_API_URL`/`DRAMAFOUNDRY_AGENT_TOKEN`/`DRAMAFOUNDRY_PROJECT_ID`
   reduced to `FORNACE_GATEWAY_URL`/`FORNACE_PROJECT_ID`, with `FORNACE_AGENT_TOKEN` provisioned for the hosted team instance.
 - Identity text: 虾导 -> DramaFoundry, DramaFoundry -> DramaFoundry, 虾料 -> 剧本上传页, 虾塘 -> 声线库.
-- Tool names: `dramaclaw_*` -> `fornace_*`; in this fork they are plain HTTP calls
+- Tool names: `dramafoundry_*` / `fornace_*`; in this fork they are plain HTTP calls
   (curl semantics) against the local backend, not a hosted plugin surface.
 - Chinese trigger vocabulary and all pipeline discipline rules unchanged.
 - Default video backend line updated: `huimeng_seedance-1.0-pro-fast` -> `h3-max`

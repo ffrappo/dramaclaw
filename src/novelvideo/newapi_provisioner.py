@@ -502,8 +502,8 @@ def get_provisioner_config(
             os.environ.get("NEWAPI_PROVISIONER_INIT_TIMEOUT_MS", "120000")
         ),
         relay_token_name=(
-            os.environ.get("NEWAPI_RELAY_TOKEN_NAME", "dramaclaw-ce-runtime").strip()
-            or "dramaclaw-ce-runtime"
+            os.environ.get("NEWAPI_RELAY_TOKEN_NAME", "dramafoundry-ce-runtime").strip()
+            or "dramafoundry-ce-runtime"
         ),
     )
 

@@ -46,7 +46,7 @@ def _install_hermes_registry_shim() -> None:
 
 def _load_dramafoundry_plugin() -> Any:
     _install_hermes_registry_shim()
-    plugin_path = _repo_root() / ".hermes" / "plugins" / "dramaclaw" / "__init__.py"
+    plugin_path = _repo_root() / ".hermes" / "plugins" / "dramafoundry" / "__init__.py"
     spec = importlib.util.spec_from_file_location(
         "_dramafoundry_hermes_plugin_for_mcp",
         plugin_path,
@@ -71,7 +71,7 @@ def _tool_index(plugin: Any) -> dict[str, tuple[dict[str, Any], Any]]:
 
 PLUGIN = _load_dramafoundry_plugin()
 TOOLS = _tool_index(PLUGIN)
-SERVER = Server("dramaclaw", version="0.1.0")
+SERVER = Server("dramafoundry", version="0.1.0")
 
 
 @SERVER.list_tools()

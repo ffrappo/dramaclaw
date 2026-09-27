@@ -5,7 +5,7 @@ whole drama pipeline — ingest, characters, script, storyboards, first frames,
 video, audio, compose, export — as ~34 tools. Any MCP-speaking agent
 (**Claude Code**, Codex, etc.) can use it to build a drama end to end.
 
-The server (`src/novelvideo/chat/dramaclaw_mcp.py`) is a thin stdio bridge over
+The server (`src/novelvideo/chat/dramafoundry_mcp.py`) is a thin stdio bridge over
 the DramaFoundry REST API: each tool is an HTTP call to your running instance, so it
 inherits the same auth, project guards, and task queue as the web UI.
 
@@ -46,26 +46,26 @@ any non-local target.
 ## Connect Claude Code
 
 This repo ships a project [`.mcp.json`](../../../.mcp.json). Open the repo in
-Claude Code and approve the `dramaclaw` server when prompted — that's it.
+Claude Code and approve the `dramafoundry` server when prompted — that's it.
 
 Or add it explicitly:
 
 ```bash
-claude mcp add dramaclaw \
+claude mcp add dramafoundry \
   --env DRAMAFOUNDRY_API_URL=http://localhost:8780 \
   --env DRAMAFOUNDRY_CE_OWNER=1 \
-  -- uv run python -m novelvideo.chat.dramaclaw_mcp
+  -- uv run python -m novelvideo.chat.dramafoundry_mcp
 ```
 
 Verify the tools are live:
 
 ```bash
-claude mcp list        # dramaclaw → ✓ connected
+claude mcp list        # dramafoundry → ✓ connected
 ```
 
 > **Running via Docker only?** Launch the bridge inside the container instead:
 > set the `.mcp.json` command to
-> `docker compose exec -T -e DRAMAFOUNDRY_API_URL=http://localhost:8780 -e DRAMAFOUNDRY_CE_OWNER=1 api python -m novelvideo.chat.dramaclaw_mcp`.
+> `docker compose exec -T -e DRAMAFOUNDRY_API_URL=http://localhost:8780 -e DRAMAFOUNDRY_CE_OWNER=1 api python -m novelvideo.chat.dramafoundry_mcp`.
 
 ## What the agent can do
 

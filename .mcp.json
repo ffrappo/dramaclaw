@@ -1,8 +1,8 @@
 {
   "mcpServers": {
-    "dramaclaw": {
+    "dramafoundry": {
       "command": "uv",
-      "args": ["run", "python", "-m", "novelvideo.chat.dramaclaw_mcp"],
+      "args": ["run", "python", "-m", "novelvideo.chat.dramafoundry_mcp"],
       "env": {
         "DRAMAFOUNDRY_API_URL": "http://localhost:8780",
         "DRAMAFOUNDRY_CE_OWNER": "1"
