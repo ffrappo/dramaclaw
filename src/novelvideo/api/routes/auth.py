@@ -1,5 +1,6 @@
-"""认证端点：登录 / 登出 / 当前用户信息。"""
+"""Authentication endpoints for browser and installer-managed team access."""
 
+import hmac
 import logging
 
 from fastapi import APIRouter, Depends, Request, Response
@@ -12,7 +13,10 @@ from novelvideo.api.auth import (
 )
 from novelvideo.ports import get_auth_port
 from novelvideo.ports.auth_contract import AuthError
-from novelvideo.ports.local.team_auth import TeamPassphraseAuthPort
+from novelvideo.ports.local.team_auth import (
+    TeamPassphraseAuthPort,
+    team_provisioning_secret,
+)
 from novelvideo.shared.runtime_env import cookie_secure as runtime_cookie_secure
 
 router = APIRouter()
@@ -92,6 +96,46 @@ async def login(request: Request):
         path="/",
     )
     return response
+
+
+@router.post("/auth/provision")
+async def provision(request: Request):
+    """Idempotently provision a colleague for Pi install and update.
+
+    The caller must be the Fornace identity bridge. The browser passphrase is
+    deliberately not accepted. Existing valid credentials are reused; absent
+    or invalid local credentials are rotated and returned once.
+    """
+    auth_port = get_auth_port()
+    if not isinstance(auth_port, TeamPassphraseAuthPort):
+        return JSONResponse({"ok": False, "error": "team auth disabled"}, status_code=404)
+    expected = team_provisioning_secret()
+    supplied = request.headers.get("X-DramaFoundry-Provisioning-Secret", "")
+    if not expected or not supplied or not hmac.compare_digest(supplied, expected):
+        return JSONResponse({"ok": False, "error": "access denied"}, status_code=403)
+    try:
+        body = await request.json()
+    except Exception:
+        body = {}
+    username = str((body or {}).get("username", "")).strip()
+    existing_token = str((body or {}).get("existing_token", "")).strip() or None
+    try:
+        token = await auth_port.provision_agent_token(username, existing_token)
+    except AuthError as exc:
+        return JSONResponse(
+            {"ok": False, "error": exc.detail or "provisioning failed"},
+            status_code=400,
+        )
+    return JSONResponse(
+        {
+            "ok": True,
+            "data": {
+                "username": username,
+                "token": token,
+                "gateway_url": "https://dramafoundry.fornace.net",
+            },
+        }
+    )
 
 
 @router.post("/auth/logout")

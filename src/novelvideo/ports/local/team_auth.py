@@ -32,12 +32,14 @@ import time
 from pathlib import Path
 
 from novelvideo.ports.auth_contract import (
+    DEFAULT_EXTERNAL_AGENT_SCOPES,
     AuthenticatedUser,
     AuthError,
     AuthFailureReason,
 )
 
 _TEAM_PASSPHRASE_ENV = "ST_TEAM_PASSPHRASE"
+_TEAM_PROVISIONING_SECRET_ENV = "ST_TEAM_PROVISIONING_SECRET"
 SESSION_TTL_SECONDS = 7 * 24 * 60 * 60
 _USERNAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{1,31}$")
 _LOGIN_WINDOW_SECONDS = 300
@@ -54,6 +56,14 @@ def team_passphrase() -> str:
 
 def team_auth_enabled() -> bool:
     return bool(team_passphrase())
+
+
+def team_provisioning_secret() -> str:
+    """Return the server-to-server installer secret, never the team passphrase."""
+    from novelvideo.shared.runtime_env import _load_env
+
+    _load_env()
+    return os.environ.get(_TEAM_PROVISIONING_SECRET_ENV, "").strip()
 
 
 def _db_path() -> Path:
@@ -129,6 +139,12 @@ class TeamPassphraseAuthPort:
                     );
                     CREATE INDEX IF NOT EXISTS idx_team_sessions_username
                         ON team_sessions(username);
+                    CREATE TABLE IF NOT EXISTS team_agent_tokens (
+                        token_hash TEXT PRIMARY KEY,
+                        username TEXT NOT NULL UNIQUE,
+                        created_at TEXT NOT NULL,
+                        last_used_at TEXT NOT NULL
+                    );
                     """
                 )
                 conn.commit()
@@ -184,6 +200,107 @@ class TeamPassphraseAuthPort:
         finally:
             conn.close()
         return AuthenticatedUser(id=username, username=username, role="owner"), token
+
+    async def provision_agent_token(
+        self, username: str, existing_token: str | None = None
+    ) -> str:
+        """Create or reconcile one hashed installer credential for a team user.
+
+        The caller is the trusted Fornace identity bridge. An update sends its
+        locally stored token so a valid credential remains stable. A missing or
+        invalid local credential rotates the server row and returns a new value.
+        """
+        from datetime import datetime, timezone
+
+        if not _USERNAME_RE.match(username or ""):
+            raise AuthError(AuthFailureReason.INVALID, "invalid username")
+        await self._ensure_schema()
+        now_iso = datetime.now(timezone.utc).isoformat()
+        existing_hash = (
+            hashlib.sha256(existing_token.encode("utf-8")).hexdigest()
+            if existing_token
+            else ""
+        )
+        conn = self._connect()
+        try:
+            conn.execute("BEGIN IMMEDIATE")
+            if existing_hash:
+                row = conn.execute(
+                    """
+                    SELECT username FROM team_agent_tokens
+                    WHERE token_hash = ?
+                    """,
+                    (existing_hash,),
+                ).fetchone()
+                if row is not None and hmac.compare_digest(str(row[0]), username):
+                    conn.execute(
+                        "UPDATE team_agent_tokens SET last_used_at = ? WHERE token_hash = ?",
+                        (now_iso, existing_hash),
+                    )
+                    conn.execute(
+                        """
+                        INSERT INTO team_users(username, created_at, last_login_at)
+                        VALUES (?, ?, ?)
+                        ON CONFLICT(username) DO UPDATE SET last_login_at = excluded.last_login_at
+                        """,
+                        (username, now_iso, now_iso),
+                    )
+                    conn.commit()
+                    return existing_token
+
+            token = f"dfa_{secrets.token_urlsafe(32)}"
+            token_hash = hashlib.sha256(token.encode("utf-8")).hexdigest()
+            conn.execute(
+                """
+                INSERT INTO team_users(username, created_at, last_login_at)
+                VALUES (?, ?, ?)
+                ON CONFLICT(username) DO UPDATE SET last_login_at = excluded.last_login_at
+                """,
+                (username, now_iso, now_iso),
+            )
+            conn.execute("DELETE FROM team_agent_tokens WHERE username = ?", (username,))
+            conn.execute(
+                """
+                INSERT INTO team_agent_tokens(
+                    token_hash, username, created_at, last_used_at
+                ) VALUES (?, ?, ?, ?)
+                """,
+                (token_hash, username, now_iso, now_iso),
+            )
+            conn.commit()
+            return token
+        except Exception:
+            conn.rollback()
+            raise
+        finally:
+            conn.close()
+
+    async def verify_agent_token(self, token: str) -> dict:
+        """Verify a persistent team credential issued by the installer bridge."""
+        if not token.startswith("dfa_"):
+            raise AuthError(AuthFailureReason.INVALID, "team agent token not found")
+        token_hash = hashlib.sha256(token.encode("utf-8")).hexdigest()
+        await self._ensure_schema()
+        conn = self._connect()
+        try:
+            row = conn.execute(
+                "SELECT username FROM team_agent_tokens WHERE token_hash = ?",
+                (token_hash,),
+            ).fetchone()
+        finally:
+            conn.close()
+        if row is None:
+            raise AuthError(AuthFailureReason.INVALID, "team agent token not found")
+        username = str(row[0])
+        return {
+            **AuthenticatedUser(
+                id=username, username=username, role="owner"
+            ).to_legacy_dict(),
+            "credential_kind": "team_agent",
+            "scopes": list(DEFAULT_EXTERNAL_AGENT_SCOPES),
+            "current_scope_kind": "team",
+            "current_project_id": None,
+        }
 
     # -- port interface ---------------------------------------------------
     async def verify_session(self, raw_cookie: str | None) -> dict:

@@ -33,6 +33,28 @@ from novelvideo.task_backend.consumer import TaskEnvelopeConsumer
 from novelvideo.task_backend.signing import load_or_create_local_signing_config
 
 
+class TeamAuthSession:
+    """Persistent team credentials plus normal short-lived page agent sessions."""
+
+    def __init__(self, team_auth: TeamPassphraseAuthPort) -> None:
+        self._team_auth = team_auth
+        self._local = LocalAuthSession()
+
+    async def verify_agent_session(self, token: str) -> dict:
+        if token.startswith("dfa_"):
+            return await self._team_auth.verify_agent_token(token)
+        return await self._local.verify_agent_session(token)
+
+    async def create_agent_session(self, **kwargs):
+        return await self._local.create_agent_session(**kwargs)
+
+    async def update_agent_session_scope(self, token_value: str, **kwargs) -> None:
+        await self._local.update_agent_session_scope(token_value, **kwargs)
+
+    async def revoke_agent_session(self, token_value: str) -> None:
+        await self._local.revoke_agent_session(token_value)
+
+
 class LocalModelCredentials:
     async def resolve(self, admission) -> RequestCredential:
         if admission.credential.source != "local":
@@ -127,9 +149,10 @@ def register_local_ports() -> None:
         clock=lambda: datetime.now(timezone.utc),
     )
     task_backend = InlineTaskBackend(producer=producer, consumer=consumer)
+    team_auth = TeamPassphraseAuthPort() if team_auth_enabled() else None
     ports = (
-        ("auth", TeamPassphraseAuthPort() if team_auth_enabled() else FileAuthPort()),
-        ("auth_session", LocalAuthSession()),
+        ("auth", team_auth or FileAuthPort()),
+        ("auth_session", TeamAuthSession(team_auth) if team_auth else LocalAuthSession()),
         ("project_registry", SQLiteProjectRegistry()),
         ("project_access", AllowAllProjectAccess()),
         ("usage_meter", NoOpUsageMeter()),

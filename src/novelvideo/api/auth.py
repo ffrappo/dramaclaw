@@ -66,7 +66,7 @@ async def _verify_browser_session(raw_cookie: str | None) -> dict:
 
 
 async def _verify_agent_bearer(token: str) -> dict:
-    """Verify an agent session token. No legacy fallback by design."""
+    """Verify an agent session or persistent installer-issued team token."""
     try:
         return await get_auth_session_port().verify_agent_session(token)
     except port_registry.PortNotRegistered:
@@ -102,7 +102,7 @@ def _enforce_agent_request_boundary(request: Request, user: dict) -> None:
     and it cannot perform unsafe writes without a write scope.
     """
 
-    if user.get("credential_kind") != "agent_session":
+    if user.get("credential_kind") not in {"agent_session", "team_agent"}:
         return
 
     match = PROJECT_PATH_RE.search(request.url.path)
@@ -184,7 +184,9 @@ def require_project_scope(needed: str) -> Callable[[str, dict], dict]:
     """
 
     async def _check(project: str, user: dict = Depends(require_scope(needed))) -> dict:
-        if user.get("credential_kind") != "agent_session":
+        if user.get("credential_kind") not in {"agent_session", "team_agent"}:
+            return user
+        if user.get("credential_kind") == "team_agent":
             return user
         current_kind = str(user.get("current_scope_kind") or "home")
         current_project = user.get("current_project_id")
