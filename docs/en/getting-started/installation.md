@@ -31,9 +31,9 @@ Prerequisites: Docker + `docker compose`.
 Once installed:
 
 ```bash
-git clone https://github.com/dramaclaw/dramaclaw.git
-git clone https://github.com/dramaclaw/dramaclaw-gateway.git   # bundled gateway, built from ../dramaclaw-gateway
-cd dramaclaw
+git clone https://github.com/ffrappo/dramafoundry.git
+git clone https://github.com/ffrappo/dramafoundry-gateway.git   # bundled gateway, built from ../dramafoundry-gateway
+cd dramafoundry
 cp .env.example .env        # at minimum, change PROMPT_EXPORT_PASSWORD to a non-default value
 docker compose up -d --build    # builds api, web and the gateway from the two checkouts
 # no build? docker compose -f docker-compose.release.yml up -d   # pulls published images, no gateway clone needed
@@ -60,8 +60,8 @@ After it's up, open **`http://localhost:8080`** in your browser (the app UI); th
 ### 2. Install dependencies and start
 
 ```bash
-git clone https://github.com/dramaclaw/dramaclaw.git
-cd dramaclaw
+git clone https://github.com/ffrappo/dramafoundry.git
+cd dramafoundry
 
 uv sync                                  # install dependencies into .venv per uv.lock
 cp .env.example .env && $EDITOR .env     # set the gateway and key

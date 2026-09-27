@@ -37,8 +37,8 @@
 | Symptom | Diagnosis |
 |---|---|
 | **Data gone after a rebuild** | Data lives in the named volume `ce-data` (`/data` inside the container). `docker compose down` keeps the volume—**do not add `-v`** (it deletes the volume). For backups see the [self-hosting handbook](self-hosting.md#5-where-the-data-lives--backups). |
-| **`unable to prepare context: path ".../dramaclaw-gateway" not found`** | The source build expects the gateway checkout next to this repo. `git clone https://github.com/dramaclaw/dramaclaw-gateway.git ../dramaclaw-gateway`, or set `DRAMAFOUNDRY_GATEWAY_SRC` in `.env` to your clone's path or to `https://github.com/dramaclaw/dramaclaw-gateway.git#main`. |
-| **Config error after an upgrade** | Source build (`docker-compose.yml`): `git -C ../dramaclaw-gateway pull && git pull && docker compose up -d --build`. Prebuilt images (`docker-compose.release.yml`): `docker compose -f docker-compose.release.yml pull && docker compose -f docker-compose.release.yml up -d` (bump `DRAMAFOUNDRY_VERSION` / `DRAMAFOUNDRY_GATEWAY_VERSION` in `.env` if you pin them). See the self-hosting guide §6. |
+| **`unable to prepare context: path ".../dramafoundry-gateway" not found`** | The source build expects the gateway checkout next to this repo. `git clone https://github.com/ffrappo/dramafoundry-gateway.git ../dramafoundry-gateway`, or set `DRAMAFOUNDRY_GATEWAY_SRC` in `.env` to your clone's path or to `https://github.com/ffrappo/dramafoundry-gateway.git#main`. |
+| **Config error after an upgrade** | Source build (`docker-compose.yml`): `git -C ../dramafoundry-gateway pull && git pull && docker compose up -d --build`. Prebuilt images (`docker-compose.release.yml`): `docker compose -f docker-compose.release.yml pull && docker compose -f docker-compose.release.yml up -d` (bump `DRAMAFOUNDRY_VERSION` / `DRAMAFOUNDRY_GATEWAY_VERSION` in `.env` if you pin them). See the self-hosting guide §6. |
 
 ## world features (3DGS/SHARP)
 
@@ -49,8 +49,8 @@
 
 ## Still stuck?
 
-- Usage / ideas → [GitHub Discussions](https://github.com/dramaclaw/dramaclaw/discussions)
-- Confirmed a bug → [File a bug](https://github.com/dramaclaw/dramaclaw/issues/new?template=bug_report.yml) (attach logs, reproduction steps, environment)
+- Usage / ideas → [GitHub Discussions](https://github.com/ffrappo/dramafoundry/discussions)
+- Confirmed a bug → [File a bug](https://github.com/ffrappo/dramafoundry/issues/new?template=bug_report.yml) (attach logs, reproduction steps, environment)
 - Security issue → do not use a public issue; see [SECURITY](../../../SECURITY.md)
 
 ## Related

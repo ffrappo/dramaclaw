@@ -52,15 +52,15 @@ DramaFoundry is <a href="./LICENSES/Elastic-2.0.txt">Elastic License 2.0</a>. Ru
 the standalone version is free for commercial use, no permission needed.<br/>
 We ask for one thing: a small "Powered by DramaFoundry" in the corner of your UI.<br/>
 The only door still closed is wrapping it up as a hosted SaaS for other people; that license isn't open yet.<br/>
-Why, and the FAQ: <a href="https://github.com/dramaclaw/dramaclaw/issues/475">#475</a>.
+Why, and the FAQ: <a href="https://github.com/ffrappo/dramafoundry/issues/475">#475</a>.
 
 </p>
 
 <br/>
 
 [![License](https://img.shields.io/badge/License-Elastic_2.0-blue.svg)](./LICENSES/Elastic-2.0.txt)
-[![GitHub stars](https://img.shields.io/github/stars/dramaclaw/dramaclaw?style=social)](https://github.com/dramaclaw/dramaclaw/stargazers)
-[![Release](https://img.shields.io/github/v/release/dramaclaw/dramaclaw?include_prereleases&sort=semver)](https://github.com/dramaclaw/dramaclaw/releases)
+[![GitHub stars](https://img.shields.io/github/stars/dramaclaw/dramaclaw?style=social)](https://github.com/ffrappo/dramafoundry/stargazers)
+[![Release](https://img.shields.io/github/v/release/dramaclaw/dramaclaw?include_prereleases&sort=semver)](https://github.com/ffrappo/dramafoundry/releases)
 [![Docker](https://img.shields.io/badge/docker-ready-2496ED?logo=docker&logoColor=white)](#quick-start)
 
 **English** &nbsp;|&nbsp; [简体中文](./readme/README_zh.md) &nbsp;|&nbsp; [Tiếng Việt](./readme/README_vi.md) &nbsp;|&nbsp; [ไทย](./readme/README_th.md) &nbsp;|&nbsp; [Website](https://dramaclaw.ai) &nbsp;|&nbsp; [Docs](./docs/en/README.md) &nbsp;|&nbsp; [Quick Start](./docs/en/getting-started/quickstart.md)
@@ -264,7 +264,7 @@ The edge isn't "more generation" — it's organizing the whole short-drama produ
 
 ## System Requirements
 
-DramaFoundry runs all inference through an **OpenAI-compatible gateway** — either the official RelayClaw service or the bundled [dramafoundry-gateway](https://github.com/dramaclaw/dramafoundry-gateway) routing to providers you configure. Nothing runs models on your machine, so the local footprint is light. An ordinary laptop or a small VPS is enough.
+DramaFoundry runs all inference through an **OpenAI-compatible gateway** — either the official RelayClaw service or the bundled [dramafoundry-gateway](https://github.com/ffrappo/dramafoundry-gateway) routing to providers you configure. Nothing runs models on your machine, so the local footprint is light. An ordinary laptop or a small VPS is enough.
 
 | Item | Requirement |
 |---|---|
@@ -287,12 +287,12 @@ DramaFoundry runs all inference through an **OpenAI-compatible gateway** — eit
 
 Every GitHub Release publishes multi-arch (amd64/arm64) images to Docker Hub.
 
-**Source build (default)** — clone DramaFoundry and the bundled [dramafoundry-gateway](https://github.com/dramaclaw/dramafoundry-gateway) side by side; `docker compose up -d --build` builds all three services from those two checkouts.
+**Source build (default)** — clone DramaFoundry and the bundled [dramafoundry-gateway](https://github.com/ffrappo/dramafoundry-gateway) side by side; `docker compose up -d --build` builds all three services from those two checkouts.
 
 ```bash
-git clone https://github.com/dramaclaw/dramaclaw.git
-git clone https://github.com/dramaclaw/dramafoundry-gateway.git   # bundled gateway, built from ../dramafoundry-gateway
-cd dramaclaw
+git clone https://github.com/ffrappo/dramafoundry.git
+git clone https://github.com/ffrappo/dramafoundry-gateway.git   # bundled gateway, built from ../dramafoundry-gateway
+cd dramafoundry
 
 cp .env.example .env
 # Edit .env — set PROMPT_EXPORT_PASSWORD to a non-default value.
@@ -300,7 +300,7 @@ cp .env.example .env
 docker compose up -d --build   # builds and starts three services: api / newapi (bundled gateway) / web
 ```
 
-Both checkouts are plain git repos: edit, `git pull`, rebuild. Only DramaFoundry code changed? `docker compose up -d --build api web`. Only the gateway? `docker compose up -d --build newapi`. Gateway clone somewhere else, or prefer Docker to fetch it from git? Set `DRAMAFOUNDRY_GATEWAY_SRC` in `.env` to that path or to `https://github.com/dramaclaw/dramafoundry-gateway.git#main`.
+Both checkouts are plain git repos: edit, `git pull`, rebuild. Only DramaFoundry code changed? `docker compose up -d --build api web`. Only the gateway? `docker compose up -d --build newapi`. Gateway clone somewhere else, or prefer Docker to fetch it from git? Set `DRAMAFOUNDRY_GATEWAY_SRC` in `.env` to that path or to `https://github.com/ffrappo/dramafoundry-gateway.git#main`.
 
 **No build** — pull published images instead (no gateway clone needed):
 
@@ -318,13 +318,13 @@ Full steps in the [Quick Start](docs/en/getting-started/quickstart.md).
 
 Pin versions or switch registry in `.env` (`DRAMAFOUNDRY_VERSION`, `DRAMAFOUNDRY_GATEWAY_VERSION`, `DRAMAFOUNDRY_IMAGE_PREFIX`) — these apply to the image mode (`docker-compose.release.yml`) only. Mainland China: set `DRAMAFOUNDRY_IMAGE_PREFIX=claymore-registry.cn-chengdu.cr.aliyuncs.com/dramaclaw` and pin both versions (the ACR mirror carries pinned tags only).
 
-> Migrating from an older checkout? For the source build, first `git clone https://github.com/dramaclaw/dramafoundry-gateway.git ../dramafoundry-gateway` (the gateway is now built from that sibling checkout; without it the build stops with `unable to prepare context`). `docker-compose.selfhosted.yml` / `docker-compose.selfhosted.release.yml` have been removed — use `docker-compose.yml` (source build) / `docker-compose.release.yml` (images). Service names and the `ce-data` / `newapi-data` volumes are unchanged; existing data is reused as-is. The bundled gateway's port now binds only to `127.0.0.1` by default; set `ST_NEWAPI_BIND=0.0.0.0` in `.env` if you need remote access to it.
+> Migrating from an older checkout? For the source build, first `git clone https://github.com/ffrappo/dramafoundry-gateway.git ../dramafoundry-gateway` (the gateway is now built from that sibling checkout; without it the build stops with `unable to prepare context`). `docker-compose.selfhosted.yml` / `docker-compose.selfhosted.release.yml` have been removed — use `docker-compose.yml` (source build) / `docker-compose.release.yml` (images). Service names and the `ce-data` / `newapi-data` volumes are unchanged; existing data is reused as-is. The bundled gateway's port now binds only to `127.0.0.1` by default; set `ST_NEWAPI_BIND=0.0.0.0` in `.env` if you need remote access to it.
 
 ### Local development (uv + Python 3.11+)
 
 ```bash
-git clone https://github.com/dramaclaw/dramaclaw.git
-cd dramaclaw
+git clone https://github.com/ffrappo/dramafoundry.git
+cd dramafoundry
 
 uv sync
 cp .env.example .env && $EDITOR .env
@@ -343,7 +343,7 @@ docker run -d --name dramafoundry-gateway -p 127.0.0.1:3000:3000 \
   claymorelab/dramafoundry-gateway:v1.0.0-rc.24-dramaclaw.1
 ```
 
-or run the gateway from source in the sibling checkout (`make dev-api` / `make dev-web` in [dramafoundry-gateway](https://github.com/dramaclaw/dramafoundry-gateway#develop), or `go build` and start the binary with `SQLITE_PATH=<path to>/dramaclaw/state/newapi/one-api.db`).
+or run the gateway from source in the sibling checkout (`make dev-api` / `make dev-web` in [dramafoundry-gateway](https://github.com/ffrappo/dramafoundry-gateway#develop), or `go build` and start the binary with `SQLITE_PATH=<path to>/dramaclaw/state/newapi/one-api.db`).
 
 <br/>
 
@@ -359,9 +359,9 @@ Full walkthrough in [Configuring Models](docs/en/getting-started/configuring-mod
 
 ### The bundled gateway: dramafoundry-gateway
 
-The `newapi` service in `docker-compose.yml` is [**dramafoundry-gateway**](https://github.com/dramaclaw/dramafoundry-gateway), DramaFoundry's own fork of [New API](https://github.com/QuantumNous/new-api). It speaks the **DC-Media** contract DramaFoundry uses for image / video / audio (media roles, references, first / last frames) and converts each request into the provider's native API. Image: [`claymorelab/dramafoundry-gateway`](https://hub.docker.com/r/claymorelab/dramafoundry-gateway) on Docker Hub, pinned by `DRAMAFOUNDRY_GATEWAY_VERSION` in `.env`. It stays idle in Official mode and is only used once you switch to **Custom** or **Local + Official Hybrid**.
+The `newapi` service in `docker-compose.yml` is [**dramafoundry-gateway**](https://github.com/ffrappo/dramafoundry-gateway), DramaFoundry's own fork of [New API](https://github.com/QuantumNous/new-api). It speaks the **DC-Media** contract DramaFoundry uses for image / video / audio (media roles, references, first / last frames) and converts each request into the provider's native API. Image: [`claymorelab/dramafoundry-gateway`](https://hub.docker.com/r/claymorelab/dramafoundry-gateway) on Docker Hub, pinned by `DRAMAFOUNDRY_GATEWAY_VERSION` in `.env`. It stays idle in Official mode and is only used once you switch to **Custom** or **Local + Official Hybrid**.
 
-Provider adapters shipped in the gateway today (see the [channel support matrix](https://github.com/dramaclaw/dramafoundry-gateway/blob/main/docs/providers/en/README.md) for verification status): ComfyUI · MiniMax / Hailuo · VolcEngine Doubao / Seedance · fal.ai · Alibaba · Kling · Jimeng · Vertex AI · Gemini · OpenAI / Sora · Suno. Want another provider? The gateway has a [scaffold generator and contribution guide](https://github.com/dramaclaw/dramafoundry-gateway/blob/main/CONTRIBUTING.md).
+Provider adapters shipped in the gateway today (see the [channel support matrix](https://github.com/ffrappo/dramafoundry-gateway/blob/main/docs/providers/en/README.md) for verification status): ComfyUI · MiniMax / Hailuo · VolcEngine Doubao / Seedance · fal.ai · Alibaba · Kling · Jimeng · Vertex AI · Gemini · OpenAI / Sora · Suno. Want another provider? The gateway has a [scaffold generator and contribution guide](https://github.com/ffrappo/dramafoundry-gateway/blob/main/CONTRIBUTING.md).
 
 | Stage                | Official mode (RelayClaw)                          | Custom / Hybrid mode (bundled gateway)                    |
 |----------------------|----------------------------------------------------|-----------------------------------------------------------|
@@ -402,13 +402,13 @@ These are being built in the open and are not in a release yet. Watch the branch
 
 ## Join the Community / Contribute
 
-- [Report a Bug](https://github.com/dramaclaw/dramaclaw/issues/new?template=bug_report.yml)
-- [Request a Feature](https://github.com/dramaclaw/dramaclaw/issues/new?template=feature_request.yml)
-- [Join the Discussion](https://github.com/dramaclaw/dramaclaw/discussions)
+- [Report a Bug](https://github.com/ffrappo/dramafoundry/issues/new?template=bug_report.yml)
+- [Request a Feature](https://github.com/ffrappo/dramafoundry/issues/new?template=feature_request.yml)
+- [Join the Discussion](https://github.com/ffrappo/dramafoundry/discussions)
 - [Contributing Guide](./CONTRIBUTING.md)
 - [Security Policy](./SECURITY.md)
 
-We continuously curate and label [`good first issue`](https://github.com/dramaclaw/dramaclaw/labels/good%20first%20issue) — a great place to start.
+We continuously curate and label [`good first issue`](https://github.com/ffrappo/dramafoundry/labels/good%20first%20issue) — a great place to start.
 
 <br/>
 
@@ -456,7 +456,7 @@ The people building DramaFoundry — thank you. 💜
 
 ## License
 
-[Elastic License 2.0](./LICENSES/Elastic-2.0.txt). Free to use, modify, redistribute and sell what you build with it; keep a small "Powered by DramaFoundry" in your UI. The only restriction is that you may not offer the software itself as a hosted service to others. See the [license explainer](./docs/en/license.md) and the [licensing statement](https://github.com/dramaclaw/dramaclaw/issues/475).
+[Elastic License 2.0](./LICENSES/Elastic-2.0.txt). Free to use, modify, redistribute and sell what you build with it; keep a small "Powered by DramaFoundry" in your UI. The only restriction is that you may not offer the software itself as a hosted service to others. See the [license explainer](./docs/en/license.md) and the [licensing statement](https://github.com/ffrappo/dramafoundry/issues/475).
 
 <br/>
 
