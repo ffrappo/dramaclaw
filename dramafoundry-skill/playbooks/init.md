@@ -5,7 +5,7 @@
 ## 前置：项目存在性检查
 
 Step 0（SKILL.md §0）的 `/pipeline/status` 返回决定从哪一步开始：
-- **404**：当前会话绑定的项目不存在或不可访问 → 停止，提示用户先在前端创建/打开项目；炉导不调用 `POST /projects`
+- **404**：当前会话绑定的项目不存在或不可访问 → 停止，提示用户先在前端创建/打开项目；DramaFoundry不调用 `POST /projects`
 - **200 + 各阶段全 false**：项目已存在但未摄入 → 从 Step 1（获取小说文件）开始
 - **200 + 部分完成**：实际上应走 resume.md；如误路由到此，退回按 `next_step` 定位
 
@@ -43,7 +43,7 @@ Step 0（SKILL.md §0）的 `/pipeline/status` 返回决定从哪一步开始：
 
 ## 步骤详情
 
-**步骤详情**：见 `references/pipeline-details.md` Steps 1-7。项目创建由前端/系统完成，不属于炉导步骤。
+**步骤详情**：见 `references/pipeline-details.md` Steps 1-7。项目创建由前端/系统完成，不属于DramaFoundry步骤。
 
 **Step 4 失败处理**：若 `build_characters` 返回空结果，从小说内容分析角色后通过 `POST /projects/{project}/characters` 逐个添加。
 

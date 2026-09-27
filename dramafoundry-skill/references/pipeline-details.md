@@ -1,4 +1,4 @@
-# Fornace Video 炉导 流水线详情
+# DramaFoundry DramaFoundry 流水线详情
 
 每个步骤的 API 调用必须以后端当前 FastAPI routes 为准。
 
@@ -15,7 +15,7 @@
 
 ## 当前项目准备阶段
 
-项目创建由前端/系统完成，炉导不会调用 `POST /projects`。以下步骤均要求
+项目创建由前端/系统完成，DramaFoundry不会调用 `POST /projects`。以下步骤均要求
 `FORNACE_PROJECT_ID` 已绑定到一个存在的项目。
 
 ### Step 1: 上传小说 [SYNC]

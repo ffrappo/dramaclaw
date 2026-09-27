@@ -1,4 +1,4 @@
-# Fornace Video 炉导 API 快速参考
+# DramaFoundry DramaFoundry API 快速参考
 
 **Base URL**: `$FORNACE_GATEWAY_URL/api/v1`
 **认证**: `Cookie: st_session=local`（回环部署；远程部署才用 `Authorization: Bearer $FORNACE_AGENT_TOKEN`）
@@ -10,7 +10,7 @@
 | 方法 | 路径 | 用途 |
 |------|------|------|
 | `GET` | `/projects` | 列出所有项目 |
-| `POST` | `/projects` | 创建项目 `{"name":"..."}`；仅前端/系统使用，炉导流程不调用 |
+| `POST` | `/projects` | 创建项目 `{"name":"..."}`；仅前端/系统使用，DramaFoundry流程不调用 |
 | `GET` | `/projects/{project}` | 获取项目配置 |
 | `PATCH` | `/projects/{project}` | 更新配置 |
 
