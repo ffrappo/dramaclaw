@@ -9,6 +9,7 @@ from fastapi.responses import JSONResponse
 from ulid import ULID
 
 from novelvideo.shared import runtime_env
+from novelvideo.ports.local.team_auth import team_auth_enabled
 
 router = APIRouter()
 
@@ -28,7 +29,7 @@ async def get_runtime_config():
             "ok": True,
             "data": {
                 "edition": edition,
-                "auth_required": edition == "ee",
+                "auth_required": edition == "ee" or team_auth_enabled(),
                 "instance_id": _INSTANCE_ID,
             },
         }

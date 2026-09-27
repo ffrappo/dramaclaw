@@ -20,6 +20,7 @@ from novelvideo.ports.model_credentials import (
 from novelvideo.ports.local.audit import NoOpAuditSink
 from novelvideo.ports.local.auth import FileAuthPort, LocalAuthSession
 from novelvideo.ports.local.credit_quote import LocalCreditQuote
+from novelvideo.ports.local.team_auth import TeamPassphraseAuthPort, team_auth_enabled
 from novelvideo.ports.local.lifecycle import NoOpLifecycle
 from novelvideo.ports.local.project import AllowAllProjectAccess, SQLiteProjectRegistry
 from novelvideo.ports.local.release_feed import LocalReleaseFeed
@@ -127,7 +128,7 @@ def register_local_ports() -> None:
     )
     task_backend = InlineTaskBackend(producer=producer, consumer=consumer)
     ports = (
-        ("auth", FileAuthPort()),
+        ("auth", TeamPassphraseAuthPort() if team_auth_enabled() else FileAuthPort()),
         ("auth_session", LocalAuthSession()),
         ("project_registry", SQLiteProjectRegistry()),
         ("project_access", AllowAllProjectAccess()),

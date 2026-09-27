@@ -1,4 +1,4 @@
-"""认证端点：登出 / 当前用户信息。"""
+"""认证端点：登录 / 登出 / 当前用户信息。"""
 
 import logging
 
@@ -11,6 +11,8 @@ from novelvideo.api.auth import (
     resolve_auth_cookie_from_request,
 )
 from novelvideo.ports import get_auth_port
+from novelvideo.ports.auth_contract import AuthError
+from novelvideo.ports.local.team_auth import TeamPassphraseAuthPort
 from novelvideo.shared.runtime_env import cookie_secure as runtime_cookie_secure
 
 router = APIRouter()
@@ -44,6 +46,52 @@ def _clear_auth_cookie(response: Response) -> None:
         samesite="lax",
         secure=_cookie_secure(),
     )
+
+
+@router.post("/auth/login")
+async def login(request: Request):
+    """Team passphrase login; auto-provisions unknown usernames.
+
+    Returns 404 unless ``ST_TEAM_PASSPHRASE`` activated the team auth port;
+    stock CE local mode keeps no login endpoint.
+    """
+    auth_port = get_auth_port()
+    if not isinstance(auth_port, TeamPassphraseAuthPort):
+        return JSONResponse({"ok": False, "error": "login disabled"}, status_code=404)
+    try:
+        body = await request.json()
+    except Exception:
+        body = {}
+    username = str((body or {}).get("username", "")).strip()
+    password = str((body or {}).get("password", ""))
+    try:
+        user, token = await auth_port.login(username, password)
+    except AuthError as exc:
+        status = 429 if "retry later" in exc.detail else 401
+        return JSONResponse(
+            {"ok": False, "error": exc.detail or "login failed"}, status_code=status
+        )
+    response = JSONResponse(
+        {
+            "ok": True,
+            "data": {
+                "username": user.username,
+                "role": user.role,
+                "credit_balance": 0,
+                "credential_kind": "browser_session",
+            },
+        }
+    )
+    response.set_cookie(
+        key=AUTH_COOKIE_NAME,
+        value=token,
+        httponly=True,
+        samesite="lax",
+        secure=_cookie_secure(),
+        max_age=_COOKIE_MAX_AGE_SECONDS,
+        path="/",
+    )
+    return response
 
 
 @router.post("/auth/logout")
