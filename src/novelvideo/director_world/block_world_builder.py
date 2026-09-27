@@ -69,7 +69,7 @@ process.stdin.on('data', chunk => {
   code += chunk;
 });
 process.stdin.on('end', () => {
-  const maxOps = Number(process.env.SUPERTALE_JS_MAX_OPS || '200000');
+  const maxOps = Number(process.env.DRAMAFOUNDRY_JS_MAX_OPS || '200000');
   const operations = [];
 
   function finiteInt(value, label) {
@@ -518,7 +518,7 @@ def execute_build_code_with_node(
             capture_output=True,
             check=False,
             timeout=timeout_seconds,
-            env={**os.environ, "SUPERTALE_JS_MAX_OPS": "200000"},
+            env={**os.environ, "DRAMAFOUNDRY_JS_MAX_OPS": "200000"},
         )
     except subprocess.TimeoutExpired as exc:
         raise ValueError("Generated JS timed out while building DirectorWorld") from exc

@@ -1,7 +1,7 @@
 <div align="center">
 
 <!-- TBD: replace with official logo assets/logo.svg -->
-<h1>DramaClaw</h1>
+<h1>DramaFoundry</h1>
 
 ## Make Your Own DC.
 
@@ -32,7 +32,7 @@ From script to storyboard, from assets to finished film — the whole chain.<br/
 Because people aren't beasts of burden.<br/>
 Because creativity is humanity's last line of defense.<br/>
 <br/>
-What DramaClaw sets out to do is simple:<br/>
+What DramaFoundry sets out to do is simple:<br/>
 <br/>
 <strong>Tear down the wall.</strong><br/>
 <br/>
@@ -48,9 +48,9 @@ We'll keep tearing down walls.
 <p align="left">
 
 <strong>And yes, you can make money with it.</strong><br/>
-DramaClaw is <a href="./LICENSES/Elastic-2.0.txt">Elastic License 2.0</a>. Run it, modify it, sell what you build with it —<br/>
+DramaFoundry is <a href="./LICENSES/Elastic-2.0.txt">Elastic License 2.0</a>. Run it, modify it, sell what you build with it —<br/>
 the standalone version is free for commercial use, no permission needed.<br/>
-We ask for one thing: a small "Powered by DramaClaw" in the corner of your UI.<br/>
+We ask for one thing: a small "Powered by DramaFoundry" in the corner of your UI.<br/>
 The only door still closed is wrapping it up as a hosted SaaS for other people; that license isn't open yet.<br/>
 Why, and the FAQ: <a href="https://github.com/dramaclaw/dramaclaw/issues/475">#475</a>.
 
@@ -70,7 +70,7 @@ Why, and the FAQ: <a href="https://github.com/dramaclaw/dramaclaw/issues/475">#4
 <br/>
 
 <p align="center">
-  <img src="./assets/hero.png" alt="DramaClaw — storytellers, back in front of the camera" width="820"/>
+  <img src="./assets/hero.png" alt="DramaFoundry — storytellers, back in front of the camera" width="820"/>
 </p>
 
 <!--
@@ -91,7 +91,7 @@ Why, and the FAQ: <a href="https://github.com/dramaclaw/dramaclaw/issues/475">#4
 
 <div align="center">
 
-## 🎬 Made with DramaClaw
+## 🎬 Made with DramaFoundry
 
 <sub>Real short dramas our team produced on this very pipeline &mdash; click a link to play.</sub>
 
@@ -140,12 +140,12 @@ Why, and the FAQ: <a href="https://github.com/dramaclaw/dramaclaw/issues/475">#4
 
 <br/>
 
-## What is DramaClaw?
+## What is DramaFoundry?
 
-DramaClaw is a **source-available production line for AI drama** — and, increasingly, for any visual story you want to tell with generative models. It has two faces that share one asset library and one agent:
+DramaFoundry is a **source-available production line for AI drama** — and, increasingly, for any visual story you want to tell with generative models. It has two faces that share one asset library and one agent:
 
-- **XiaHua — the infinite canvas.** A node-based workbench where you generate, edit and connect images, video, audio, 3D sets and scripts freely, then promote what you like back into the series. This is where most of our own creative work happens today, and where DramaClaw is heading.
-- **Series (XiaJi) — the pipeline.** Drop in a manuscript or screenplay and DramaClaw takes over the heavy lifting: structuring the story, planning episodes, writing scripts, drawing storyboards and first frames, synthesizing voice-over, and cutting the final film.
+- **XiaHua — the infinite canvas.** A node-based workbench where you generate, edit and connect images, video, audio, 3D sets and scripts freely, then promote what you like back into the series. This is where most of our own creative work happens today, and where DramaFoundry is heading.
+- **Series (XiaJi) — the pipeline.** Drop in a manuscript or screenplay and DramaFoundry takes over the heavy lifting: structuring the story, planning episodes, writing scripts, drawing storyboards and first frames, synthesizing voice-over, and cutting the final film.
 
 **Xia Director**, the built-in agent, sits across both: it answers questions about your project, drives pipeline tasks, and can build and run node graphs on the canvas for you.
 
@@ -181,7 +181,7 @@ It's built for creators, indie studios and creative engineers — run the whole 
 ### Series (XiaJi) — the pipeline
 
 <p align="center">
-  <img src="./assets/pipeline.png" alt="DramaClaw pipeline — Ingest, Plan, Produce, Deliver" width="760"/>
+  <img src="./assets/pipeline.png" alt="DramaFoundry pipeline — Ingest, Plan, Produce, Deliver" width="760"/>
 </p>
 
 Every step has its own interface — run them in order, skip steps, resume from any checkpoint, or even plug in your own orchestrator.
@@ -218,33 +218,33 @@ Every step has its own interface — run them in order, skip steps, resume from 
 **Today**
 
 - **Knows your project** &mdash; checks progress, advances script / shot tasks, audits deliverable completeness and suggests next steps
-- **Open to other agents** &mdash; a local MCP server exposes DramaClaw to Claude Code, Codex and any MCP client (loopback-only, explicit trust flag); see [MCP for Claude Code](docs/en/guides/mcp-claude-code.md)
+- **Open to other agents** &mdash; a local MCP server exposes DramaFoundry to Claude Code, Codex and any MCP client (loopback-only, explicit trust flag); see [MCP for Claude Code](docs/en/guides/mcp-claude-code.md)
 
 **Next**
 
-- **Works on the canvas** &mdash; the screenshot above is where this is going: describe the film, and Xia Director creates and connects the nodes, lays them out, runs them, and reviews the results, with every canvas command approved in your browser first. Canvas + agent is the core of DramaClaw from here on; see [In Development](#in-development).
+- **Works on the canvas** &mdash; the screenshot above is where this is going: describe the film, and Xia Director creates and connects the nodes, lays them out, runs them, and reviews the results, with every canvas command approved in your browser first. Canvas + agent is the core of DramaFoundry from here on; see [In Development](#in-development).
 
 <br/>
 
-## Why DramaClaw?
+## Why DramaFoundry?
 
-**A canvas that understands drama, and an agent that works on it.** Generic node canvases will wire anything together but know nothing about episodes, characters or shots; series tools know the craft but lock you into a wizard. XiaHua gives you the free canvas with drama-aware nodes and skills, and Xia Director is being built to lay out, run and review those graphs for you. That combination is where DramaClaw is going.
+**A canvas that understands drama, and an agent that works on it.** Generic node canvases will wire anything together but know nothing about episodes, characters or shots; series tools know the craft but lock you into a wizard. XiaHua gives you the free canvas with drama-aware nodes and skills, and Xia Director is being built to lay out, run and review those graphs for you. That combination is where DramaFoundry is going.
 
-**Built for novel-to-short-drama.** General workflow tools can wire nodes together, but they don't know what an "episode beat" is, don't understand why a character's cross-scene identity consistency matters, and won't guard a chapter's emotional arc across image + voice + editing. DramaClaw builds all that judgment into the tool.
+**Built for novel-to-short-drama.** General workflow tools can wire nodes together, but they don't know what an "episode beat" is, don't understand why a character's cross-scene identity consistency matters, and won't guard a chapter's emotional arc across image + voice + editing. DramaFoundry builds all that judgment into the tool.
 
-**Canvas and pipeline, not canvas or pipeline.** Most tools give you either a free node canvas or a rigid wizard. DramaClaw runs both as dual tracks over one asset library: explore on the canvas, commit what works to the series, project the series back onto a canvas. The agent works on both.
+**Canvas and pipeline, not canvas or pipeline.** Most tools give you either a free node canvas or a rigid wizard. DramaFoundry runs both as dual tracks over one asset library: explore on the canvas, commit what works to the series, project the series back onto a canvas. The agent works on both.
 
 **Every step is decomposable.** Each stage is an independent async task with its own interface. Run sequentially, skip steps, resume mid-way — the toolchain itself is the product, with no hidden black box.
 
-**Self-hostable, model-neutral.** Your manuscript, your characters, your models, your servers. Use closed-source frontier models when you want the best results; switch to open-weight models when you want full control. DramaClaw won't lock you into any single vendor.
+**Self-hostable, model-neutral.** Your manuscript, your characters, your models, your servers. Use closed-source frontier models when you want the best results; switch to open-weight models when you want full control. DramaFoundry won't lock you into any single vendor.
 
-### How DramaClaw compares
+### How DramaFoundry compares
 
 The edge isn't "more generation" — it's organizing the whole short-drama production loop (script → assets → shots → canvas → final cut) into something reusable, collaborative and scalable.
 
 <sub>Legend: ✅ Full · ◐ Partial · ○ Planned · ❌ None — competitor names partially masked; comparison based on publicly available product docs and positioning.</sub>
 
-| Capability | L\*TV | R\*Hub | T\*Now | S\*ko | U\*dream | O\*II | J\*/K\* | **DramaClaw** |
+| Capability | L\*TV | R\*Hub | T\*Now | S\*ko | U\*dream | O\*II | J\*/K\* | **DramaFoundry** |
 |---|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|
 | Storyboard preview (script→shots, boards) | ◐ | ✅ | ◐ | ✅ | ◐ | ❌ | ❌ | ✅ |
 | Interactive series (multi-episode, branching, IP) | ◐ | ◐ | ◐ | ✅ | ◐ | ❌ | ❌ | ✅ |
@@ -264,7 +264,7 @@ The edge isn't "more generation" — it's organizing the whole short-drama produ
 
 ## System Requirements
 
-DramaClaw runs all inference through an **OpenAI-compatible gateway** — either the official RelayClaw service or the bundled [dramaclaw-gateway](https://github.com/dramaclaw/dramaclaw-gateway) routing to providers you configure. Nothing runs models on your machine, so the local footprint is light. An ordinary laptop or a small VPS is enough.
+DramaFoundry runs all inference through an **OpenAI-compatible gateway** — either the official RelayClaw service or the bundled [dramafoundry-gateway](https://github.com/dramaclaw/dramafoundry-gateway) routing to providers you configure. Nothing runs models on your machine, so the local footprint is light. An ordinary laptop or a small VPS is enough.
 
 | Item | Requirement |
 |---|---|
@@ -287,11 +287,11 @@ DramaClaw runs all inference through an **OpenAI-compatible gateway** — either
 
 Every GitHub Release publishes multi-arch (amd64/arm64) images to Docker Hub.
 
-**Source build (default)** — clone DramaClaw and the bundled [dramaclaw-gateway](https://github.com/dramaclaw/dramaclaw-gateway) side by side; `docker compose up -d --build` builds all three services from those two checkouts.
+**Source build (default)** — clone DramaFoundry and the bundled [dramafoundry-gateway](https://github.com/dramaclaw/dramafoundry-gateway) side by side; `docker compose up -d --build` builds all three services from those two checkouts.
 
 ```bash
 git clone https://github.com/dramaclaw/dramaclaw.git
-git clone https://github.com/dramaclaw/dramaclaw-gateway.git   # bundled gateway, built from ../dramaclaw-gateway
+git clone https://github.com/dramaclaw/dramafoundry-gateway.git   # bundled gateway, built from ../dramafoundry-gateway
 cd dramaclaw
 
 cp .env.example .env
@@ -300,7 +300,7 @@ cp .env.example .env
 docker compose up -d --build   # builds and starts three services: api / newapi (bundled gateway) / web
 ```
 
-Both checkouts are plain git repos: edit, `git pull`, rebuild. Only DramaClaw code changed? `docker compose up -d --build api web`. Only the gateway? `docker compose up -d --build newapi`. Gateway clone somewhere else, or prefer Docker to fetch it from git? Set `DRAMACLAW_GATEWAY_SRC` in `.env` to that path or to `https://github.com/dramaclaw/dramaclaw-gateway.git#main`.
+Both checkouts are plain git repos: edit, `git pull`, rebuild. Only DramaFoundry code changed? `docker compose up -d --build api web`. Only the gateway? `docker compose up -d --build newapi`. Gateway clone somewhere else, or prefer Docker to fetch it from git? Set `DRAMAFOUNDRY_GATEWAY_SRC` in `.env` to that path or to `https://github.com/dramaclaw/dramafoundry-gateway.git#main`.
 
 **No build** — pull published images instead (no gateway clone needed):
 
@@ -316,9 +316,9 @@ Open the app at <http://localhost:8080>; the REST API is at <http://localhost:87
 
 Full steps in the [Quick Start](docs/en/getting-started/quickstart.md).
 
-Pin versions or switch registry in `.env` (`DRAMACLAW_VERSION`, `DRAMACLAW_GATEWAY_VERSION`, `DRAMACLAW_IMAGE_PREFIX`) — these apply to the image mode (`docker-compose.release.yml`) only. Mainland China: set `DRAMACLAW_IMAGE_PREFIX=claymore-registry.cn-chengdu.cr.aliyuncs.com/dramaclaw` and pin both versions (the ACR mirror carries pinned tags only).
+Pin versions or switch registry in `.env` (`DRAMAFOUNDRY_VERSION`, `DRAMAFOUNDRY_GATEWAY_VERSION`, `DRAMAFOUNDRY_IMAGE_PREFIX`) — these apply to the image mode (`docker-compose.release.yml`) only. Mainland China: set `DRAMAFOUNDRY_IMAGE_PREFIX=claymore-registry.cn-chengdu.cr.aliyuncs.com/dramaclaw` and pin both versions (the ACR mirror carries pinned tags only).
 
-> Migrating from an older checkout? For the source build, first `git clone https://github.com/dramaclaw/dramaclaw-gateway.git ../dramaclaw-gateway` (the gateway is now built from that sibling checkout; without it the build stops with `unable to prepare context`). `docker-compose.selfhosted.yml` / `docker-compose.selfhosted.release.yml` have been removed — use `docker-compose.yml` (source build) / `docker-compose.release.yml` (images). Service names and the `ce-data` / `newapi-data` volumes are unchanged; existing data is reused as-is. The bundled gateway's port now binds only to `127.0.0.1` by default; set `ST_NEWAPI_BIND=0.0.0.0` in `.env` if you need remote access to it.
+> Migrating from an older checkout? For the source build, first `git clone https://github.com/dramaclaw/dramafoundry-gateway.git ../dramafoundry-gateway` (the gateway is now built from that sibling checkout; without it the build stops with `unable to prepare context`). `docker-compose.selfhosted.yml` / `docker-compose.selfhosted.release.yml` have been removed — use `docker-compose.yml` (source build) / `docker-compose.release.yml` (images). Service names and the `ce-data` / `newapi-data` volumes are unchanged; existing data is reused as-is. The bundled gateway's port now binds only to `127.0.0.1` by default; set `ST_NEWAPI_BIND=0.0.0.0` in `.env` if you need remote access to it.
 
 ### Local development (uv + Python 3.11+)
 
@@ -338,30 +338,30 @@ Frontend in a second terminal: `cd frontend && pnpm install && pnpm dev`.
 
 ```bash
 mkdir -p state/newapi
-docker run -d --name dramaclaw-gateway -p 127.0.0.1:3000:3000 \
+docker run -d --name dramafoundry-gateway -p 127.0.0.1:3000:3000 \
   -v "$PWD/state/newapi:/data" \
-  claymorelab/dramaclaw-gateway:v1.0.0-rc.24-dramaclaw.1
+  claymorelab/dramafoundry-gateway:v1.0.0-rc.24-dramaclaw.1
 ```
 
-or run the gateway from source in the sibling checkout (`make dev-api` / `make dev-web` in [dramaclaw-gateway](https://github.com/dramaclaw/dramaclaw-gateway#develop), or `go build` and start the binary with `SQLITE_PATH=<path to>/dramaclaw/state/newapi/one-api.db`).
+or run the gateway from source in the sibling checkout (`make dev-api` / `make dev-web` in [dramafoundry-gateway](https://github.com/dramaclaw/dramafoundry-gateway#develop), or `go build` and start the binary with `SQLITE_PATH=<path to>/dramaclaw/state/newapi/one-api.db`).
 
 <br/>
 
 ## Supported Models & Providers
 
-DramaClaw stays model-neutral — all text / image / video / audio models connect through an **OpenAI-compatible gateway**. Pick the mode in **Settings → Model Config**:
+DramaFoundry stays model-neutral — all text / image / video / audio models connect through an **OpenAI-compatible gateway**. Pick the mode in **Settings → Model Config**:
 
-- **Official (recommended)** — paste your DC key (get one at <https://relayclaw.cdnfg.com>), save, done. RelayClaw already ships every model mapping DramaClaw needs; nothing to configure.
-- **Custom** — one click initializes the bundled `dramaclaw-gateway`, then add your own provider channels (API keys, model IDs) in its admin UI. Every model DramaClaw calls goes through your channels.
+- **Official (recommended)** — paste your DC key (get one at <https://relayclaw.cdnfg.com>), save, done. RelayClaw already ships every model mapping DramaFoundry needs; nothing to configure.
+- **Custom** — one click initializes the bundled `dramafoundry-gateway`, then add your own provider channels (API keys, model IDs) in its admin UI. Every model DramaFoundry calls goes through your channels.
 - **Local + Official Hybrid** — keep the official models for the main pipeline and add extra channels (for example a local ComfyUI video workflow) through the bundled gateway.
 
 Full walkthrough in [Configuring Models](docs/en/getting-started/configuring-models.md).
 
-### The bundled gateway: dramaclaw-gateway
+### The bundled gateway: dramafoundry-gateway
 
-The `newapi` service in `docker-compose.yml` is [**dramaclaw-gateway**](https://github.com/dramaclaw/dramaclaw-gateway), DramaClaw's own fork of [New API](https://github.com/QuantumNous/new-api). It speaks the **DC-Media** contract DramaClaw uses for image / video / audio (media roles, references, first / last frames) and converts each request into the provider's native API. Image: [`claymorelab/dramaclaw-gateway`](https://hub.docker.com/r/claymorelab/dramaclaw-gateway) on Docker Hub, pinned by `DRAMACLAW_GATEWAY_VERSION` in `.env`. It stays idle in Official mode and is only used once you switch to **Custom** or **Local + Official Hybrid**.
+The `newapi` service in `docker-compose.yml` is [**dramafoundry-gateway**](https://github.com/dramaclaw/dramafoundry-gateway), DramaFoundry's own fork of [New API](https://github.com/QuantumNous/new-api). It speaks the **DC-Media** contract DramaFoundry uses for image / video / audio (media roles, references, first / last frames) and converts each request into the provider's native API. Image: [`claymorelab/dramafoundry-gateway`](https://hub.docker.com/r/claymorelab/dramafoundry-gateway) on Docker Hub, pinned by `DRAMAFOUNDRY_GATEWAY_VERSION` in `.env`. It stays idle in Official mode and is only used once you switch to **Custom** or **Local + Official Hybrid**.
 
-Provider adapters shipped in the gateway today (see the [channel support matrix](https://github.com/dramaclaw/dramaclaw-gateway/blob/main/docs/providers/en/README.md) for verification status): ComfyUI · MiniMax / Hailuo · VolcEngine Doubao / Seedance · fal.ai · Alibaba · Kling · Jimeng · Vertex AI · Gemini · OpenAI / Sora · Suno. Want another provider? The gateway has a [scaffold generator and contribution guide](https://github.com/dramaclaw/dramaclaw-gateway/blob/main/CONTRIBUTING.md).
+Provider adapters shipped in the gateway today (see the [channel support matrix](https://github.com/dramaclaw/dramafoundry-gateway/blob/main/docs/providers/en/README.md) for verification status): ComfyUI · MiniMax / Hailuo · VolcEngine Doubao / Seedance · fal.ai · Alibaba · Kling · Jimeng · Vertex AI · Gemini · OpenAI / Sora · Suno. Want another provider? The gateway has a [scaffold generator and contribution guide](https://github.com/dramaclaw/dramafoundry-gateway/blob/main/CONTRIBUTING.md).
 
 | Stage                | Official mode (RelayClaw)                          | Custom / Hybrid mode (bundled gateway)                    |
 |----------------------|----------------------------------------------------|-----------------------------------------------------------|
@@ -381,7 +381,7 @@ These are being built in the open and are not in a release yet. Watch the branch
 
 - **Xia Director on the canvas** &mdash; the agent creates and connects nodes, updates node data, lays out and groups nodes, runs node actions and builds whole workflow graphs, with every canvas command approved in the open browser first.
 - **Workflow catalog and community skills** &mdash; a catalog of 11 workflow skills and 60 recipes (short drama, e-commerce ads, IP character ads, social campaigns, anime / Pixar / LEGO / kung-fu styles…) that lay out whole generation graphs; skills and recipes as installable, exportable, shareable bundles
-- **agent-kit** &mdash; a portable package that brings the same DramaClaw workflows to Hermes, OpenClaw, WorkBuddy, Claude Code and Codex
+- **agent-kit** &mdash; a portable package that brings the same DramaFoundry workflows to Hermes, OpenClaw, WorkBuddy, Claude Code and Codex
 - **Previz stage** &mdash; an in-browser 3D blocking stage as a canvas node: multi-track timeline, character rigs and paths, real lens / sensor camera model, close-up tracking, then capture the framed shot straight into the next node. Branch: `feat/previz-canvas-node`
 - **Interactive stories** &mdash; branching choice points on the canvas, compiled to an ink story and exported as a self-contained HTML player, with playtest stats and path coverage. Branch: `feat/canvas-fmv`
 - **Interactive ads** &mdash; the ad skills and recipes above, combined with branching playback, for product videos viewers can steer
@@ -414,7 +414,7 @@ We continuously curate and label [`good first issue`](https://github.com/dramacl
 
 ## Contributors
 
-The people building DramaClaw — thank you. 💜
+The people building DramaFoundry — thank you. 💜
 
 <table>
   <tr>
@@ -456,7 +456,7 @@ The people building DramaClaw — thank you. 💜
 
 ## License
 
-[Elastic License 2.0](./LICENSES/Elastic-2.0.txt). Free to use, modify, redistribute and sell what you build with it; keep a small "Powered by DramaClaw" in your UI. The only restriction is that you may not offer the software itself as a hosted service to others. See the [license explainer](./docs/en/license.md) and the [licensing statement](https://github.com/dramaclaw/dramaclaw/issues/475).
+[Elastic License 2.0](./LICENSES/Elastic-2.0.txt). Free to use, modify, redistribute and sell what you build with it; keep a small "Powered by DramaFoundry" in your UI. The only restriction is that you may not offer the software itself as a hosted service to others. See the [license explainer](./docs/en/license.md) and the [licensing statement](https://github.com/dramaclaw/dramaclaw/issues/475).
 
 <br/>
 

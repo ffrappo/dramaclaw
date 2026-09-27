@@ -18,7 +18,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ═══════════════════════════════════════════════════════════
-   Theme: SuperTale AI — deep neutral + electric cyan accent.
+   Theme: DramaFoundry AI — deep neutral + electric cyan accent.
    oklch color space for perceptual uniformity.
    Toggle via `.dark` class on <html>.
    ═══════════════════════════════════════════════════════════ */

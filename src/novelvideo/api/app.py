@@ -446,10 +446,10 @@ def create_app() -> FastAPI:
             status_code=410,
         )
 
-    # 原生/便携部署(无 nginx)时由后端直接伺服 SPA:设 DRAMACLAW_FRONTEND_DIST
+    # 原生/便携部署(无 nginx)时由后端直接伺服 SPA:设 DRAMAFOUNDRY_FRONTEND_DIST
     # 指向前端构建产物目录才挂载;Docker/EE 路径不设该变量,行为不变。
     # 挂在所有路由之后,/api、/healthz、/static 仍然优先命中。
-    frontend_dist = os.environ.get("DRAMACLAW_FRONTEND_DIST", "").strip()
+    frontend_dist = os.environ.get("DRAMAFOUNDRY_FRONTEND_DIST", "").strip()
     if frontend_dist and Path(frontend_dist).is_dir():
         from fastapi.staticfiles import StaticFiles
         from starlette.exceptions import HTTPException as _StarletteHTTPException

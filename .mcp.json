@@ -4,8 +4,8 @@
       "command": "uv",
       "args": ["run", "python", "-m", "novelvideo.chat.dramaclaw_mcp"],
       "env": {
-        "DRAMACLAW_API_URL": "http://localhost:8780",
-        "DRAMACLAW_CE_OWNER": "1"
+        "DRAMAFOUNDRY_API_URL": "http://localhost:8780",
+        "DRAMAFOUNDRY_CE_OWNER": "1"
       }
     }
   }

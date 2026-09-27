@@ -3,9 +3,9 @@
 
 # Quickstart
 
-> Run DramaClaw locally and produce your first result.
+> Run DramaFoundry locally and produce your first result.
 
-DramaClaw is the Community Edition (CE): it runs on a single machine with no PostgreSQL / Redis required. By default `docker compose` brings up three services: `api` (the creation backend, :8780), `newapi` (the bundled gateway, idle until you switch to Custom or Local + Official Hybrid mode), and `web` (the browser UI, :8080). Models are served through the **DramaClaw official gateway (RelayClaw)** by default — paste in a DC key and you're ready to go.
+DramaFoundry is the Community Edition (CE): it runs on a single machine with no PostgreSQL / Redis required. By default `docker compose` brings up three services: `api` (the creation backend, :8780), `newapi` (the bundled gateway, idle until you switch to Custom or Local + Official Hybrid mode), and `web` (the browser UI, :8080). Models are served through the **DramaFoundry official gateway (RelayClaw)** by default — paste in a DC key and you're ready to go.
 
 ## Prerequisites
 
@@ -15,7 +15,7 @@ DramaClaw is the Community Edition (CE): it runs on a single machine with no Pos
 ## Steps
 
 ```bash
-# 1. Get the code — DramaClaw and the bundled gateway, side by side
+# 1. Get the code — DramaFoundry and the bundled gateway, side by side
 git clone https://github.com/dramaclaw/dramaclaw.git
 git clone https://github.com/dramaclaw/dramaclaw-gateway.git
 cd dramaclaw
@@ -35,7 +35,7 @@ docker compose ps   # api, newapi, and web should all be running
 
 ## Enter your DC key (one-time, required)
 
-1. Open **`http://localhost:8080`** in your browser — this is the DramaClaw UI.
+1. Open **`http://localhost:8080`** in your browser — this is the DramaFoundry UI.
 2. Go to Settings → **Model Configuration → Official Channel**. The gateway address is already prefilled as `https://relayclaw.cdnfg.com/v1`.
 3. **Paste your DC key** and click "Save and Enable". It works immediately, with **no model mapping required** (RelayClaw has everything configured on the backend).
 

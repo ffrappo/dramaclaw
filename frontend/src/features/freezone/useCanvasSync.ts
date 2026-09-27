@@ -713,7 +713,7 @@ interface CanvasSyncResult {
 }
 
 /**
- * Bind a SuperTale freezone canvas (project, canvasId) to the local
+ * Bind a DramaFoundry freezone canvas (project, canvasId) to the local
  * `useCanvasStore`. On mount the canvas is fetched and pushed into the
  * store; subsequent edits are debounced + PUT back. F4's freezoneAiGateway
  * generates new images that flow into the store the same way upstream did.

@@ -47,36 +47,36 @@ CONTENT_FILTER_MESSAGE = (
     "请把需求拆得更具体，避免一次性要求完成整集或包含敏感/违规描述；"
     "也可以先让我只列当前制作进度和下一步。"
 )
-DRAMACLAW_ONE_STEP_STOP_MESSAGE = (
+DRAMAFOUNDRY_ONE_STEP_STOP_MESSAGE = (
     "当前任务已开始处理。请稍后让我查看当前任务进度，或在任务完成后再继续下一步。"
 )
-DRAMACLAW_WRITE_FAILED_STOP_MESSAGE = (
+DRAMAFOUNDRY_WRITE_FAILED_STOP_MESSAGE = (
     "刚才这一步没有成功启动任务。请先根据返回的错误补齐前置条件；"
     "如果是配音缺少声线，可以到「虾塘」上传或录制缺失声线后再继续。"
 )
 
-_DRAMACLAW_WRITE_TOOLS = {
-    "dramaclaw_post",
-    "dramaclaw_patch",
-    "dramaclaw_delete",
-    "dramaclaw_build_characters",
-    "dramaclaw_plan_episodes",
-    "dramaclaw_generate_script",
-    "dramaclaw_update_character_face_prompt",
-    "dramaclaw_plan_identities",
-    "dramaclaw_plan_scenes",
-    "dramaclaw_plan_props",
-    "dramaclaw_generate_scene_master",
-    "dramaclaw_generate_scene_reverse",
-    "dramaclaw_generate_sketches",
-    "dramaclaw_detect_sketch_identities",
-    "dramaclaw_optimize_video_global",
-    "dramaclaw_generate_audio",
-    "dramaclaw_render_first_frames",
-    "dramaclaw_compose_episode",
-    "dramaclaw_generate_portrait",
-    "dramaclaw_generate_identity_image",
-    "dramaclaw_start_single_video",
+_DRAMAFOUNDRY_WRITE_TOOLS = {
+    "dramafoundry_post",
+    "dramafoundry_patch",
+    "dramafoundry_delete",
+    "dramafoundry_build_characters",
+    "dramafoundry_plan_episodes",
+    "dramafoundry_generate_script",
+    "dramafoundry_update_character_face_prompt",
+    "dramafoundry_plan_identities",
+    "dramafoundry_plan_scenes",
+    "dramafoundry_plan_props",
+    "dramafoundry_generate_scene_master",
+    "dramafoundry_generate_scene_reverse",
+    "dramafoundry_generate_sketches",
+    "dramafoundry_detect_sketch_identities",
+    "dramafoundry_optimize_video_global",
+    "dramafoundry_generate_audio",
+    "dramafoundry_render_first_frames",
+    "dramafoundry_compose_episode",
+    "dramafoundry_generate_portrait",
+    "dramafoundry_generate_identity_image",
+    "dramafoundry_start_single_video",
 }
 
 
@@ -147,12 +147,12 @@ def _has_content_filter_signal(value: object) -> bool:
     return False
 
 
-def _is_dramaclaw_write_tool(name: object) -> bool:
-    return str(name or "").strip() in _DRAMACLAW_WRITE_TOOLS
+def _is_dramafoundry_write_tool(name: object) -> bool:
+    return str(name or "").strip() in _DRAMAFOUNDRY_WRITE_TOOLS
 
 
 def _should_stop_after_write_tool(first_write_tool: str | None, next_tool_name: object) -> bool:
-    return first_write_tool is not None and _is_dramaclaw_write_tool(next_tool_name)
+    return first_write_tool is not None and _is_dramafoundry_write_tool(next_tool_name)
 
 
 def _is_failed_tool_update(value: object) -> bool:
@@ -434,7 +434,7 @@ class HermesSdkThread:
         """Send a prompt and yield ChatBackendEvent items as hermes streams them.
 
         ``current_project`` is included as a prompt prefix so per-user hermes
-        knows which DramaClaw project the user is talking about (see plan).
+        knows which DramaFoundry project the user is talking about (see plan).
         """
         if self._closed:
             raise RuntimeError("HermesSdkThread is closed")
@@ -536,9 +536,9 @@ class HermesSdkThread:
                         active_tool_name = tool_name
                         if _should_stop_after_write_tool(first_write_tool, tool_name):
                             stop_text = (
-                                DRAMACLAW_WRITE_FAILED_STOP_MESSAGE
+                                DRAMAFOUNDRY_WRITE_FAILED_STOP_MESSAGE
                                 if first_write_failed
-                                else DRAMACLAW_ONE_STEP_STOP_MESSAGE
+                                else DRAMAFOUNDRY_ONE_STEP_STOP_MESSAGE
                             )
                             _log.warning(
                                 "Hermes turn attempted tool after write task: thread=%s turn=%s "
@@ -557,7 +557,7 @@ class HermesSdkThread:
                                 text=stop_text,
                             )
                             return
-                        if _is_dramaclaw_write_tool(tool_name):
+                        if _is_dramafoundry_write_tool(tool_name):
                             first_write_tool = tool_name
                             first_write_failed = False
                         if tool_call_count > TURN_TOOL_CALL_LIMIT:

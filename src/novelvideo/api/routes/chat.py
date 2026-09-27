@@ -664,7 +664,7 @@ async def _stream_home_turn(
     # 出网 project 身份用哨兵 `HOME_SCOPE_EGRESS_PROJECT_ID`：`TrustedEgressContext`
     # 的 `project_id` 有非空不变量，而 home 态的**会话**身份必须是 None。两者是
     # 两个口径，所以下面 `get_for_user` 里 `project_id` 与 `egress_project_id`
-    # 各传各的——哨兵只喂出网比对，不得漏进子进程的 DRAMACLAW_PROJECT_ID。
+    # 各传各的——哨兵只喂出网比对，不得漏进子进程的 DRAMAFOUNDRY_PROJECT_ID。
     #
     # 哨兵必须两跳一致：绑定、换 authorization、取号三处同值，否则
     # `_strict_admission` 在 `authorize_credentialed_hermes` 与

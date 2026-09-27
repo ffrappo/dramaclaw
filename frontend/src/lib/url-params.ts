@@ -8,7 +8,7 @@
 import { getAppRouter } from "@/lib/app-router";
 
 export interface FreezoneUrl {
-  /** SuperTale project_id. Display names are not accepted by project-scoped APIs. */
+  /** DramaFoundry project_id. Display names are not accepted by project-scoped APIs. */
   project: string | null;
   canvas: string | null;
 }

@@ -20,8 +20,8 @@ import yaml
 
 _log = logging.getLogger(__name__)
 
-DRAMACLAW_ROOT = Path(__file__).resolve().parents[3]
-STATE_ROOT = DRAMACLAW_ROOT / "state"
+DRAMAFOUNDRY_ROOT = Path(__file__).resolve().parents[3]
+STATE_ROOT = DRAMAFOUNDRY_ROOT / "state"
 DEFAULT_HERMES_SKILLS = {"dramaclaw"}
 DEFAULT_HERMES_PLUGINS = {"dramaclaw"}
 DEFAULT_HERMES_TOOLSETS = {"hermes-acp"}
@@ -29,20 +29,20 @@ _warned_repo_state_fallback = False
 
 
 _DEFAULT_HERMES_MODEL = "DC-hermes-LLM"
-_DRAMACLAW_HERMES_PROVIDER_NAME = "dramaclaw"
-_DRAMACLAW_HERMES_PROVIDER = f"custom:{_DRAMACLAW_HERMES_PROVIDER_NAME}"
-_DRAMACLAW_HERMES_KEY_ENV = "NEWAPI_API_KEY"
+_DRAMAFOUNDRY_HERMES_PROVIDER_NAME = "dramaclaw"
+_DRAMAFOUNDRY_HERMES_PROVIDER = f"custom:{_DRAMAFOUNDRY_HERMES_PROVIDER_NAME}"
+_DRAMAFOUNDRY_HERMES_KEY_ENV = "NEWAPI_API_KEY"
 _DEFAULT_HERMES_MODEL_API_MODE = "chat_completions"
 _DEFAULT_HERMES_MODEL_CONTEXT_LENGTH = "131072"
 
-_CONFIG_YAML_TEMPLATE = """# DramaClaw-managed hermes config.
+_CONFIG_YAML_TEMPLATE = """# DramaFoundry-managed hermes config.
 # Toolset whitelist enforces L1 defense (no direct file write / shell).
 #
 # Edit with care; this file may be regenerated.
 #
 # Model routes through the selected NewAPI gateway (OpenAI-compatible), unified
 # with the video/image generators. The endpoint is non-secret workspace config;
-# DramaClaw injects the key into the worker process as NEWAPI_API_KEY.
+# DramaFoundry injects the key into the worker process as NEWAPI_API_KEY.
 
 custom_providers:
   - name: dramaclaw
@@ -83,7 +83,7 @@ disabled_toolsets:
 """
 
 
-_DEFAULT_ENV_TEMPLATE = """# DramaClaw-managed Hermes workspace.
+_DEFAULT_ENV_TEMPLATE = """# DramaFoundry-managed Hermes workspace.
 # Model credentials are injected into the worker process and are never written
 # here. Do not duplicate model keys in this file.
 """
@@ -98,14 +98,14 @@ def _state_root() -> Path:
         _warned_repo_state_fallback = True
         _log.warning(
             "NOVELVIDEO_STATE_DIR is not set; Hermes workspace falls back to %s",
-            DRAMACLAW_ROOT / "state",
+            DRAMAFOUNDRY_ROOT / "state",
         )
-    return DRAMACLAW_ROOT / "state"
+    return DRAMAFOUNDRY_ROOT / "state"
 
 
 def _root_value(*names: str) -> str:
     """Read the first non-empty value among ``names`` from root .env then env."""
-    env_path = DRAMACLAW_ROOT / ".env"
+    env_path = DRAMAFOUNDRY_ROOT / ".env"
     try:
         root_values = _parse_env_assignments(env_path.read_text(encoding="utf-8"))
     except OSError:
@@ -154,7 +154,7 @@ def _hermes_model_default() -> str:
     return _root_value(
         "HERMES_MODEL",
         "HERMES_MODEL_DEFAULT",
-        "DRAMACLAW_HERMES_MODEL",
+        "DRAMAFOUNDRY_HERMES_MODEL",
     ) or _DEFAULT_HERMES_MODEL
 
 
@@ -185,14 +185,14 @@ def _default_config_yaml() -> str:
 _DEFAULT_SOUL_MD = (
     "你是虾导。不要自称 Hermes Agent，不要提 Nous Research，"
     "也不要主动解释底层代理框架。自我介绍时只回答“我是虾导”，"
-    "不要附加“DramaClaw 的小说转视频创作助手”之类的头衔或职能描述。"
+    "不要附加“DramaFoundry 的小说转视频创作助手”之类的头衔或职能描述。"
     "你应当直接、清晰、务实，优先帮助用户完成 "
-    "DramaClaw 项目进度查询、任务管理、剧本、配音、图片、视频生成与交付相关工作。\n"
+    "DramaFoundry 项目进度查询、任务管理、剧本、配音、图片、视频生成与交付相关工作。\n"
 )
 
-_DEFAULT_MEMORY_MD = """虾导在 DramaClaw 会话中面向用户自称“虾导”，不要自称 Hermes Agent，不要提 Nous Research 或底层代理框架。自我介绍时只回答“我是虾导”，不要附加“DramaClaw 的小说转视频创作助手”之类的头衔或职能描述。
+_DEFAULT_MEMORY_MD = """虾导在 DramaFoundry 会话中面向用户自称“虾导”，不要自称 Hermes Agent，不要提 Nous Research 或底层代理框架。自我介绍时只回答“我是虾导”，不要附加“DramaFoundry 的小说转视频创作助手”之类的头衔或职能描述。
 §
-DramaClaw 管理的虾导会话中 `terminal` 被禁用（在 config.yaml disabled_toolsets 中），curl 等 shell 命令会被直接拒绝。调用 DramaClaw API 时应使用已启用的 `hermes-acp` toolset 中的 DramaClaw 插件工具，不要用 curl。
+DramaFoundry 管理的虾导会话中 `terminal` 被禁用（在 config.yaml disabled_toolsets 中），curl 等 shell 命令会被直接拒绝。调用 DramaFoundry API 时应使用已启用的 `hermes-acp` toolset 中的 DramaFoundry 插件工具，不要用 curl。
 """
 
 _OLD_SOUL_PREFIX = (
@@ -206,34 +206,34 @@ _OLD_SOUL_PREFIX = (
 )
 
 _OLD_IDENTITY_MEMORY_LINE = (
-    "虾导在 DramaClaw 会话中面向用户自称“虾导”，不要自称 Hermes Agent，"
+    "虾导在 DramaFoundry 会话中面向用户自称“虾导”，不要自称 Hermes Agent，"
     "不要提 Nous Research 或底层代理框架。用户问“你是谁 / 你叫什么 / "
-    "你是什么助手 / 介绍一下你自己”时，直接回答“我是虾导，DramaClaw "
+    "你是什么助手 / 介绍一下你自己”时，直接回答“我是虾导，DramaFoundry "
     "的小说转视频创作助手。”"
 )
 
 _IDENTITY_MEMORY_LINE = (
-    "虾导在 DramaClaw 会话中面向用户自称“虾导”，不要自称 Hermes Agent，"
+    "虾导在 DramaFoundry 会话中面向用户自称“虾导”，不要自称 Hermes Agent，"
     "不要提 Nous Research 或底层代理框架。自我介绍时只回答“我是虾导”，"
-    "不要附加“DramaClaw 的小说转视频创作助手”之类的头衔或职能描述。"
+    "不要附加“DramaFoundry 的小说转视频创作助手”之类的头衔或职能描述。"
 )
 
 _OLD_MEMORY_LINE = (
-    "DramaClaw 管理的 Hermes 会话中 `terminal` 被禁用（在 config.yaml "
-    "disabled_toolsets 中），curl 等 shell 命令会被直接拒绝。调用 DramaClaw API "
+    "DramaFoundry 管理的 Hermes 会话中 `terminal` 被禁用（在 config.yaml "
+    "disabled_toolsets 中），curl 等 shell 命令会被直接拒绝。调用 DramaFoundry API "
     "时应使用已启用的 `dramaclaw` 插件 toolset 提供的内置 HTTP 工具，不要用 curl。"
 )
 
 _NEW_MEMORY_LINE = (
-    "DramaClaw 管理的虾导会话中 `terminal` 被禁用（在 config.yaml "
-    "disabled_toolsets 中），curl 等 shell 命令会被直接拒绝。调用 DramaClaw API "
-    "时应使用已启用的 `hermes-acp` toolset 中的 DramaClaw 插件工具，不要用 curl。"
+    "DramaFoundry 管理的虾导会话中 `terminal` 被禁用（在 config.yaml "
+    "disabled_toolsets 中），curl 等 shell 命令会被直接拒绝。调用 DramaFoundry API "
+    "时应使用已启用的 `hermes-acp` toolset 中的 DramaFoundry 插件工具，不要用 curl。"
 )
 
 _OLD_SOUL_IDENTITY_TEXT = (
-    "你是虾导，DramaClaw 的小说转视频创作助手。用户问“你是谁 / 你叫什么 / "
+    "你是虾导，DramaFoundry 的小说转视频创作助手。用户问“你是谁 / 你叫什么 / "
     "你是什么助手 / 介绍一下你自己”时，直接回答“我是虾导，"
-    "DramaClaw 的小说转视频创作助手。”"
+    "DramaFoundry 的小说转视频创作助手。”"
 )
 
 
@@ -351,13 +351,13 @@ def _ensure_identity_context(home: Path) -> None:
 def _materialize_skill_links(skills_dir: Path) -> None:
     """Create / refresh symlinks from skills_dir/<name> → repo-pinned skills.
 
-    The source of truth is ``DramaClaw/.hermes/skills/`` so a fresh checkout
+    The source of truth is ``DramaFoundry/.hermes/skills/`` so a fresh checkout
     has the same Hermes skills on every machine.
 
     Idempotent: stale links to dirs that no longer exist in the source are
     removed; new skills are added; existing real directories are left alone.
     """
-    src_skills = DRAMACLAW_ROOT / ".hermes" / "skills"
+    src_skills = DRAMAFOUNDRY_ROOT / ".hermes" / "skills"
     if not src_skills.is_dir():
         _log.info(
             "hermes skills source not found at %s — skipping skill links",
@@ -531,7 +531,7 @@ def _ensure_model_gateway_config(config_yaml: Path) -> None:
     changed = False
     desired_model = {
         "default": _hermes_model_default(),
-        "provider": _DRAMACLAW_HERMES_PROVIDER,
+        "provider": _DRAMAFOUNDRY_HERMES_PROVIDER,
         "context_length": int(_hermes_model_context_length()),
     }
     for key, value in desired_model.items():
@@ -554,18 +554,18 @@ def _ensure_model_gateway_config(config_yaml: Path) -> None:
             for item in providers
             if isinstance(item, dict)
             and str(item.get("name") or "").strip().lower()
-            == _DRAMACLAW_HERMES_PROVIDER_NAME
+            == _DRAMAFOUNDRY_HERMES_PROVIDER_NAME
         ),
         None,
     )
     if managed_provider is None:
-        managed_provider = {"name": _DRAMACLAW_HERMES_PROVIDER_NAME}
+        managed_provider = {"name": _DRAMAFOUNDRY_HERMES_PROVIDER_NAME}
         providers.append(managed_provider)
         changed = True
     desired_provider = {
-        "name": _DRAMACLAW_HERMES_PROVIDER_NAME,
+        "name": _DRAMAFOUNDRY_HERMES_PROVIDER_NAME,
         "base_url": _newapi_base_url(),
-        "key_env": _DRAMACLAW_HERMES_KEY_ENV,
+        "key_env": _DRAMAFOUNDRY_HERMES_KEY_ENV,
         "api_mode": _hermes_model_api_mode(),
     }
     for key, value in desired_provider.items():
@@ -601,7 +601,7 @@ def _dump_hermes_config_yaml(config: dict) -> str:
 def _ensure_model_config_from_env(config_yaml: Path) -> None:
     """Apply explicit Hermes model env overrides to existing config.yaml files."""
     overrides: dict[str, object] = {}
-    model = _root_value("HERMES_MODEL", "HERMES_MODEL_DEFAULT", "DRAMACLAW_HERMES_MODEL")
+    model = _root_value("HERMES_MODEL", "HERMES_MODEL_DEFAULT", "DRAMAFOUNDRY_HERMES_MODEL")
     if model:
         overrides["default"] = model
     api_mode = _root_value("HERMES_MODEL_API_MODE")
@@ -642,7 +642,7 @@ def _ensure_model_config_from_env(config_yaml: Path) -> None:
 
 def _materialize_plugin_links(plugins_dir: Path) -> None:
     """Create / refresh symlinks from plugins_dir/<name> → repo-pinned plugins."""
-    src_plugins = DRAMACLAW_ROOT / ".hermes" / "plugins"
+    src_plugins = DRAMAFOUNDRY_ROOT / ".hermes" / "plugins"
     if not src_plugins.is_dir():
         _log.info(
             "hermes plugins source not found at %s — skipping plugin links",

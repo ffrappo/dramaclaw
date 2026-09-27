@@ -1,7 +1,7 @@
-# Storytelling Channels Playbook (DramaClaw × Fornace Stack)
+# Storytelling Channels Playbook (DramaFoundry × Fornace Stack)
 
 A production-proven guide for authoring character-led visual stories, short dramas,
-and vertical video channels with DramaClaw and our generative model stack.
+and vertical video channels with DramaFoundry and our generative model stack.
 
 ---
 
@@ -73,7 +73,7 @@ uv run python scripts/provision_local_gateway.py
 
 ## 4. Multi-Language Storytelling (English & Italian)
 
-DramaClaw CE now natively supports multilingual channels:
+DramaFoundry CE now natively supports multilingual channels:
 
 * **Interface:** Choose `English` or `Italiano` from the account menu.
 * **Prose Detection:** Italian scripts automatically trigger Italian model prompts

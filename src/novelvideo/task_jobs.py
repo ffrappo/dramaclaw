@@ -38,18 +38,18 @@ def resolve_user_project_id_from_context(project_dir: Path) -> tuple[str, str]:
     """Resolve username/project_id strictly from env or project-local settings."""
     fallback_env = load_project_skill_env(project_dir)
     username = (
-        os.environ.get("SUPERTALE_USERNAME")
-        or fallback_env.get("SUPERTALE_USERNAME")
+        os.environ.get("DRAMAFOUNDRY_USERNAME")
+        or fallback_env.get("DRAMAFOUNDRY_USERNAME")
         or ""
     ).strip()
     project_id = (
-        os.environ.get("SUPERTALE_PROJECT_ID")
-        or fallback_env.get("SUPERTALE_PROJECT_ID")
+        os.environ.get("DRAMAFOUNDRY_PROJECT_ID")
+        or fallback_env.get("DRAMAFOUNDRY_PROJECT_ID")
         or ""
     ).strip()
     if not username or not project_id:
         raise RuntimeError(
-            "SUPERTALE_USERNAME / SUPERTALE_PROJECT_ID is not configured in env or "
+            "DRAMAFOUNDRY_USERNAME / DRAMAFOUNDRY_PROJECT_ID is not configured in env or "
             ".claude/settings.local.json"
         )
     return username, project_id
@@ -59,13 +59,13 @@ def resolve_project_id_from_context(project_dir: Path) -> str:
     """Resolve project_id strictly from env or project-local settings."""
     fallback_env = load_project_skill_env(project_dir)
     project_id = (
-        os.environ.get("SUPERTALE_PROJECT_ID")
-        or fallback_env.get("SUPERTALE_PROJECT_ID")
+        os.environ.get("DRAMAFOUNDRY_PROJECT_ID")
+        or fallback_env.get("DRAMAFOUNDRY_PROJECT_ID")
         or ""
     ).strip()
     if not project_id:
         raise RuntimeError(
-            "SUPERTALE_PROJECT_ID is not configured in env or .claude/settings.local.json"
+            "DRAMAFOUNDRY_PROJECT_ID is not configured in env or .claude/settings.local.json"
         )
     return project_id
 

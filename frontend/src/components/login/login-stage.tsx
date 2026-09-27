@@ -24,10 +24,10 @@ function formatStars(count: number): string {
 
 export function Brand({ className }: { className?: string }) {
   return (
-    <div className={className ?? styles.brand} aria-label="DramaClaw">
+    <div className={className ?? styles.brand} aria-label="DramaFoundry">
       <img
         className={styles.brandLogo}
-        src="/brand/dramaclaw-wordmark.png"
+        src="/brand/dramafoundry-wordmark.png"
         alt=""
         aria-hidden="true"
       />

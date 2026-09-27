@@ -53,7 +53,7 @@ COMMON_REVERSE_ENV_ALLOWLIST: tuple[tuple[re.Pattern[str], str], ...] = (
         "(task_backend/subprocesses.build_model_child_env); never operator-set, and "
         "setting it externally has no effect because the parent rebuilds the child env.",
     ),
-    (re.compile(r"^DRAMACLAW_CE_ROOT$"), "Audit script discovery override, not runtime app config."),
+    (re.compile(r"^DRAMAFOUNDRY_CE_ROOT$"), "Audit script discovery override, not runtime app config."),
     (
         re.compile(
             r"^(?:PROJECT_ID|PROJECT_DIR|PROJECT_DIR_FILE|DIRS_FILE|TASK_FILE|TASK_ID|LANE|MODE|"
@@ -108,7 +108,7 @@ COMMON_REVERSE_ENV_ALLOWLIST: tuple[tuple[re.Pattern[str], str], ...] = (
             r"TTS|MIGRATE_LEGACY|ML_SHARP|KEEP_RAW|DOWNLOAD_VIA_OSS|STATIC_VIA_OSS|"
             r"DISABLE_RENDER_PLAN|GRID_MODE|JR_ERROR_LOG|VIDEO_RESOLUTION|"
             r"SCENE_SPATIAL_CONTRACT|BLOCK_WORLD_|"
-            r"OSS_|SUPERTALE_|DRAMACLAW_|HERMES_|CLAUDE_|CODEX_|SUPERPOWER_).*"
+            r"OSS_|SUPERTALE_|DRAMAFOUNDRY_|HERMES_|CLAUDE_|CODEX_|SUPERPOWER_).*"
         ),
         "Legacy/internal feature flag or integration env outside the current public template contract.",
     ),
@@ -902,7 +902,7 @@ def _is_ce_root(path: Path) -> bool:
 
 
 def _discover_ce_root(root: Path) -> Path | None:
-    env_root = os.environ.get("DRAMACLAW_CE_ROOT", "").strip()
+    env_root = os.environ.get("DRAMAFOUNDRY_CE_ROOT", "").strip()
     candidates = []
     if env_root:
         candidates.append(Path(env_root).expanduser())
@@ -922,7 +922,7 @@ def _discover_ce_root(root: Path) -> Path | None:
 def _ce_root_error(root: Path) -> str:
     return (
         "SuperTale2 env audit requires dramaclaw-ce source for CE runtime keys. "
-        "Pass --ce-root /path/to/dramaclaw-ce, set DRAMACLAW_CE_ROOT, "
+        "Pass --ce-root /path/to/dramaclaw-ce, set DRAMAFOUNDRY_CE_ROOT, "
         f"or checkout dramaclaw-ce under {root / 'dc' / 'dramaclaw-ce'}."
     )
 

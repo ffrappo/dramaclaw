@@ -43,7 +43,7 @@ import type { TFn } from "@/lib/i18n-types";
  *   a fatal-error overlay.
  *
  * Source of truth: backend `MAX_NODES` / `MAX_EDGES` + 5 MB request body
- * middleware in SuperTale2's freezone routes. Keep both in sync — if the
+ * middleware in DramaFoundry2's freezone routes. Keep both in sync — if the
  * backend ever raises these limits, bump both ends.
  */
 export const MAX_NODES = 50_000;

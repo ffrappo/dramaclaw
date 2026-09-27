@@ -75,19 +75,19 @@ _CHAT_RUN_LOCK_MAX_SECONDS = 60 * 60
 _CHAT_RUN_LOCK_HEARTBEAT_SECONDS = 30.0
 _CHAT_RUN_LOCK_BIRTH_GRACE_SECONDS = 5.0
 _REINGEST_CONFIRMATION_BLOCK_RE = re.compile(
-    r"\[DRAMACLAW_REINGEST_CONFIRMATION\](.*?)\[/DRAMACLAW_REINGEST_CONFIRMATION\]",
+    r"\[DRAMAFOUNDRY_REINGEST_CONFIRMATION\](.*?)\[/DRAMAFOUNDRY_REINGEST_CONFIRMATION\]",
     re.DOTALL,
 )
 _REINGEST_CANCELLED_BLOCK_RE = re.compile(
-    r"\[DRAMACLAW_REINGEST_CANCELLED\](.*?)\[/DRAMACLAW_REINGEST_CANCELLED\]",
+    r"\[DRAMAFOUNDRY_REINGEST_CANCELLED\](.*?)\[/DRAMAFOUNDRY_REINGEST_CANCELLED\]",
     re.DOTALL,
 )
 _CHAT_ATTACHMENTS_BLOCK_RE = re.compile(
     r"\[CHAT_ATTACHMENTS\].*?\[/CHAT_ATTACHMENTS\]",
     re.DOTALL,
 )
-_DRAMACLAW_INGEST_AUTOMATION_RE = re.compile(
-    r"\[DRAMACLAW_(?:INGEST_AUTOMATION|REINGEST_CONFIRMATION|UPLOADED_FILES)\]",
+_DRAMAFOUNDRY_INGEST_AUTOMATION_RE = re.compile(
+    r"\[DRAMAFOUNDRY_(?:INGEST_AUTOMATION|REINGEST_CONFIRMATION|UPLOADED_FILES)\]",
 )
 _SCRIPT_CREATION_REQUEST_RE = re.compile(
     r"(?:帮我|给我|请|想要|我要|创建|生成|写|做|制作|创作|起草|来一个|出一个)"
@@ -102,7 +102,7 @@ _STYLE_SHORT_DRAMA_REQUEST_RE = re.compile(
 _CONTINUE_PIPELINE_RE = re.compile(
     r"(?:继续|恢复|接着|下一步|当前|已有|已上传|刚才上传)"
 )
-_DRAMACLAW_SCRIPT_UPLOAD_MODEL_REPLY_INSTRUCTIONS = """[DRAMACLAW_SCRIPT_UPLOAD_GUIDANCE]
+_DRAMAFOUNDRY_SCRIPT_UPLOAD_MODEL_REPLY_INSTRUCTIONS = """[DRAMAFOUNDRY_SCRIPT_UPLOAD_GUIDANCE]
 用户正在请求创建、生成或编写剧本/短剧，但当前消息没有上传剧本文档。
 
 你必须只用自然中文回复用户，不要调用任何工具，不要创建项目，不要生成剧本，不要构造基础脚本，不要启动摄入或流水线。
@@ -113,7 +113,7 @@ _DRAMACLAW_SCRIPT_UPLOAD_MODEL_REPLY_INSTRUCTIONS = """[DRAMACLAW_SCRIPT_UPLOAD_
 - 引导用户去“虾料”上传已有剧本文档。
 - 说明上传后你可以继续帮他推进分集、画面、配音、成片等后续制作。
 - 只回复 1-2 句，不要列步骤，不要输出 markdown 标题。
-[/DRAMACLAW_SCRIPT_UPLOAD_GUIDANCE]
+[/DRAMAFOUNDRY_SCRIPT_UPLOAD_GUIDANCE]
 """
 _HIDDEN_TOOL_MARKERS = (
     "skill_view",
@@ -128,7 +128,7 @@ _JSON_RENDER_CHAT_INSTRUCTIONS = """[RENDERING_CONTRACT]
 这是硬性输出合同，优先级高于普通叙述习惯。违反时必须自我修正后再回复。
 
 触发条件：
-- 只有在回复需要展示图片、肖像、身份图、草图、首帧、视频、音频等可视/可播放媒体时，才需要调用对应的 DramaClaw 展示工具。
+- 只有在回复需要展示图片、肖像、身份图、草图、首帧、视频、音频等可视/可播放媒体时，才需要调用对应的 DramaFoundry 展示工具。
 - 角色列表、剧集规划、项目进度、任务状态、脚本/beat 摘要、表格、长篇正文、普通结构化说明默认使用 markdown；如果没有图片/视频/音频媒体，不要使用媒体展示工具。
 
 禁止事项：
@@ -140,22 +140,22 @@ _JSON_RENDER_CHAT_INSTRUCTIONS = """[RENDERING_CONTRACT]
 
 资源 URL 规则：
 - 展示工具会读取 API 返回的可访问 URL 字段（portrait_url、image_url、sketch_url、frame_url、video_url、audio_url、url）并准备可展示媒体。
-- 如果工具/API 只返回本地文件路径或你不确定 URL 是否可访问，必须先调用相应 DramaClaw 展示工具；不能自己按经验拼 /static 路径。
+- 如果工具/API 只返回本地文件路径或你不确定 URL 是否可访问，必须先调用相应 DramaFoundry 展示工具；不能自己按经验拼 /static 路径。
 - 如果没有正式结果 URL、URL 为空、或资源尚未生成，只说明当前状态，不要伪造媒体展示。
 - 如果工具/API 返回多个候选字段，优先使用明确的 *_url 字段；不要使用 *_path 作为 src，除非 API 明确说明该 path 已是浏览器可访问 URL。
 
 展示工具选择：
-- 角色肖像/身份图：调用 dramaclaw_get_character_media。
-- 当前草图：调用 dramaclaw_get_sketches，只展示正式 sketch_url。草图候选池：调用 dramaclaw_get_sketch_candidates，只展示 grids/epNNN/sketch/beat_XX_t* 候选。首帧：调用 dramaclaw_get_first_frames，只展示首帧。
-- 场景图：调用 dramaclaw_get_scene_images。
-- 视频预览、beat 视频、最终成片：调用 dramaclaw_get_episode_media(media_type="video") 或对应最终视频读取工具。
-- 配音/TTS/音乐：调用 dramaclaw_get_episode_media(media_type="audio") 或对应音频读取工具。
-- 指定人物肖像：调用 dramaclaw_get_character_media(media_kind="portrait", name="角色名或名称片段")；name 只匹配角色名/别名，不要混入身份图。
-- 指定身份图：调用 dramaclaw_get_character_media(media_kind="identity", name="角色名或身份名片段")；不要混入角色肖像。name 匹配角色名/别名/身份名/身份 ID；只有用户明确按描述内容查找时才用 query="..."。
-- 指定当前草图：调用 dramaclaw_get_sketches(episode=N, beat=M)；该工具只展示正式 sketch_url/current sketch，不展示 grids/epNNN/sketch/beat_XX_t* 草图池候选。不要用草图池或首帧替代当前草图。指定草图候选/图池/备选草图：调用 dramaclaw_get_sketch_candidates(episode=N, beat=M)。指定首帧：调用 dramaclaw_get_first_frames(episode=N, beat=M)。多个正式草图用 beat_indices=[...]；分页用 offset + limit。
-- 指定场景图：调用 dramaclaw_get_scene_images(name="场景名或名称片段")；名称按包含关系模糊匹配；多个关键词用 names=[...]；按第几个场景用 index=N 或 scene_indices=[...]；按类型筛选用 scene_type="..."；分页用 offset + limit。
-- 指定视频：调用 dramaclaw_get_episode_media(episode=N, media_type="video", beat=M)；按内容片段查视频用 query="..."，匹配 beat 标题、画面描述、解说/对白、说话人、角色、场景；多个 beat 用 beat_indices=[...]；分页用 offset + limit。
-- 指定音频/配音/TTS：调用 dramaclaw_get_episode_media(episode=N, media_type="audio", beat=M)；按内容片段查音频用 query="..."，匹配 beat 标题、解说/对白、说话人、角色、场景；多个 beat 用 beat_indices=[...]；分页用 offset + limit。
+- 角色肖像/身份图：调用 dramafoundry_get_character_media。
+- 当前草图：调用 dramafoundry_get_sketches，只展示正式 sketch_url。草图候选池：调用 dramafoundry_get_sketch_candidates，只展示 grids/epNNN/sketch/beat_XX_t* 候选。首帧：调用 dramafoundry_get_first_frames，只展示首帧。
+- 场景图：调用 dramafoundry_get_scene_images。
+- 视频预览、beat 视频、最终成片：调用 dramafoundry_get_episode_media(media_type="video") 或对应最终视频读取工具。
+- 配音/TTS/音乐：调用 dramafoundry_get_episode_media(media_type="audio") 或对应音频读取工具。
+- 指定人物肖像：调用 dramafoundry_get_character_media(media_kind="portrait", name="角色名或名称片段")；name 只匹配角色名/别名，不要混入身份图。
+- 指定身份图：调用 dramafoundry_get_character_media(media_kind="identity", name="角色名或身份名片段")；不要混入角色肖像。name 匹配角色名/别名/身份名/身份 ID；只有用户明确按描述内容查找时才用 query="..."。
+- 指定当前草图：调用 dramafoundry_get_sketches(episode=N, beat=M)；该工具只展示正式 sketch_url/current sketch，不展示 grids/epNNN/sketch/beat_XX_t* 草图池候选。不要用草图池或首帧替代当前草图。指定草图候选/图池/备选草图：调用 dramafoundry_get_sketch_candidates(episode=N, beat=M)。指定首帧：调用 dramafoundry_get_first_frames(episode=N, beat=M)。多个正式草图用 beat_indices=[...]；分页用 offset + limit。
+- 指定场景图：调用 dramafoundry_get_scene_images(name="场景名或名称片段")；名称按包含关系模糊匹配；多个关键词用 names=[...]；按第几个场景用 index=N 或 scene_indices=[...]；按类型筛选用 scene_type="..."；分页用 offset + limit。
+- 指定视频：调用 dramafoundry_get_episode_media(episode=N, media_type="video", beat=M)；按内容片段查视频用 query="..."，匹配 beat 标题、画面描述、解说/对白、说话人、角色、场景；多个 beat 用 beat_indices=[...]；分页用 offset + limit。
+- 指定音频/配音/TTS：调用 dramafoundry_get_episode_media(episode=N, media_type="audio", beat=M)；按内容片段查音频用 query="..."，匹配 beat 标题、解说/对白、说话人、角色、场景；多个 beat 用 beat_indices=[...]；分页用 offset + limit。
 
 发送前自检：
 1. 本回复是否展示图片/视频/音频媒体？如果是，是否调用了对应展示工具？
@@ -255,7 +255,7 @@ def _prompt_with_user_context(username: str, project: str, prompt: str) -> str:
     preferences = load_user_preferences(username)
     scope = f"project:{project}" if project else "home"
     return (
-        "[DRAMACLAW_USER_CONTEXT]\n"
+        "[DRAMAFOUNDRY_USER_CONTEXT]\n"
         f"username: {username}\n"
         f"scope: {scope}\n"
         "Project-scoped facts must stay in the project scope. "
@@ -270,8 +270,8 @@ def _prompt_with_user_context(username: str, project: str, prompt: str) -> str:
 
 def _chat_backend() -> str:
     preferred = (
-        os.environ.get("DRAMACLAW_CHAT_BACKEND")
-        or os.environ.get("SUPERTALE_CHAT_BACKEND")
+        os.environ.get("DRAMAFOUNDRY_CHAT_BACKEND")
+        or os.environ.get("DRAMAFOUNDRY_CHAT_BACKEND")
         or "hermes"
     ).strip().lower() or "hermes"
     if preferred == "hermes":
@@ -280,7 +280,7 @@ def _chat_backend() -> str:
         if is_hermes_backend_available():
             return "hermes"
         raise RuntimeError(
-            "DRAMACLAW_CHAT_BACKEND=hermes requested but hermes is unavailable. "
+            "DRAMAFOUNDRY_CHAT_BACKEND=hermes requested but hermes is unavailable. "
             "Run `uv tool install 'hermes-agent[acp]'`, "
             "then run `hermes doctor` to diagnose."
         )
@@ -288,7 +288,7 @@ def _chat_backend() -> str:
         if is_codex_backend_available():
             return "codex"
         raise RuntimeError(
-            "DRAMACLAW_CHAT_BACKEND=codex requested but Codex is unavailable. "
+            "DRAMAFOUNDRY_CHAT_BACKEND=codex requested but Codex is unavailable. "
             "Install `openai-codex`/Codex Python SDK support in the backend environment "
             "and ensure CODEX_BIN points to a valid codex binary."
         )
@@ -296,7 +296,7 @@ def _chat_backend() -> str:
         if is_claude_backend_available():
             return "claude"
         raise RuntimeError(
-            "DRAMACLAW_CHAT_BACKEND=claude requested but Claude is unavailable. "
+            "DRAMAFOUNDRY_CHAT_BACKEND=claude requested but Claude is unavailable. "
             "Install claude-agent-sdk and ensure CLAUDE_CLI_PATH points to a valid claude binary."
         )
     if is_codex_backend_available():
@@ -357,7 +357,7 @@ def is_hermes_backend_available() -> bool:
 
 
 def is_chat_backend_available() -> bool:
-    # NOTE: _chat_backend() raises when DRAMACLAW_CHAT_BACKEND=hermes is
+    # NOTE: _chat_backend() raises when DRAMAFOUNDRY_CHAT_BACKEND=hermes is
     # requested but unavailable; catch so this probe stays non-throwing.
     try:
         backend = _chat_backend()
@@ -396,8 +396,8 @@ def _skill_sources() -> list[tuple[str, Path]]:
                 sources.setdefault(child.name, child)
 
     configured = (
-        os.environ.get("CLAUDE_DRAMACLAW_SKILL_PATH")
-        or os.environ.get("CLAUDE_SUPERTALE_SKILL_PATH")
+        os.environ.get("CLAUDE_DRAMAFOUNDRY_SKILL_PATH")
+        or os.environ.get("CLAUDE_DRAMAFOUNDRY_SKILL_PATH")
         or ""
     ).strip()
     if configured:
@@ -1329,7 +1329,7 @@ def _strip_media_rendering_leaks(content: str) -> str:
             or "backend" in lower
         ):
             continue
-        if "dramaclaw_" in lower:
+        if "dramafoundry_" in lower:
             continue
         if "按规范渲染" in stripped or "UI画廊" in stripped:
             continue
@@ -1808,12 +1808,12 @@ def _filter_tool_ui_specs_for_prompt(
 
 
 _DISPLAY_TOOL_NAMES = {
-    "dramaclaw_get_sketches",
-    "dramaclaw_get_sketch_candidates",
-    "dramaclaw_get_first_frames",
-    "dramaclaw_get_scene_images",
-    "dramaclaw_get_character_media",
-    "dramaclaw_get_episode_media",
+    "dramafoundry_get_sketches",
+    "dramafoundry_get_sketch_candidates",
+    "dramafoundry_get_first_frames",
+    "dramafoundry_get_scene_images",
+    "dramafoundry_get_character_media",
+    "dramafoundry_get_episode_media",
 }
 
 
@@ -2145,20 +2145,20 @@ def _infer_display_tool_call_from_text(
             except (TypeError, ValueError):
                 beat = 0
             if beat > 0:
-                return "dramaclaw_get_sketch_candidates", {
+                return "dramafoundry_get_sketch_candidates", {
                     "episode": episode,
                     "beat": beat,
                 }
         return None
-    return "dramaclaw_get_sketches", {"episode": episode}
+    return "dramafoundry_get_sketches", {"episode": episode}
 
 
 def _backend_api_get(path: str, token: str) -> dict[str, Any]:
     base_url = (
-        os.environ.get("DRAMACLAW_API_URL")
+        os.environ.get("DRAMAFOUNDRY_API_URL")
         or os.environ.get("NOVELVIDEO_API_URL")
         or f"http://127.0.0.1:{os.environ.get('NOVELVIDEO_API_PORT', '19080')}"
-        or os.environ.get("SUPERTALE_API_URL")
+        or os.environ.get("DRAMAFOUNDRY_API_URL")
     ).strip()
     url = f"{base_url.rstrip('/')}{path}"
     req = Request(
@@ -2196,10 +2196,10 @@ async def _fallback_display_tool_ui_specs(
             args.get("project_id") or args.get("project") or project
         ).strip()
         project_q = quote(api_project, safe="")
-        if tool_name in {"dramaclaw_get_sketches", "dramaclaw_get_first_frames"}:
+        if tool_name in {"dramafoundry_get_sketches", "dramafoundry_get_first_frames"}:
             episode = int(args.get("episode") or 1)
             media_kind = (
-                "frame" if tool_name == "dramaclaw_get_first_frames" else "sketch"
+                "frame" if tool_name == "dramafoundry_get_first_frames" else "sketch"
             )
             resp = _backend_api_get(
                 f"/api/v1/projects/{project_q}/episodes/{episode}/beats",
@@ -2242,7 +2242,7 @@ async def _fallback_display_tool_ui_specs(
                 [_media_ui_spec("sketch_gallery", "Image", limited)] if limited else []
             )
 
-        if tool_name == "dramaclaw_get_sketch_candidates":
+        if tool_name == "dramafoundry_get_sketch_candidates":
             episode = int(args.get("episode") or 1)
             try:
                 beat = int(
@@ -2283,7 +2283,7 @@ async def _fallback_display_tool_ui_specs(
                 [_media_ui_spec("sketch_gallery", "Image", limited)] if limited else []
             )
 
-        if tool_name == "dramaclaw_get_scene_images":
+        if tool_name == "dramafoundry_get_scene_images":
             resp = _backend_api_get(
                 f"/api/v1/projects/{project_q}/scenes?summary=false", token
             )
@@ -2333,7 +2333,7 @@ async def _fallback_display_tool_ui_specs(
                 [_media_ui_spec("sketch_gallery", "Image", limited)] if limited else []
             )
 
-        if tool_name == "dramaclaw_get_character_media":
+        if tool_name == "dramafoundry_get_character_media":
             resp = _backend_api_get(
                 f"/api/v1/projects/{project_q}/characters?summary=false", token
             )
@@ -2477,7 +2477,7 @@ async def _fallback_display_tool_ui_specs(
                 else []
             )
 
-        if tool_name == "dramaclaw_get_episode_media":
+        if tool_name == "dramafoundry_get_episode_media":
             episode = int(args.get("episode") or 1)
             media_type = str(args.get("media_type") or "video").strip().lower()
             resp = _backend_api_get(
@@ -2682,7 +2682,7 @@ def _load_codex_thread_history(username: str, project: str) -> list[dict[str, An
         codex_bin=str(codex_bin) if codex_bin is not None else None,
         cwd=str(workspace),
         env=_build_codex_env(username, project),
-        config_overrides=_codex_mcp_config_overrides(_dramaclaw_mcp_servers()),
+        config_overrides=_codex_mcp_config_overrides(_dramafoundry_mcp_servers()),
     )
 
     with Codex(config=config) as codex:
@@ -2967,7 +2967,7 @@ def _set_codex_thread_id(username: str, project: str, thread_id: str) -> None:
 
 
 def _load_api_url() -> str:
-    explicit = os.environ.get("DRAMACLAW_API_URL", "").strip()
+    explicit = os.environ.get("DRAMAFOUNDRY_API_URL", "").strip()
     if explicit:
         return explicit.rstrip("/")
 
@@ -2982,7 +2982,7 @@ def _load_api_url() -> str:
             host = "127.0.0.1"
         return f"http://{host}:{api_port}"
 
-    legacy = os.environ.get("SUPERTALE_API_URL", "").strip()
+    legacy = os.environ.get("DRAMAFOUNDRY_API_URL", "").strip()
     if legacy:
         return legacy.rstrip("/")
 
@@ -3026,18 +3026,18 @@ def _project_skill_settings_payload(
     agent_token: str = "",
 ) -> dict[str, Any]:
     env = {
-        "DRAMACLAW_USERNAME": username,
-        "DRAMACLAW_AGENT_SCOPE": "user",
-        "DRAMACLAW_API_URL": _load_api_url(),
-        "DRAMACLAW_AGENT_TOKEN": agent_token,
-        "SUPERTALE_USERNAME": username,
-        "SUPERTALE_AGENT_SCOPE": "user",
-        "SUPERTALE_API_URL": _load_api_url(),
-        "SUPERTALE_AGENT_TOKEN": agent_token,
+        "DRAMAFOUNDRY_USERNAME": username,
+        "DRAMAFOUNDRY_AGENT_SCOPE": "user",
+        "DRAMAFOUNDRY_API_URL": _load_api_url(),
+        "DRAMAFOUNDRY_AGENT_TOKEN": agent_token,
+        "DRAMAFOUNDRY_USERNAME": username,
+        "DRAMAFOUNDRY_AGENT_SCOPE": "user",
+        "DRAMAFOUNDRY_API_URL": _load_api_url(),
+        "DRAMAFOUNDRY_AGENT_TOKEN": agent_token,
     }
     if project:
-        env["DRAMACLAW_PROJECT_ID"] = project
-        env["SUPERTALE_PROJECT_ID"] = project
+        env["DRAMAFOUNDRY_PROJECT_ID"] = project
+        env["DRAMAFOUNDRY_PROJECT_ID"] = project
     return {"env": env}
 
 
@@ -3085,17 +3085,17 @@ def _build_claude_env(
     egress_context=None,
 ) -> dict[str, str]:
     env = os.environ.copy()
-    env["DRAMACLAW_USERNAME"] = username
-    env["DRAMACLAW_AGENT_SCOPE"] = "user"
-    env["SUPERTALE_USERNAME"] = username
-    env["SUPERTALE_AGENT_SCOPE"] = "user"
+    env["DRAMAFOUNDRY_USERNAME"] = username
+    env["DRAMAFOUNDRY_AGENT_SCOPE"] = "user"
+    env["DRAMAFOUNDRY_USERNAME"] = username
+    env["DRAMAFOUNDRY_AGENT_SCOPE"] = "user"
     if project:
-        env["DRAMACLAW_PROJECT_ID"] = project
-        env["SUPERTALE_PROJECT_ID"] = project
-    env["DRAMACLAW_API_URL"] = _load_api_url()
-    env["SUPERTALE_API_URL"] = _load_api_url()
-    env["DRAMACLAW_AGENT_TOKEN"] = agent_token
-    env["SUPERTALE_AGENT_TOKEN"] = agent_token
+        env["DRAMAFOUNDRY_PROJECT_ID"] = project
+        env["DRAMAFOUNDRY_PROJECT_ID"] = project
+    env["DRAMAFOUNDRY_API_URL"] = _load_api_url()
+    env["DRAMAFOUNDRY_API_URL"] = _load_api_url()
+    env["DRAMAFOUNDRY_AGENT_TOKEN"] = agent_token
+    env["DRAMAFOUNDRY_AGENT_TOKEN"] = agent_token
     from novelvideo.task_backend.subprocesses import build_model_child_env
 
     return build_model_child_env(env, egress_context=egress_context)
@@ -3109,17 +3109,17 @@ def _build_codex_env(
     egress_context=None,
 ) -> dict[str, str]:
     env = os.environ.copy()
-    env["DRAMACLAW_USERNAME"] = username
-    env["DRAMACLAW_AGENT_SCOPE"] = "user"
-    env["SUPERTALE_USERNAME"] = username
-    env["SUPERTALE_AGENT_SCOPE"] = "user"
+    env["DRAMAFOUNDRY_USERNAME"] = username
+    env["DRAMAFOUNDRY_AGENT_SCOPE"] = "user"
+    env["DRAMAFOUNDRY_USERNAME"] = username
+    env["DRAMAFOUNDRY_AGENT_SCOPE"] = "user"
     if project:
-        env["DRAMACLAW_PROJECT_ID"] = project
-        env["SUPERTALE_PROJECT_ID"] = project
-    env["DRAMACLAW_API_URL"] = _load_api_url()
-    env["SUPERTALE_API_URL"] = _load_api_url()
-    env["DRAMACLAW_AGENT_TOKEN"] = agent_token
-    env["SUPERTALE_AGENT_TOKEN"] = agent_token
+        env["DRAMAFOUNDRY_PROJECT_ID"] = project
+        env["DRAMAFOUNDRY_PROJECT_ID"] = project
+    env["DRAMAFOUNDRY_API_URL"] = _load_api_url()
+    env["DRAMAFOUNDRY_API_URL"] = _load_api_url()
+    env["DRAMAFOUNDRY_AGENT_TOKEN"] = agent_token
+    env["DRAMAFOUNDRY_AGENT_TOKEN"] = agent_token
     from novelvideo.task_backend.subprocesses import build_model_child_env
 
     return build_model_child_env(env, egress_context=egress_context)
@@ -3355,12 +3355,12 @@ def _build_claude_thread(
     return client.thread_resume(session_id) if session_id else client.thread_start()
 
 
-def _dramaclaw_mcp_servers() -> dict[str, dict[str, Any]]:
+def _dramafoundry_mcp_servers() -> dict[str, dict[str, Any]]:
     return {
         "dramaclaw": {
             "type": "stdio",
             "command": sys.executable,
-            "args": ["-m", "novelvideo.chat.dramaclaw_mcp"],
+            "args": ["-m", "novelvideo.chat.dramafoundry_mcp"],
         }
     }
 
@@ -3401,7 +3401,7 @@ def _build_codex_thread(
             username, project, agent_token, egress_context=egress_context
         ),
         model=_codex_model(),
-        config_overrides=_codex_mcp_config_overrides(_dramaclaw_mcp_servers()),
+        config_overrides=_codex_mcp_config_overrides(_dramafoundry_mcp_servers()),
     )
     thread_id = _get_codex_thread_id(username, project)
     return client.thread_resume(thread_id) if thread_id else client.thread_start()
@@ -3525,7 +3525,7 @@ def _frontend_context_reply(prompt: str) -> str | None:
 def _script_creation_model_reply_prompt(prompt: str) -> str | None:
     if not prompt:
         return None
-    if _DRAMACLAW_INGEST_AUTOMATION_RE.search(prompt):
+    if _DRAMAFOUNDRY_INGEST_AUTOMATION_RE.search(prompt):
         return None
     if _CHAT_ATTACHMENTS_BLOCK_RE.search(prompt):
         return None
@@ -3537,7 +3537,7 @@ def _script_creation_model_reply_prompt(prompt: str) -> str | None:
         text
     ):
         return (
-            f"{_DRAMACLAW_SCRIPT_UPLOAD_MODEL_REPLY_INSTRUCTIONS}"
+            f"{_DRAMAFOUNDRY_SCRIPT_UPLOAD_MODEL_REPLY_INSTRUCTIONS}"
             f"\n\n用户原话：{text}"
         )
     return None

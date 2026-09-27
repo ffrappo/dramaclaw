@@ -3,20 +3,20 @@
 每个步骤的 API 调用必须以后端当前 FastAPI routes 为准。
 
 变量约定：
-- `$PID` = 当前 `DRAMACLAW_PROJECT_ID`
+- `$PID` = 当前 `DRAMAFOUNDRY_PROJECT_ID`
 - `$EP` = 集数编号
 - `$CHAR_NAME` = 角色名
 - `$IDENTITY_ID` = 身份 ID
 - `$BEAT` = beat 编号
 
-认证：所有请求使用 `Authorization: Bearer $DRAMACLAW_AGENT_TOKEN`。
+认证：所有请求使用 `Authorization: Bearer $DRAMAFOUNDRY_AGENT_TOKEN`。
 
 ---
 
 ## 当前项目准备阶段
 
 项目创建由前端/系统完成，虾导不会调用 `POST /projects`。以下步骤均要求
-`DRAMACLAW_PROJECT_ID` 已绑定到一个存在的项目。
+`DRAMAFOUNDRY_PROJECT_ID` 已绑定到一个存在的项目。
 
 ### Step 1: 上传小说 [SYNC]
 
@@ -51,7 +51,7 @@ Body: {"visual_style": "...", "narration_style": "...", "ethnicity": "...", "rhy
 `POST /projects/$PID/characters/build`。
 
 ```
-dramaclaw_build_characters            # 触发提取（项目默认取 DRAMACLAW_PROJECT_ID）
+dramaclaw_build_characters            # 触发提取（项目默认取 DRAMAFOUNDRY_PROJECT_ID）
 
 dramaclaw_get_task(task_type="build_characters", episode=0)   # 轮询状态
 SSE /projects/$PID/tasks/build_characters/0/stream            # 或流式

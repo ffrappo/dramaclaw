@@ -2001,7 +2001,7 @@ class NewApiVideoGenerator(VideoGeneratorBase):
             self.egress_context is not None and self.egress_context.is_organization
         ):
             raise ValueError(
-                "DramaClawAPI key must be set for DramaClawAPI video generation"
+                "DramaFoundryAPI key must be set for DramaFoundryAPI video generation"
             )
 
     @staticmethod
@@ -2069,7 +2069,7 @@ class NewApiVideoGenerator(VideoGeneratorBase):
                 if resp.status < 200 or resp.status >= 300:
                     request_id = self._extract_request_id(text, resp.headers)
                     raise NewApiVideoError(
-                        f"DramaClawAPI submit failed: HTTP {resp.status} - {text}",
+                        f"DramaFoundryAPI submit failed: HTTP {resp.status} - {text}",
                         request_id=request_id,
                         status_code=resp.status,
                     )
@@ -2082,7 +2082,7 @@ class NewApiVideoGenerator(VideoGeneratorBase):
                     return data
                 except json.JSONDecodeError as exc:
                     raise RuntimeError(
-                        f"DramaClawAPI submit returned invalid JSON: {text}"
+                        f"DramaFoundryAPI submit returned invalid JSON: {text}"
                     ) from exc
 
     async def _get_json(
@@ -2097,7 +2097,7 @@ class NewApiVideoGenerator(VideoGeneratorBase):
                 if resp.status < 200 or resp.status >= 300:
                     request_id = self._extract_request_id(text, resp.headers)
                     raise NewApiVideoError(
-                        f"DramaClawAPI task query failed: HTTP {resp.status} - {text}",
+                        f"DramaFoundryAPI task query failed: HTTP {resp.status} - {text}",
                         request_id=request_id,
                         status_code=resp.status,
                     )
@@ -2105,7 +2105,7 @@ class NewApiVideoGenerator(VideoGeneratorBase):
                     return json.loads(text)
                 except json.JSONDecodeError as exc:
                     raise RuntimeError(
-                        f"DramaClawAPI task query returned invalid JSON: {text}"
+                        f"DramaFoundryAPI task query returned invalid JSON: {text}"
                     ) from exc
 
     async def _download_video(self, url: str, output_path: str) -> VideoDeliveryReceipt:
@@ -2231,7 +2231,7 @@ class NewApiVideoGenerator(VideoGeneratorBase):
         references: object,
         log: Callable[[str], None],
     ) -> None:
-        """Populate the stable DramaClaw-to-RelayClaw video media protocol."""
+        """Populate the stable DramaFoundry-to-RelayClaw video media protocol."""
 
         normalized_mode = {
             "textToVideo": "text_to_video",
@@ -3387,7 +3387,7 @@ class NewApiVideoGenerator(VideoGeneratorBase):
                 metadata.get("resolution") or self.resolution or ""
             ).strip()
             log(
-                f"正在提交 DramaClawAPI 视频任务 ({model_label}, {duration}s, {request_resolution})..."
+                f"正在提交 DramaFoundryAPI 视频任务 ({model_label}, {duration}s, {request_resolution})..."
             )
             progress(0.1)
             from novelvideo.media_model_request_schema import (
@@ -3454,7 +3454,7 @@ class NewApiVideoGenerator(VideoGeneratorBase):
                     error=(
                         "EGRESS_OPERATION_UNKNOWN"
                         if organization_request
-                        else f"No task_id in DramaClawAPI response: {submitted}"
+                        else f"No task_id in DramaFoundryAPI response: {submitted}"
                     ),
                 )
             if organization_request:
@@ -3610,7 +3610,7 @@ class NewApiVideoGenerator(VideoGeneratorBase):
                         safe_missing_result_error = (
                             "EGRESS_OPERATION_UNKNOWN"
                             if organization_request
-                            else "No video url in DramaClawAPI result"
+                            else "No video url in DramaFoundryAPI result"
                         )
                         if organization_request:
                             await self._mark_operation_unknown(
@@ -3627,7 +3627,7 @@ class NewApiVideoGenerator(VideoGeneratorBase):
                             error=(
                                 safe_missing_result_error
                                 if organization_request
-                                else f"No video url in DramaClawAPI result: {task}"
+                                else f"No video url in DramaFoundryAPI result: {task}"
                             ),
                             task_id=task_id,
                         )
@@ -3757,7 +3757,7 @@ class NewApiVideoGenerator(VideoGeneratorBase):
                                 str(last_frame_output_path),
                             )
                             last_frame_path = last_frame_output_path.as_posix()
-                            log("已保存 DramaClawAPI 返回尾帧")
+                            log("已保存 DramaFoundryAPI 返回尾帧")
                     progress(1.0)
                     update_request_status(task_id, "completed")
                     if organization_request:
@@ -3804,7 +3804,7 @@ class NewApiVideoGenerator(VideoGeneratorBase):
                     error = (
                         task.get("error")
                         or task.get("fail_reason")
-                        or "DramaClawAPI video task failed"
+                        or "DramaFoundryAPI video task failed"
                     )
                     safe_task_error = (
                         (
@@ -3838,13 +3838,13 @@ class NewApiVideoGenerator(VideoGeneratorBase):
 
                 if poll_count % 6 == 0:
                     log(
-                        f"DramaClawAPI task {task_id} status: "
+                        f"DramaFoundryAPI task {task_id} status: "
                         f"{status or 'queued'} ({poll_count}/{max_polls})"
                     )
                 await asyncio.sleep(poll_interval)
 
             timeout_error = (
-                last_delivery_error or "Timeout waiting for DramaClawAPI video task"
+                last_delivery_error or "Timeout waiting for DramaFoundryAPI video task"
             )
             update_request_status(
                 task_id,
@@ -3941,9 +3941,9 @@ class NewApiVideoGenerator(VideoGeneratorBase):
                     await self._mark_operation_rejected(operation_port, operation_claim)
                 operation_terminal = True
             if exc.request_id:
-                log(f"DramaClawAPI request_id: {exc.request_id}")
+                log(f"DramaFoundryAPI request_id: {exc.request_id}")
             if task_id:
-                log(f"DramaClawAPI task_id: {task_id}")
+                log(f"DramaFoundryAPI task_id: {task_id}")
                 update_request_status(task_id, "failed", safe_exception_error)
             elif is_definite_no_cost_http_rejection(exc.status_code):
                 try:

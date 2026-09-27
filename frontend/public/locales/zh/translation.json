@@ -25,8 +25,8 @@
     "totalMaxDuration": "参考素材总时长 {{actual}} 秒；最多 {{expected}} 秒。"
   },
   "app": {
-    "title": "SuperTale",
-    "subtitle": "SuperTale 候选图生成与资产提交工作台",
+    "title": "DramaFoundry",
+    "subtitle": "DramaFoundry 候选图生成与资产提交工作台",
     "updateRequired": {
       "title": "应用已更新",
       "description": "当前页面引用的应用文件已经失效。请刷新页面以加载最新版本。",
@@ -123,8 +123,8 @@
       "qrAlt": "商务微信二维码",
       "items": {
         "difference": {
-          "question": "DramaClaw 和普通 AI 视频生成工具有什么区别？",
-          "answer": "普通工具通常围绕一次提示词、一个片段或一张图工作。DramaClaw 面向的是完整项目：从文本导入、资产沉淀、剧集规划、镜头制作到合成导出，形成可追踪、可协作、可复用的生产闭环。"
+          "question": "DramaFoundry 和普通 AI 视频生成工具有什么区别？",
+          "answer": "普通工具通常围绕一次提示词、一个片段或一张图工作。DramaFoundry 面向的是完整项目：从文本导入、资产沉淀、剧集规划、镜头制作到合成导出，形成可追踪、可协作、可复用的生产闭环。"
         },
         "gettingStarted": {
           "question": "第一次使用应该从哪里开始？",
@@ -143,7 +143,7 @@
           "answer": "AI 视频创作最容易返工的原因，往往不是最后一步视频生成，而是前面的角色不稳定、场景不清楚、道具缺参考、声线没统一。虾塘把这些内容先变成资产，可以显著减少后续镜头阶段的混乱。"
         },
         "contentTypes": {
-          "question": "DramaClaw 适合哪些内容类型？",
+          "question": "DramaFoundry 适合哪些内容类型？",
           "answer": "适合 AI 短剧、漫剧、小说推文、解说剧、广告宣传、教育培训视频，以及需要长期维护 IP 角色和系列内容的团队项目。个人创作者可以用它跑通流程，团队可以用它协作生产。"
         },
         "teamRoles": {
@@ -156,7 +156,7 @@
         },
         "dcUniverse": {
           "question": "什么是 “Make Your DC Universe.”？",
-          "answer": "DC 不只是 DramaClaw 的缩写，也代表每个创作者自己的内容宇宙。DramaClaw 希望帮助创作者从一个故事开始，逐步建立角色、世界观、场景资产和系列化内容生产能力。"
+          "answer": "DC 不只是 DramaFoundry 的缩写，也代表每个创作者自己的内容宇宙。DramaFoundry 希望帮助创作者从一个故事开始，逐步建立角色、世界观、场景资产和系列化内容生产能力。"
         },
         "afterLogin": {
           "question": "登录后我会进入哪里？",
@@ -199,12 +199,12 @@
     },
     "fifth": {
       "heading": "把万千灵感沉淀为资产",
-      "lead1": "DramaClaw 把它们整理成项目资产库，",
+      "lead1": "DramaFoundry 把它们整理成项目资产库，",
       "lead2": "让后续镜头生成可以持续引用、统一维护、必要时回滚版本。"
     },
     "seventh": {
       "heading": "让短剧生成从抽卡走向流程",
-      "lead": "DramaClaw 把 AI 视频创作中的不确定性拆解到文本、资产、镜头和任务流程中",
+      "lead": "DramaFoundry 把 AI 视频创作中的不确定性拆解到文本、资产、镜头和任务流程中",
       "steps": {
         "01": {
           "title": "设定输入",
@@ -234,7 +234,7 @@
     },
     "eighth": {
       "heading": "只为创作完整的作品企划",
-      "lead": "DramaClaw 关注的是一部剧如何持续生产：文本入项，角色一致性，场景复用，镜头推进，团队协作交付。",
+      "lead": "DramaFoundry 关注的是一部剧如何持续生产：文本入项，角色一致性，场景复用，镜头推进，团队协作交付。",
       "statementTitle": "夜航协议 · 镜头序列 08",
       "statementBody": "一艘未登记运输舰拖着整座城市的秘密进入夜层。",
       "decisions": {
@@ -259,7 +259,7 @@
     "ninth": {
       "headingTop": "一句设定，直接进入",
       "headingAccent": "镜头",
-      "lead": "不必先写完整剧本。给出一个方向，DramaClaw 会把它拆成角色、冲突、场景和可推进的镜头链路。",
+      "lead": "不必先写完整剧本。给出一个方向，DramaFoundry 会把它拆成角色、冲突、场景和可推进的镜头链路。",
       "featuredWork": "鲁班秘术",
       "steps": {
         "01": {
@@ -286,7 +286,7 @@
     },
     "twelfth": {
       "heading": "把一句设定推进成可看的宇宙",
-      "lead": "输入角色冲突或世界观 让 DramaClaw 拆成镜头节点并持续延展",
+      "lead": "输入角色冲突或世界观 让 DramaFoundry 拆成镜头节点并持续延展",
       "primaryCta": "开启无限创作",
       "secondaryCta": "快速申请账号"
     },
@@ -299,7 +299,7 @@
     },
     "second": {
       "title": "从灵感到项目",
-      "subtitle": "在 DramaClaw 中，创作不再停留在一次提示词和一次生成结果"
+      "subtitle": "在 DramaFoundry 中，创作不再停留在一次提示词和一次生成结果"
     },
     "third": {
       "title": "让故事成为起点",
@@ -341,8 +341,8 @@
       "eyebrow": "界面",
       "title": "主线走流程，画布做编排",
       "lede": "主线把一本小说拆成剧集、角色、分镜、首帧、视频和合成，一步一页推着走；虾画是一块节点画布，可以把主线的镜头投影进来自由改，改完再同步回主线。两条路共用同一批资产，不用来回搬素材。",
-      "windowTitle": "DramaClaw — 第 03 集 · 画布",
-      "alt": "DramaClaw 桌面端画布界面示意：顶部是剧集标签条，左侧分镜大纲，中间节点画布，右侧参数面板。",
+      "windowTitle": "DramaFoundry — 第 03 集 · 画布",
+      "alt": "DramaFoundry 桌面端画布界面示意：顶部是剧集标签条，左侧分镜大纲，中间节点画布，右侧参数面板。",
       "caption": "示意图（虾画画布视图）"
     },
     "capability": {
@@ -408,7 +408,7 @@
       },
       "v120": {
         "title": "功能积分透明化，外部智能体可接入",
-        "description": "统一展示功能价格、预计扣费与使用记录；Claude Code 等本地智能体可通过 MCP 直接调用 DramaClaw CE。"
+        "description": "统一展示功能价格、预计扣费与使用记录；Claude Code 等本地智能体可通过 MCP 直接调用 DramaFoundry CE。"
       }
     },
     "faq": {
@@ -417,7 +417,7 @@
       "items": {
         "macGatekeeper": {
           "question": "Mac 提示「无法打开，因为无法验证开发者」怎么办？",
-          "answer": "在「访达 — 应用程序」里找到 DramaClaw，按住 Control 点按图标选「打开」，在弹出的确认框里再点一次「打开」即可。这一步只需要做一次，之后正常双击启动。"
+          "answer": "在「访达 — 应用程序」里找到 DramaFoundry，按住 Control 点按图标选「打开」，在弹出的确认框里再点一次「打开」即可。这一步只需要做一次，之后正常双击启动。"
         },
         "winSmartScreen": {
           "question": "Windows 提示「Windows 已保护你的电脑」怎么办？",
@@ -439,7 +439,7 @@
         "openSource": {
           "question": "是开源的吗？",
           "answer": "采用 Elastic-2.0 授权：可以自由使用、修改和自行部署，不可作为托管服务对外转售。源码在",
-          "linkLabel": "github.com/dramaclaw/dramaclaw"
+          "linkLabel": "dramafoundry.fornace.net"
         }
       }
     },
@@ -769,21 +769,21 @@
       "lineLabel": "第 {{line}} 行",
       "noIssues": "未发现具体问题"
     },
-    "title": "虾导",
-    "upgrading": "虾导升级中，请敬请期待！",
-    "description": "在当前创作页面旁打开虾导。",
-    "toggle": "展开或收起虾导",
-    "close": "收起虾导",
+    "title": "DramaFoundry",
+    "upgrading": "DramaFoundry升级中，请敬请期待！",
+    "description": "在当前创作页面旁打开DramaFoundry。",
+    "toggle": "展开或收起DramaFoundry",
+    "close": "收起DramaFoundry",
     "resize": "拖动调整聊天宽度",
     "openExternal": "在新窗口打开",
-    "iframeTitle": "虾导",
+    "iframeTitle": "DramaFoundry",
     "newChat": "新会话",
     "expandSessions": "展开会话列表",
     "collapseSessions": "收起会话列表",
     "sessionActions": "会话操作",
     "deleteSessionConfirm": "是否删除此对话？",
     "noSessions": "暂无会话",
-    "chatTitle": "虾导",
+    "chatTitle": "DramaFoundry",
     "globalScope": "全局",
     "connected": "已连接",
     "connecting": "连接中",
@@ -793,11 +793,11 @@
     "emptyTitle": "开始对话",
     "emptyDescription": "可以询问项目进度、任务失败原因，或让助手帮你整理创作思路。",
     "syncingHistoryTitle": "正在初始化会话",
-    "syncingHistoryDescription": "正在连接虾导并同步历史对话，请稍候。",
-    "disclaimer": "虾导可能会出错，请核对关键剧情、角色与资产信息。",
+    "syncingHistoryDescription": "正在连接DramaFoundry并同步历史对话，请稍候。",
+    "disclaimer": "DramaFoundry可能会出错，请核对关键剧情、角色与资产信息。",
     "placeholder": "上传剧本后，说出要推进的分集、画面、配音或成片任务",
     "waiting": "等待聊天服务连接...",
-    "waitingResponse": "等待虾导回复",
+    "waitingResponse": "等待DramaFoundry回复",
     "waitingResponses": [
       "正在理解你想推进的内容",
       "正在核对当前对话上下文",
@@ -869,11 +869,11 @@
     "ingestAutomationUploading": "正在上传小说：{{filename}}",
     "ingestAutomationStarted": "已启动小说摄入：{{filename}}",
     "ingestAutomationFailed": "小说上传或启动失败：{{message}}",
-    "ingestAutomationNoProject": "请先进入一个项目，再从虾导上传小说生成视频。",
+    "ingestAutomationNoProject": "请先进入一个项目，再从DramaFoundry上传小说生成视频。",
     "ingestAutomationMissingFile": "未能读取上传的小说文件，请重新选择文件。",
     "attachmentOnlyPrompt": "请分析我上传的文件。",
     "attachmentAnalysisUploading": "正在上传文件供分析：{{filename}}",
-    "settingsHint": "账号和登录由 SuperTale 管理。这里的设置只控制聊天展示和附件行为。",
+    "settingsHint": "账号和登录由 DramaFoundry 管理。这里的设置只控制聊天展示和附件行为。",
     "tool": "工具",
     "historyTool": "历史工具",
     "showStructuredSourceWhileStreaming": "流式显示 JSON 原文",
@@ -884,11 +884,11 @@
   },
   "freezone": {
     "chat": {
-      "title": "虾导",
-      "description": "在虾画画布旁打开虾导。",
-      "toggle": "打开虾画虾导",
-      "close": "收起虾画虾导",
-      "resize": "拖动调整虾画虾导宽度"
+      "title": "DramaFoundry",
+      "description": "在虾画画布旁打开DramaFoundry。",
+      "toggle": "打开虾画DramaFoundry",
+      "close": "收起虾画DramaFoundry",
+      "resize": "拖动调整虾画DramaFoundry宽度"
     },
     "canvases": {
       "defaultSection": "默认画布",
@@ -1678,8 +1678,8 @@
     "retryQuote": "刷新报价"
   },
   "paymentReturn": {
-    "back": "返回 DramaClaw",
-    "returnButton": "返回 DramaClaw",
+    "back": "返回 DramaFoundry",
+    "returnButton": "返回 DramaFoundry",
     "orderNumber": "商户订单号",
     "retry": "重新查询",
     "states": {
@@ -1689,7 +1689,7 @@
       },
       "credited": {
         "title": "充值已到账",
-        "description": "支付和积分入账均已由服务端确认，你可以返回 DramaClaw 继续创作。"
+        "description": "支付和积分入账均已由服务端确认，你可以返回 DramaFoundry 继续创作。"
       },
       "closed": {
         "title": "订单已关闭",
@@ -1766,7 +1766,7 @@
     "styles": "虾格",
     "tasks": "虾条",
     "taskCenter": "任务中心",
-    "aiAssistant": "虾导",
+    "aiAssistant": "DramaFoundry",
     "freezone": "虾画"
   },
   "characters": {
@@ -2128,8 +2128,8 @@
       "noAccount": "还没有账号？",
       "applyAccount": "申请账号",
       "otpRegistration": "首次使用手机号验证码登录，将自动创建账号",
-      "showcaseLabel": "DramaClaw 作品展示",
-      "showcaseEyebrow": "MADE WITH DRAMACLAW",
+      "showcaseLabel": "DramaFoundry 作品展示",
+      "showcaseEyebrow": "MADE WITH DRAMAFOUNDRY",
       "showcaseMeta": "创作现场",
       "showcaseTitle": "想象力，全速开拍",
       "showcaseDescription": "角色、分镜、声音与镜头，在同一条制作线上持续推进"
@@ -2195,7 +2195,7 @@
     },
     "community": {
       "label": "社区作品",
-      "heading": "DramaClaw TV",
+      "heading": "DramaFoundry TV",
       "likes": "{{count}} 次喜欢",
       "openWork": "打开作品「{{title}}」",
       "works": {
@@ -4858,7 +4858,7 @@
           "style": {
             "label": "风格",
             "options": {
-              "supertale_production": "SuperTale 生产风格",
+              "supertale_production": "DramaFoundry 生产风格",
               "cinematic_realistic": "影视写实",
               "clean_sketch": "干净线稿",
               "spiderverse_mixed": "混合媒介"
@@ -7065,7 +7065,7 @@
         "mediaCatalogCheckFailed": "检查官方媒体模型列表失败，请稍后重试。"
       },
       "custom": {
-        "description": "CE 使用本机 SQLite NewAPI。DramaClaw 会自动连接数据库、创建运行令牌并启用本地渠道。",
+        "description": "CE 使用本机 SQLite NewAPI。DramaFoundry 会自动连接数据库、创建运行令牌并启用本地渠道。",
         "init": "初始化本地 NewAPI",
         "repair": "检测并修复",
         "initialized": "本地 NewAPI 已就绪。",
@@ -7084,7 +7084,7 @@
         "setupConfirmPassword": "确认密码",
         "setupPasswordPlaceholder": "至少 8 位",
         "setupConfirmPasswordPlaceholder": "再次输入密码",
-        "setupPasswordOnlyOnce": "该账号和密码只会在全新 NewAPI 首次创建管理员时提交给你的 NewAPI 实例。若 NewAPI 已经初始化，即使这里填写了密码，也不会修改已有管理员密码。DramaClaw 不会保存密码，也不会用它执行后续操作；首次初始化完成后请自行保存，用于登录 NewAPI 后台。",
+        "setupPasswordOnlyOnce": "该账号和密码只会在全新 NewAPI 首次创建管理员时提交给你的 NewAPI 实例。若 NewAPI 已经初始化，即使这里填写了密码，也不会修改已有管理员密码。DramaFoundry 不会保存密码，也不会用它执行后续操作；首次初始化完成后请自行保存，用于登录 NewAPI 后台。",
         "setupRequired": "当前本地 NewAPI 尚未完成初始化，请填写初始化密码和确认密码后重试。",
         "setupAlreadyInitializedPasswordIgnored": "检测到你的 NewAPI 已经初始化，本次没有调用 NewAPI 初始化接口，也没有修改已有管理员密码；你刚刚填写的密码已被忽略并清空。",
         "setupPasswordMissingUsername": "请填写管理员用户名。",
@@ -7220,12 +7220,12 @@
           "xialiao": "虾料",
           "xiatan": "虾塘",
           "xiajing": "虾镜",
-          "xiadao": "虾导",
+          "xiadao": "DramaFoundry",
           "xiage": "虾格",
           "novelImport": "虾料 · 小说知识库（Cognee）"
         },
         "features": {
-          "HERMES": "虾导聊天模型",
+          "HERMES": "DramaFoundry聊天模型",
           "GLOBAL_VIDEO_OPTIMIZER": "根据画面优化视频提示词",
           "SEEDANCE2_PROMPT_COMPOSER": "组合视频生成提示词",
           "GLOBAL_VIDEO_IDENTITY_DETECTOR": "识别草图中的角色与道具标记",
@@ -7447,7 +7447,7 @@
     "missingAnyApiKeyMessage": "后端 provider 未配置。",
     "openProvidersSettings": "查看 provider",
     "aboutAppName": "Beat Workbench",
-    "aboutIntro": "SuperTale 的候选图生成、自由实验与资产提交工作台。",
+    "aboutIntro": "DramaFoundry 的候选图生成、自由实验与资产提交工作台。",
     "aboutVersionLabel": "版本",
     "aboutVersionUnknown": "未知",
     "aboutAuthorLabel": "作者",

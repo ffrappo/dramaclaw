@@ -3,7 +3,7 @@
 
 # 配置模型
 
-DramaClaw CE 通过 NewAPI 兼容网关调用文本、视觉理解、Embedding、图片、视频和音频模型。模型设置保存在 CE 的本地 `settings.db` 中；密钥不会回传到浏览器，只会显示脱敏后的保存状态。
+DramaFoundry CE 通过 NewAPI 兼容网关调用文本、视觉理解、Embedding、图片、视频和音频模型。模型设置保存在 CE 的本地 `settings.db` 中；密钥不会回传到浏览器，只会显示脱敏后的保存状态。
 
 启动后打开 `http://localhost:8080`，进入 **设置 → 模型与渠道**。页面顶部的“当前生效”表示实际运行模式，不是当前正在查看的标签。
 
@@ -25,7 +25,7 @@ DramaClaw CE 通过 NewAPI 兼容网关调用文本、视觉理解、Embedding�
 2. 填写 RelayClaw DC Key。
 3. 点击 **保存并启用**。
 
-官方网关地址由 DramaClaw 固定管理。RelayClaw 已配置 `DC-*-LLM`、`DC-cognee-embedding` 和官方媒体模型，不需要在 CE 中填写上游模型映射。
+官方网关地址由 DramaFoundry 固定管理。RelayClaw 已配置 `DC-*-LLM`、`DC-cognee-embedding` 和官方媒体模型，不需要在 CE 中填写上游模型映射。
 
 官方媒体模型及其分辨率、比例、时长和参考素材能力来自 CE 内置的 `src/novelvideo/official_media_models.json`。
 
@@ -33,10 +33,10 @@ DramaClaw CE 通过 NewAPI 兼容网关调用文本、视觉理解、Embedding�
 
 官方模式和本地 + 官方混合模式会显示当前官方模型列表的版本、模型数量和来源：
 
-- 点击 **立即检查更新**，可以从 DramaClaw 官方发布地址获取最新模型列表并立即应用。
+- 点击 **立即检查更新**，可以从 DramaFoundry 官方发布地址获取最新模型列表并立即应用。
 - **自动更新官方模型列表**默认关闭。开启后，后端默认每 5 分钟检查一次；打开对应设置面板时也会立即检查。
 - 下载的模型列表保存在本地 `state/local/official_media_models.json`，重启后继续生效。
-- DramaClaw 不会安装低于当前生效版本的远端列表。应用升级后，如果新版内置列表比本地缓存更新，会优先使用新版内置列表。
+- DramaFoundry 不会安装低于当前生效版本的远端列表。应用升级后，如果新版内置列表比本地缓存更新，会优先使用新版内置列表。
 - 开启自动更新后，已打开的虾画浏览器每分钟观察一次目录状态；内容 SHA256 变化时会自动刷新图片和视频模型列表。
 - 状态接口会返回当前内容的 SHA256、发布 Git revision、发布时间、远端地址和最近一次更新错误，便于确认每个实例实际使用的版本。
 
@@ -63,9 +63,9 @@ DramaClaw CE 通过 NewAPI 兼容网关调用文本、视觉理解、Embedding�
 docker compose up -d
 ```
 
-它会启动 DramaClaw API、Web 和内置 NewAPI。默认情况下 DramaClaw 在容器网络中访问 NewAPI；浏览器访问的宿主机端口可以不同，不需要把内部地址改成浏览器地址。
+它会启动 DramaFoundry API、Web 和内置 NewAPI。默认情况下 DramaFoundry 在容器网络中访问 NewAPI；浏览器访问的宿主机端口可以不同，不需要把内部地址改成浏览器地址。
 
-仓库编排已经启用设置页所需的初始化和渠道管理能力。内置 NewAPI 的 SQLite 数据保存在 Compose 的 `newapi-data` 卷中；NewAPI 容器内路径是 `/data/one-api.db`，DramaClaw API 通过共享卷中的 `/newapi-data/one-api.db` 管理它。通常不需要手动填写 SQLite 路径或数据库 DSN。
+仓库编排已经启用设置页所需的初始化和渠道管理能力。内置 NewAPI 的 SQLite 数据保存在 Compose 的 `newapi-data` 卷中；NewAPI 容器内路径是 `/data/one-api.db`，DramaFoundry API 通过共享卷中的 `/newapi-data/one-api.db` 管理它。通常不需要手动填写 SQLite 路径或数据库 DSN。
 
 ### 2. 初始化本地 NewAPI
 
@@ -81,20 +81,20 @@ docker compose up -d
 - 将运行地址和令牌保存到 CE 本地配置。
 - 检查 NewAPI SQLite 数据库与管理员访问是否可用。
 
-DramaClaw 不保存管理员密码。初始化完成后请自行保管该密码，以便登录 NewAPI 后台。对已经初始化的 NewAPI 再填写密码不会重置原密码。
+DramaFoundry 不保存管理员密码。初始化完成后请自行保管该密码，以便登录 NewAPI 后台。对已经初始化的 NewAPI 再填写密码不会重置原密码。
 
 ### 3. 使用推荐配置
 
 初始化完成后，推荐先使用 **推荐配置**。一份配置会同时处理：
 
 - 供应商渠道及上游 Key。
-- DramaClaw 业务模型映射。
+- DramaFoundry 业务模型映射。
 - Cognee Embedding 模型、维度和批量大小。
 - 图片、视频和音频模型映射。
 
 按渠道填写 API Key，然后点击 **保存并应用全部配置**。Key 独立保存，不会写入配置 JSON；已经保存的 Key 可以留空，重新输入会替换旧值。
 
-当前推荐模板包含 OpenRouter、VolcEngine、fal.ai 和 DoubaoAudio。推荐音频映射中的 DramaClaw 模型 ID 仍是 `index-tts-2`，实际通过 DoubaoAudio 渠道调用上游 `seed-audio-1.0`。
+当前推荐模板包含 OpenRouter、VolcEngine、fal.ai 和 DoubaoAudio。推荐音频映射中的 DramaFoundry 模型 ID 仍是 `index-tts-2`，实际通过 DoubaoAudio 渠道调用上游 `seed-audio-1.0`。
 
 内置推荐配置是只读模板。切换到 **我的配置** 后可以编辑 JSON，保存后的个人配置会在下次打开时恢复。JSON 的主要结构如下：
 
@@ -160,7 +160,7 @@ DramaClaw 不保存管理员密码。初始化完成后请自行保管该密码�
 
 #### 业务模型
 
-DramaClaw 使用稳定的内部逻辑模型名，例如 `DC-character-builder-LLM`、`DC-scene-builder-LLM` 和 `DC-freezone-vision-LLM`。自定义模式下，应保留这些内部名称，在 NewAPI 渠道中把它们映射到真实上游模型。
+DramaFoundry 使用稳定的内部逻辑模型名，例如 `DC-character-builder-LLM`、`DC-scene-builder-LLM` 和 `DC-freezone-vision-LLM`。自定义模式下，应保留这些内部名称，在 NewAPI 渠道中把它们映射到真实上游模型。
 
 - 文本理解与生成可以选择普通文本模型。
 - 视觉理解功能会发送图片或视频，必须选择支持相应输入的多模态模型。
@@ -195,7 +195,7 @@ Embedding 模型和维度在项目创建时绑定。修改配置只自动影响�
 
 主线内置模型提供默认能力基线，不能从配置中删除。我的配置可以新增图片或视频模型，并编辑自定义模型能力。保存后刷新虾画，模型列表和控件会使用最新配置。
 
-模型 ID 是 DramaClaw 使用的稳定名称，**上游模型名**是 NewAPI 渠道实际调用的名称，两者可以不同。
+模型 ID 是 DramaFoundry 使用的稳定名称，**上游模型名**是 NewAPI 渠道实际调用的名称，两者可以不同。
 
 ### 5. ComfyUI 配置
 
@@ -205,14 +205,14 @@ Embedding 模型和维度在项目创建时绑定。修改配置只自动影响�
 
 每个 ComfyUI 渠道配置需要：
 
-- 一个 DramaClaw 使用的模型名称。该名称会注册到本地 NewAPI，并显示在虾画中。
+- 一个 DramaFoundry 使用的模型名称。该名称会注册到本地 NewAPI，并显示在虾画中。
 - ComfyUI 服务地址；本机默认是 `http://127.0.0.1:8188`。
 - 一条或多条 Workflow。每条包含唯一的 **Workflow ID** 和从 ComfyUI 导出的 **API Format Workflow JSON**，不能使用浏览器工作流 JSON。
 - 该模型的媒体能力，例如支持模式、比例、分辨率、时长和参考素材数量。
 
 普通本地 ComfyUI 不需要 API Key，可以留空。只有在 ComfyUI 前方部署了要求认证的代理时，才需要按代理方案提供认证信息。
 
-同一个模型名称可以绑定多条 Workflow。DramaClaw 将模型名称、Workflow ID 和 Workflow JSON 保存到 NewAPI，具体选择哪条 Workflow 由虾驿处理；虾画只显示一个统一模型，不再为每条 Workflow 创建一个模型。
+同一个模型名称可以绑定多条 Workflow。DramaFoundry 将模型名称、Workflow ID 和 Workflow JSON 保存到 NewAPI，具体选择哪条 Workflow 由虾驿处理；虾画只显示一个统一模型，不再为每条 Workflow 创建一个模型。
 
 MiniMax H3 模板使用模型名 `MiniMax-H3-local`，内置文生、首帧和全能参考三条 Workflow。初始媒体能力为文生视频、首帧和全能参考，分辨率为 `480p`、`768p`、`1080p`，比例为 `21:9`、`16:9`、`4:3`、`1:1`、`3:4`、`9:16`。这些是初始值，仍可在媒体模型能力配置中调整。
 
@@ -233,7 +233,7 @@ ComfyUI API Key 是可选项。Workflow 必须是 API Format，而不是浏览�
 
 ComfyUI 渠道存在时，MiniMax H3 模板按钮会保留在该渠道的 **ComfyUI Workflows** 区域，方便恢复缺少的模板。重复载入时会把模板合并到现有 Workflow 中，保留用户已经配置的同 ID Workflow；当 ComfyUI 地址为空时，会自动填入 `http://127.0.0.1:8188`，不会覆盖非空的自定义地址。
 
-混合模式按模型 ID 路由：本地 ComfyUI 模型可以作为新模型加入虾画；本地存在与官方同名的视频模型时，则使用本地模型覆盖该官方模型。其他模型继续使用官方 RelayClaw。保存视频配置时，DramaClaw 会先保存 ComfyUI 渠道，再保存对应媒体模型。DramaClaw 不会在本地生成失败后自动回退官方，是否重试或改选官方模型由用户决定。混合模式只管理本地视频模型，不要求再次配置 OpenRouter、火山等官方上游渠道。
+混合模式按模型 ID 路由：本地 ComfyUI 模型可以作为新模型加入虾画；本地存在与官方同名的视频模型时，则使用本地模型覆盖该官方模型。其他模型继续使用官方 RelayClaw。保存视频配置时，DramaFoundry 会先保存 ComfyUI 渠道，再保存对应媒体模型。DramaFoundry 不会在本地生成失败后自动回退官方，是否重试或改选官方模型由用户决定。混合模式只管理本地视频模型，不要求再次配置 OpenRouter、火山等官方上游渠道。
 
 ## 参考媒体存储
 
@@ -251,7 +251,7 @@ ComfyUI 渠道存在时，MiniMax H3 模板按钮会保留在该渠道的 **Comf
 | AccessKey Secret | `OSS_RELAY_SK` | 对应 SK |
 | 有效期 | `MEDIA_RELAY_TTL_SECONDS` | 默认 1800 秒 |
 
-Bucket 无需公开读；DramaClaw 使用临时签名 URL 授权上游读取。
+Bucket 无需公开读；DramaFoundry 使用临时签名 URL 授权上游读取。
 
 ### Cloudinary
 
@@ -271,7 +271,7 @@ Bucket 无需公开读；DramaClaw 使用临时签名 URL 授权上游读取。
 | 知识图谱 embedding 失败 | 检查 embedding Key、上游模型、维度和批量大小；429 表示上游限流。 |
 | 参考图或首帧无法读取 | 检查媒体存储配置和临时 URL 是否能被上游公网访问。 |
 | 混合模式本地视频失败后没有走官方 | 这是预期行为；混合模式不做自动失败回退。 |
-| ComfyUI 无法连接 `127.0.0.1:8188` | `127.0.0.1` 指 DramaClaw 后端所在环境。容器或远程部署时改为后端可访问的宿主机名或局域网地址。 |
+| ComfyUI 无法连接 `127.0.0.1:8188` | `127.0.0.1` 指 DramaFoundry 后端所在环境。容器或远程部署时改为后端可访问的宿主机名或局域网地址。 |
 | MiniMax H3 Workflow 执行时报节点或模型缺失 | 确认 ComfyUI 已安装推荐 Workflow 使用的自定义节点和模型文件，并按本机安装情况修改 Workflow。 |
 
 ## 相关文件

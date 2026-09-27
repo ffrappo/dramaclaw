@@ -1,8 +1,8 @@
-"""MCP bridge for DramaClaw tools.
+"""MCP bridge for DramaFoundry tools.
 
 Hermes uses ``.hermes/plugins/dramaclaw`` directly. Claude, Codex, and other
 MCP-speaking agents use this stdio server to call that same toolset without
-duplicating DramaClaw API wrappers.
+duplicating DramaFoundry API wrappers.
 """
 
 from __future__ import annotations
@@ -44,15 +44,15 @@ def _install_hermes_registry_shim() -> None:
     sys.modules["tools.registry"] = registry
 
 
-def _load_dramaclaw_plugin() -> Any:
+def _load_dramafoundry_plugin() -> Any:
     _install_hermes_registry_shim()
     plugin_path = _repo_root() / ".hermes" / "plugins" / "dramaclaw" / "__init__.py"
     spec = importlib.util.spec_from_file_location(
-        "_dramaclaw_hermes_plugin_for_mcp",
+        "_dramafoundry_hermes_plugin_for_mcp",
         plugin_path,
     )
     if spec is None or spec.loader is None:
-        raise RuntimeError(f"cannot load DramaClaw plugin from {plugin_path}")
+        raise RuntimeError(f"cannot load DramaFoundry plugin from {plugin_path}")
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -69,7 +69,7 @@ def _tool_index(plugin: Any) -> dict[str, tuple[dict[str, Any], Any]]:
     return index
 
 
-PLUGIN = _load_dramaclaw_plugin()
+PLUGIN = _load_dramafoundry_plugin()
 TOOLS = _tool_index(PLUGIN)
 SERVER = Server("dramaclaw", version="0.1.0")
 
@@ -93,7 +93,7 @@ async def list_tools() -> list[types.Tool]:
 async def call_tool(name: str, arguments: dict[str, Any]) -> list[types.TextContent]:
     item = TOOLS.get(name)
     if item is None:
-        raise ValueError(f"unknown DramaClaw tool: {name}")
+        raise ValueError(f"unknown DramaFoundry tool: {name}")
     _schema, handler = item
     text = handler(arguments or {})
     return [types.TextContent(type="text", text=str(text or ""))]

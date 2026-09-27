@@ -3,7 +3,7 @@
 /**
  * Desktop installer downloads offered on the login hero.
  *
- * 安装包文件名带版本号(如 DramaClaw-Setup-1.1.0.exe),写死必随发版腐烂。
+ * 安装包文件名带版本号(如 DramaFoundry-Setup-1.1.0.exe),写死必随发版腐烂。
  * 发布流水线维护着一对"当前版本指针"—— electron-updater 的 latest.yml /
  * latest-mac.yml(CDN 对 *.yml 零缓存,即发即新)。这里按需解析指针拿到
  * 当前安装包的真实文件名;文件名从清单的 url: 字段取,绝不自拼版本号,
@@ -75,7 +75,7 @@ function unquote(value: string): string {
  * zip),挂到 dmg 上会让用户按错的值去核验,比不显示更糟。
  *
  * 文件名取到行尾再 trim,不用 `\S+`:electron-builder 的 NSIS 默认
- * artifactName 会产出带空格的文件名(`DramaClaw Setup 1.3.2.exe`),YAML 里
+ * artifactName 会产出带空格的文件名(`DramaFoundry Setup 1.3.2.exe`),YAML 里
  * 就是不加引号的裸标量,`\S+` 会在第一个空格处截断,拼出必然 404 的直链。
  */
 export function pickInstallerFromManifest(

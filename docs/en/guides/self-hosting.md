@@ -3,9 +3,9 @@
 
 # Self-Hosting Handbook (Docker)
 
-> Deploy, configure, upgrade, and back up DramaClaw CE with Docker.
+> Deploy, configure, upgrade, and back up DramaFoundry CE with Docker.
 
-CE ships three containers: `api` + `newapi` (the bundled DramaClaw gateway, idle until you switch to Custom or Local + Official Hybrid mode) + `web`, with **no PostgreSQL / no Redis / no Celery** (`ST_EDITION=ce`; tasks run inline within the process). Models go through the official DramaClaw gateway by default.
+CE ships three containers: `api` + `newapi` (the bundled DramaFoundry gateway, idle until you switch to Custom or Local + Official Hybrid mode) + `web`, with **no PostgreSQL / no Redis / no Celery** (`ST_EDITION=ce`; tasks run inline within the process). Models go through the official DramaFoundry gateway by default.
 
 Two compose files ship in the repo: `docker-compose.yml` builds all three services from source (the default entry point — `docker compose up -d --build`), and `docker-compose.release.yml` only pulls published images (`docker compose -f docker-compose.release.yml up -d`). `docker-compose.yml` extends `docker-compose.release.yml` for the shared runtime definition (env / ports / volumes / healthchecks) and only adds `build:` plus local image names.
 
@@ -29,7 +29,7 @@ Two files, already set for you, no changes needed:
 
 | File | Mode | Command |
 |---|---|---|
-| `docker-compose.yml` | Source build (default) — builds `api` and `web` from this checkout and the bundled gateway from `../dramaclaw-gateway` (override with `DRAMACLAW_GATEWAY_SRC`, a path or a git URL) | `docker compose up -d --build` |
+| `docker-compose.yml` | Source build (default) — builds `api` and `web` from this checkout and the bundled gateway from `../dramaclaw-gateway` (override with `DRAMAFOUNDRY_GATEWAY_SRC`, a path or a git URL) | `docker compose up -d --build` |
 | `docker-compose.release.yml` | Image only — pulls published images, never builds | `docker compose -f docker-compose.release.yml up -d` |
 
 Key points shared by both (defined once in `docker-compose.release.yml`, reused by `docker-compose.yml` via `extends`):
@@ -37,8 +37,8 @@ Key points shared by both (defined once in `docker-compose.release.yml`, reused 
 | Item | Value | Notes |
 |---|---|---|
 | Services | `api` + `newapi` + `web` | No PG/Redis; `newapi` is the bundled gateway |
-| Images (release) | `${DRAMACLAW_IMAGE_PREFIX:-claymorelab}/...` | Pulled from Docker Hub; set `DRAMACLAW_IMAGE_PREFIX` in `.env` to use the ACR mirror (pinned tags only) |
-| Versions (release) | `DRAMACLAW_VERSION` (api/web), `DRAMACLAW_GATEWAY_VERSION` | Defaults: `2.0.2` / the gateway tag baked into the file |
+| Images (release) | `${DRAMAFOUNDRY_IMAGE_PREFIX:-claymorelab}/...` | Pulled from Docker Hub; set `DRAMAFOUNDRY_IMAGE_PREFIX` in `.env` to use the ACR mirror (pinned tags only) |
+| Versions (release) | `DRAMAFOUNDRY_VERSION` (api/web), `DRAMAFOUNDRY_GATEWAY_VERSION` | Defaults: `2.0.2` / the gateway tag baked into the file |
 | Port | `8780:8780` | REST API |
 | Gateway admin port | `${ST_NEWAPI_BIND:-127.0.0.1}:${ST_NEWAPI_PORT:-3000}:3000` | Bound to `127.0.0.1` by default; set `ST_NEWAPI_BIND=0.0.0.0` in `.env` to widen it |
 | Enforced environment | `ST_EDITION=ce`, control-plane/Redis/Celery cleared | CE mode cannot be downgraded |
@@ -57,7 +57,7 @@ Recommended and alternative options (see [Configuring Model Providers](../gettin
 - **A. DC official key (recommended)**: the default compose already uses the official gateway. After bringing the stack up, open `http://localhost:8080` → Settings → Model Configuration → Official Channel → paste your DC key and save to start using it, **no model mapping required**. Get a key at <https://relayclaw.cdnfg.com>.
 - **B. Local NewAPI**: the bundled gateway is already running; open Settings → Model Configuration → Custom, click Initialize, then configure upstream channels and model mappings from the Local NewAPI page.
 
-Local NewAPI must map DramaClaw's logical models to real upstream models. The reference-image feature needs `OSS_RELAY_AK/SK` (you can skip it for a text-only workflow).
+Local NewAPI must map DramaFoundry's logical models to real upstream models. The reference-image feature needs `OSS_RELAY_AK/SK` (you can skip it for a text-only workflow).
 
 ## 4. Start / Stop
 
@@ -114,19 +114,19 @@ git pull
 docker compose up -d --build
 ```
 
-`docker compose up -d --build` also rebuilds the bundled gateway from `../dramaclaw-gateway` (Go + bun, several minutes); `git pull` there too when you want a newer gateway. When only DramaClaw code changed, rebuild just the two local services: `docker compose up -d --build api web`; when only the gateway changed, `docker compose up -d --build newapi`.
+`docker compose up -d --build` also rebuilds the bundled gateway from `../dramaclaw-gateway` (Go + bun, several minutes); `git pull` there too when you want a newer gateway. When only DramaFoundry code changed, rebuild just the two local services: `docker compose up -d --build api web`; when only the gateway changed, `docker compose up -d --build newapi`.
 
 Image mode:
 
 ```bash
-# edit .env: DRAMACLAW_VERSION=2.1.0 (and DRAMACLAW_GATEWAY_VERSION if the release notes say so)
+# edit .env: DRAMAFOUNDRY_VERSION=2.1.0 (and DRAMAFOUNDRY_GATEWAY_VERSION if the release notes say so)
 docker compose -f docker-compose.release.yml pull
 docker compose -f docker-compose.release.yml up -d
 ```
 
 Your `.env` is never touched by the upgrade. The `ce-data` and `newapi-data` volumes are reused.
 
-The `DRAMACLAW_VERSION` / `DRAMACLAW_GATEWAY_VERSION` defaults baked into `docker-compose.release.yml` are kept current by the release packaging workflow: after each packaging run that publishes a compose bundle it opens a PR here pinning both defaults to that release's CE and gateway tags, so pulling `main` picks up the latest defaults even if your `.env` sets nothing.
+The `DRAMAFOUNDRY_VERSION` / `DRAMAFOUNDRY_GATEWAY_VERSION` defaults baked into `docker-compose.release.yml` are kept current by the release packaging workflow: after each packaging run that publishes a compose bundle it opens a PR here pinning both defaults to that release's CE and gateway tags, so pulling `main` picks up the latest defaults even if your `.env` sets nothing.
 
 If an older release wrote media to `/app/output` inside the container, run the one-time migration **before** starting the new version (zip users: download `scripts/migrate_docker_output.py` from GitHub instead of `git pull`):
 
@@ -152,7 +152,7 @@ The script copies only missing files, never overwrites or deletes the source, an
 
 | Before | Now |
 |---|---|
-| `docker compose up -d --build` (official gateway, source build) | Same command, **after** `git clone https://github.com/dramaclaw/dramaclaw-gateway.git ../dramaclaw-gateway` (or `DRAMACLAW_GATEWAY_SRC=https://github.com/dramaclaw/dramaclaw-gateway.git#main` in `.env` to skip the clone); it now also builds the bundled gateway (host-only by default, idle until used). Without the clone the build stops with `unable to prepare context: path ".../dramaclaw-gateway" not found` |
+| `docker compose up -d --build` (official gateway, source build) | Same command, **after** `git clone https://github.com/dramaclaw/dramaclaw-gateway.git ../dramaclaw-gateway` (or `DRAMAFOUNDRY_GATEWAY_SRC=https://github.com/dramaclaw/dramaclaw-gateway.git#main` in `.env` to skip the clone); it now also builds the bundled gateway (host-only by default, idle until used). Without the clone the build stops with `unable to prepare context: path ".../dramaclaw-gateway" not found` |
 | `docker compose -f docker-compose.release.yml up -d` | Same command; the gateway image is now `claymorelab/dramaclaw-gateway` |
 | `docker compose -f docker-compose.selfhosted.yml up -d --build` | Clone the gateway as above, then `docker compose up -d --build`; the `newapi-data` volume is reused — back it up first (rc.21 → rc.24 only adds tables) |
 | `docker compose -f docker-compose.selfhosted.release.yml up -d` | Use `docker compose -f docker-compose.release.yml up -d` instead; same as above |

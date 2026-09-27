@@ -2191,9 +2191,9 @@ function uploadedFileFromPrepared(item: PreparedIngestAttachment): UploadedInges
 
 function buildUploadedFilesContext(project: string | undefined, files: UploadedIngestFile[]): string {
   const lines = [
-    "[DRAMACLAW_UPLOADED_FILES]",
-    "If the user asks what files are currently uploaded, answer directly from this list. These files have already been uploaded to the current SuperTale_N project ingest directory.",
-    project ? `dramaclaw_project_id: ${project}` : null,
+    "[DRAMAFOUNDRY_UPLOADED_FILES]",
+    "If the user asks what files are currently uploaded, answer directly from this list. These files have already been uploaded to the current DramaFoundry_N project ingest directory.",
+    project ? `dramafoundry_project_id: ${project}` : null,
   ].filter((line): line is string => line !== null);
 
   if (files.length === 0) {
@@ -2215,7 +2215,7 @@ function buildUploadedFilesContext(project: string | undefined, files: UploadedI
     });
   }
 
-  lines.push("[/DRAMACLAW_UPLOADED_FILES]");
+  lines.push("[/DRAMAFOUNDRY_UPLOADED_FILES]");
   return lines.join("\n");
 }
 
@@ -2223,26 +2223,26 @@ function buildReingestConfirmationContext(
   pending: ReingestConfirmation,
 ): string {
   return [
-    "[DRAMACLAW_REINGEST_CONFIRMATION]",
+    "[DRAMAFOUNDRY_REINGEST_CONFIRMATION]",
     `stage: ${pending.stage}`,
-    `dramaclaw_project_id: ${pending.project}`,
+    `dramafoundry_project_id: ${pending.project}`,
     `filename: ${pending.filename}`,
     pending.stage === "choose_overwrite"
       ? "The current project has already ingested a script. Do not call ingest/start yet. Tell the user the current project is not empty and ask only whether they want to overwrite this project. Do not recommend creating a new project, and do not offer to create another project from the current project flow."
       // 这句是发给模型的英文指令，里面的中文是「用户要原样打出来的词」。
       : "The user chose overwrite. Do not call ingest/start yet. Ask the second confirmation and warn that overwrite/rebuild will clear existing characters, episodes, scripts, sketches, audio, videos, and other pipeline outputs. Only an exact user reply of 确定 / 继续 (or confirm / continue / yes) may proceed.", // i18n-exempt
-    "[/DRAMACLAW_REINGEST_CONFIRMATION]",
+    "[/DRAMAFOUNDRY_REINGEST_CONFIRMATION]",
   ].join("\n");
 }
 
 function buildReingestCancelledContext(pending: ReingestConfirmation): string {
   return [
-    "[DRAMACLAW_REINGEST_CANCELLED]",
+    "[DRAMAFOUNDRY_REINGEST_CANCELLED]",
     `stage: ${pending.stage}`,
-    `dramaclaw_project_id: ${pending.project}`,
+    `dramafoundry_project_id: ${pending.project}`,
     `filename: ${pending.filename}`,
     "The overwrite/re-ingest flow was cancelled or not explicitly confirmed. Do not call any write API. Briefly tell the user no overwrite was performed.",
-    "[/DRAMACLAW_REINGEST_CANCELLED]",
+    "[/DRAMAFOUNDRY_REINGEST_CANCELLED]",
   ].join("\n");
 }
 
@@ -2409,8 +2409,8 @@ async function buildAttachmentAnalysisContext(
   preparedAttachments: PreparedIngestAttachment[],
 ): Promise<string> {
   const lines = [
-    "[DRAMACLAW_ATTACHMENT_CONTEXT]",
-    "The user attached file(s). No explicit video-generation instruction was detected, so do not start the DramaClaw/SuperTale video pipeline unless the user asks for it later. Analyze the attached text when available, and ask a focused follow-up if the intent is ambiguous.",
+    "[DRAMAFOUNDRY_ATTACHMENT_CONTEXT]",
+    "The user attached file(s). No explicit video-generation instruction was detected, so do not start the DramaFoundry/DramaFoundry video pipeline unless the user asks for it later. Analyze the attached text when available, and ask a focused follow-up if the intent is ambiguous.",
   ];
 
   for (const prepared of preparedAttachments) {
@@ -2427,17 +2427,17 @@ async function buildAttachmentAnalysisContext(
 
     if (project && isNovelAttachment(originalAttachment)) {
       if (prepared.upload) {
-        lines.push(`dramaclaw_upload_filename: ${prepared.upload.filename}`);
-        lines.push(`dramaclaw_project_id: ${project}`);
-        lines.push("dramaclaw_upload_target: supertale_ingest");
+        lines.push(`dramafoundry_upload_filename: ${prepared.upload.filename}`);
+        lines.push(`dramafoundry_project_id: ${project}`);
+        lines.push("dramafoundry_upload_target: dramafoundry_ingest");
         if (typeof prepared.upload.total_chars === "number") {
-          lines.push(`dramaclaw_total_chars: ${prepared.upload.total_chars}`);
+          lines.push(`dramafoundry_total_chars: ${prepared.upload.total_chars}`);
         }
         if (typeof prepared.upload.count === "number") {
-          lines.push(`dramaclaw_chapter_count: ${prepared.upload.count}`);
+          lines.push(`dramafoundry_chapter_count: ${prepared.upload.count}`);
         }
       } else if (prepared.error) {
-        lines.push(`dramaclaw_upload_error: ${prepared.error}`);
+        lines.push(`dramafoundry_upload_error: ${prepared.error}`);
       }
     }
 
@@ -2460,7 +2460,7 @@ async function buildAttachmentAnalysisContext(
     }
   }
 
-  lines.push("[/DRAMACLAW_ATTACHMENT_CONTEXT]");
+  lines.push("[/DRAMAFOUNDRY_ATTACHMENT_CONTEXT]");
   return lines.join("\n");
 }
 
@@ -2471,14 +2471,14 @@ function appendIngestAutomationContext(
   return [
     text,
     "",
-    "[DRAMACLAW_INGEST_AUTOMATION]",
+    "[DRAMAFOUNDRY_INGEST_AUTOMATION]",
     `novel_filename: ${result.filename}`,
     result.rebuild ? "rebuild: true" : "rebuild: false",
     result.taskType ? `task_type: ${result.taskType}` : null,
     result.taskKey ? `task_key: ${result.taskKey}` : null,
     result.message ? `message: ${result.message}` : null,
-    "The uploaded novel has already been submitted to the project ingest API. Continue the DramaClaw/SuperTale video creation workflow from this task instead of asking the user to upload a novel again.",
-    "[/DRAMACLAW_INGEST_AUTOMATION]",
+    "The uploaded novel has already been submitted to the project ingest API. Continue the DramaFoundry/DramaFoundry video creation workflow from this task instead of asking the user to upload a novel again.",
+    "[/DRAMAFOUNDRY_INGEST_AUTOMATION]",
   ].filter((line): line is string => line !== null).join("\n");
 }
 
@@ -2538,7 +2538,7 @@ export function SuperChatPanel({
   const taskEventBus = useEventBus();
   const chat = useSuperChat({
     project: params.project,
-    displayName: displayName || "SuperTale",
+    displayName: displayName || "DramaFoundry",
   });
   const isChatInitializing = !chat.historyReady && chat.messages.length === 0 && (chat.connecting || chat.connected);
 

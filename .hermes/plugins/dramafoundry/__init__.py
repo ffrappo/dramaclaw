@@ -22,7 +22,7 @@ ACP_TOOLSET = "hermes-acp"
 REGISTER_TOOLSETS = (ACP_TOOLSET,)
 API_PREFIX = "/api/v1/"
 try:
-    DEFAULT_TIMEOUT_SECONDS = max(30, int(os.environ.get("DRAMACLAW_API_TIMEOUT_SECONDS", "120")))
+    DEFAULT_TIMEOUT_SECONDS = max(30, int(os.environ.get("DRAMAFOUNDRY_API_TIMEOUT_SECONDS", "120")))
 except ValueError:
     DEFAULT_TIMEOUT_SECONDS = 120
 SCRIPT_UPLOAD_EXTENSIONS = {".txt", ".md", ".doc", ".docx"}
@@ -163,10 +163,10 @@ def _ce_owner_mode() -> bool:
     A DramaClaw CE instance trusts local requests as the owner (no
     ``Authorization`` header required), so an external MCP client such as
     Claude Code can call the API on the same machine without minting an
-    agent-session token. This is opt-in via ``DRAMACLAW_CE_OWNER`` so it can
+    agent-session token. This is opt-in via ``DRAMAFOUNDRY_CE_OWNER`` so it can
     never silently drop auth against an EE deployment.
     """
-    raw = os.environ.get("DRAMACLAW_CE_OWNER", "").strip().lower()
+    raw = os.environ.get("DRAMAFOUNDRY_CE_OWNER", "").strip().lower()
     return raw in {"1", "true", "yes", "on"}
 
 
@@ -183,20 +183,20 @@ def _ce_owner_allow_remote() -> bool:
     must only target a local CE the caller controls. Pointing it at a remote
     host would send owner-level, unauthenticated requests across the network;
     that is refused unless the operator opts in via
-    ``DRAMACLAW_CE_OWNER_ALLOW_REMOTE`` (deliberately a different variable from
-    ``DRAMACLAW_CE_OWNER`` so it cannot be enabled by accident).
+    ``DRAMAFOUNDRY_CE_OWNER_ALLOW_REMOTE`` (deliberately a different variable from
+    ``DRAMAFOUNDRY_CE_OWNER`` so it cannot be enabled by accident).
     """
-    raw = os.environ.get("DRAMACLAW_CE_OWNER_ALLOW_REMOTE", "").strip().lower()
+    raw = os.environ.get("DRAMAFOUNDRY_CE_OWNER_ALLOW_REMOTE", "").strip().lower()
     return raw in {"1", "true", "yes", "on"}
 
 
 def _enforce_ce_owner_target(url: str) -> None:
-    """Require a loopback ``DRAMACLAW_API_URL`` in tokenless CE-owner mode.
+    """Require a loopback ``DRAMAFOUNDRY_API_URL`` in tokenless CE-owner mode.
 
     Called only when owner mode is active and no bearer token is present. The
     host must be a loopback address (``localhost``/``127.0.0.1``/``::1``/
     ``[::1]``) unless the operator has set the explicit unsafe override
-    ``DRAMACLAW_CE_OWNER_ALLOW_REMOTE=1``.
+    ``DRAMAFOUNDRY_CE_OWNER_ALLOW_REMOTE=1``.
     """
     if _ce_owner_allow_remote():
         return
@@ -204,41 +204,41 @@ def _enforce_ce_owner_target(url: str) -> None:
     if host in _LOOPBACK_HOSTS:
         return
     raise ValueError(
-        "DRAMACLAW_CE_OWNER=1 refuses non-loopback DRAMACLAW_API_URL "
+        "DRAMAFOUNDRY_CE_OWNER=1 refuses non-loopback DRAMAFOUNDRY_API_URL "
         f"(host {host!r}): tokenless owner mode sends unauthenticated, "
         "owner-level requests and must point at a local CE "
-        "(localhost, 127.0.0.1, ::1). Set DRAMACLAW_CE_OWNER_ALLOW_REMOTE=1 "
-        "to override (unsafe), or provide DRAMACLAW_AGENT_TOKEN."
+        "(localhost, 127.0.0.1, ::1). Set DRAMAFOUNDRY_CE_OWNER_ALLOW_REMOTE=1 "
+        "to override (unsafe), or provide DRAMAFOUNDRY_AGENT_TOKEN."
     )
 
 
 def _available() -> bool:
-    if not os.environ.get("DRAMACLAW_API_URL"):
+    if not os.environ.get("DRAMAFOUNDRY_API_URL"):
         return False
-    return bool(os.environ.get("DRAMACLAW_AGENT_TOKEN")) or _ce_owner_mode()
+    return bool(os.environ.get("DRAMAFOUNDRY_AGENT_TOKEN")) or _ce_owner_mode()
 
 
 def _base_url() -> str:
-    value = os.environ.get("DRAMACLAW_API_URL", "").strip()
+    value = os.environ.get("DRAMAFOUNDRY_API_URL", "").strip()
     if not value:
-        raise ValueError("DRAMACLAW_API_URL is not set")
+        raise ValueError("DRAMAFOUNDRY_API_URL is not set")
     return value.rstrip("/")
 
 
 def _token() -> str:
-    value = os.environ.get("DRAMACLAW_AGENT_TOKEN", "").strip()
+    value = os.environ.get("DRAMAFOUNDRY_AGENT_TOKEN", "").strip()
     if not value:
-        raise ValueError("DRAMACLAW_AGENT_TOKEN is not set")
+        raise ValueError("DRAMAFOUNDRY_AGENT_TOKEN is not set")
     return value
 
 
 def _default_project_id() -> str:
-    return os.environ.get("DRAMACLAW_PROJECT_ID", "").strip()
+    return os.environ.get("DRAMAFOUNDRY_PROJECT_ID", "").strip()
 
 
 def _project_output_dir() -> Path | None:
     value = (
-        os.environ.get("DRAMACLAW_PROJECT_OUTPUT_DIR")
+        os.environ.get("DRAMAFOUNDRY_PROJECT_OUTPUT_DIR")
         or os.environ.get("SUPERTALE_PROJECT_OUTPUT_DIR")
         or ""
     ).strip()
@@ -315,10 +315,10 @@ def _request(method: str, path: str, *, query: Any = None, body: Any = None) -> 
         "Accept": "application/json",
         "User-Agent": "dramaclaw-plugin/0.1.0",
     }
-    token = os.environ.get("DRAMACLAW_AGENT_TOKEN", "").strip()
+    token = os.environ.get("DRAMAFOUNDRY_AGENT_TOKEN", "").strip()
     if not token:
         if not _ce_owner_mode():
-            _token()  # raise the standard "DRAMACLAW_AGENT_TOKEN is not set" error
+            _token()  # raise the standard "DRAMAFOUNDRY_AGENT_TOKEN is not set" error
         # Tokenless owner mode drops Authorization entirely, so it must only
         # ever target a loopback CE unless explicitly overridden.
         _enforce_ce_owner_target(_base_url())
@@ -377,7 +377,7 @@ def _response_error_text(text: str) -> str:
 def _project_from_args(args: dict[str, Any]) -> str:
     project = str(args.get("project_id") or args.get("project") or _default_project_id()).strip()
     if not project:
-        raise ValueError("project_id is required and DRAMACLAW_PROJECT_ID is not set")
+        raise ValueError("project_id is required and DRAMAFOUNDRY_PROJECT_ID is not set")
     return project
 
 
@@ -651,7 +651,7 @@ def _handle_list_ingest_uploads(args: dict[str, Any], **_: Any) -> str:
         if current_project and project != current_project:
             raise ValueError("can only list uploads for the current Hermes project scope")
 
-        project_dir_raw = os.environ.get("DRAMACLAW_PROJECT_OUTPUT_DIR", "").strip()
+        project_dir_raw = os.environ.get("DRAMAFOUNDRY_PROJECT_OUTPUT_DIR", "").strip()
         if not project_dir_raw:
             project_dir_raw = os.environ.get("SUPERTALE_PROJECT_OUTPUT_DIR", "").strip()
         if not project_dir_raw:
@@ -1715,7 +1715,7 @@ TOOLS = (
             "dramaclaw_pipeline_status",
             "Get the current DramaClaw project pipeline status.",
             {
-                "project_id": {"type": "string", "description": "Project id. Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Project id. Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Optional episode number."},
             },
         ),
@@ -1773,7 +1773,7 @@ TOOLS = (
             "the user asks which files are currently uploaded, or before starting video/short-drama "
             "ingest from a previously uploaded script.",
             {
-                "project_id": {"type": "string", "description": "Project id. Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Project id. Defaults to DRAMAFOUNDRY_PROJECT_ID."},
             },
         ),
         _handle_list_ingest_uploads,
@@ -1789,7 +1789,7 @@ TOOLS = (
             {
                 "project_id": {
                     "type": "string",
-                    "description": "Project id. Defaults to DRAMACLAW_PROJECT_ID.",
+                    "description": "Project id. Defaults to DRAMAFOUNDRY_PROJECT_ID.",
                 },
             },
         ),
@@ -1805,7 +1805,7 @@ TOOLS = (
             "/build_episodes or /start_pipeline). Poll with dramaclaw_get_task("
             "task_type='build_episodes', episode=0); read with dramaclaw_get('/projects/{project}/episodes').",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "target_episodes": {"type": "integer", "description": "How many episodes to plan (default 10)."},
                 "planning_mode": {"type": "string", "description": "Planning mode (default 'chapters')."},
             },
@@ -1822,7 +1822,7 @@ TOOLS = (
             "code 'identity_plan_required'). Poll with dramaclaw_get_task(task_type='script_writer', "
             "episode=N); read with dramaclaw_get_episode_script(episode=N).",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Episode number (1-based, required)."},
             },
             ["episode"],
@@ -1839,7 +1839,7 @@ TOOLS = (
             "PATCH /projects/{project}/characters/{name} with {face_prompt: ...}. After this "
             "succeeds, retry dramaclaw_generate_portrait for that character.",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "name": {"type": "string", "description": "Character name (required)."},
                 "character": {"type": "string", "description": "Alias of name."},
                 "face_prompt": {
@@ -1860,7 +1860,7 @@ TOOLS = (
             "plan-async. This is a PREREQUISITE for dramaclaw_generate_script. Poll dramaclaw_get_task("
             "task_type='identity_planner', episode=N).",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Episode number (required)."},
             },
             ["episode"],
@@ -1876,7 +1876,7 @@ TOOLS = (
             "context. Real endpoint POST /projects/{project}/episodes/{episode}/scenes/plan. Poll "
             "with dramaclaw_get_task(task_type='episode_scene_planner', episode=N).",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Episode number (required)."},
             },
             ["episode"],
@@ -1892,7 +1892,7 @@ TOOLS = (
             "context. Real endpoint POST /projects/{project}/episodes/{episode}/props/plan. Poll "
             "with dramaclaw_get_task(task_type='episode_prop_planner', episode=N).",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Episode number (required)."},
             },
             ["episode"],
@@ -1909,7 +1909,7 @@ TOOLS = (
             "scenes') or the episode scene menu. Poll with dramaclaw_get_task(task_type="
             "'scene_reference_asset', episode=0, scope=<returned scope>).",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "name": {"type": "string", "description": "Scene name (required)."},
                 "scene_name": {"type": "string", "description": "Alias of name."},
             },
@@ -1926,7 +1926,7 @@ TOOLS = (
             "reverse/generate-async. Poll with dramaclaw_get_task(task_type='scene_reference_asset', "
             "episode=0, scope=<returned scope>).",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "name": {"type": "string", "description": "Scene name (required)."},
                 "scene_name": {"type": "string", "description": "Alias of name."},
             },
@@ -1942,7 +1942,7 @@ TOOLS = (
             "POST /projects/{project}/characters/{name}/portrait-async. Call once per character. Poll "
             "dramaclaw_get_task(task_type='character_portrait').",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "name": {"type": "string", "description": "Character name (required; from the character list)."},
             },
             ["name"],
@@ -1957,7 +1957,7 @@ TOOLS = (
             "/projects/{project}/characters/{name}/identities/{identity_id}/generate-async. Poll "
             "dramaclaw_get_task(task_type='identity_image').",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "name": {"type": "string", "description": "Character name (required)."},
                 "identity_id": {"type": "string", "description": "Identity id from the character's identity list (required)."},
             },
@@ -1976,7 +1976,7 @@ TOOLS = (
             "aspect_ratio='2:3'. Use THIS instead of dramaclaw_post or guessing the body. Runs "
             "after the script exists. Poll dramaclaw_get_task(task_type='sketch_generation', episode=N).",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Episode number (required)."},
                 "style": {"type": "string", "description": "Optional visual style override."},
                 "model": {"type": "string", "description": "Sketch model. Default: nanobanana."},
@@ -2022,7 +2022,7 @@ TOOLS = (
             "returns a timeout or retryable=false, do not call it again in the same turn; report the "
             "timeout and stop.",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Episode number (required)."},
             },
             ["episode"],
@@ -2042,7 +2042,7 @@ TOOLS = (
             "After calling this tool, do not write markdown images, raw URLs, http/static paths, "
             "or HTML media tags.",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Episode number (required)."},
                 "beat": {"type": "integer", "description": "Show only one beat's sketch."},
                 "beat_indices": {
@@ -2069,7 +2069,7 @@ TOOLS = (
             "Use dramaclaw_get_sketches for sketches. After calling this tool, do not write markdown "
             "images, raw URLs, http/static paths, or HTML media tags.",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Episode number (required)."},
                 "beat": {"type": "integer", "description": "Show only one beat's first frame."},
                 "beat_indices": {
@@ -2095,7 +2095,7 @@ TOOLS = (
             "grids/epNNN/sketch/beat_XX_t* candidates and is separate from current sketch_url. "
             "Use dramaclaw_get_sketches when the user asks for the official/current sketch.",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Episode number (required)."},
                 "beat": {"type": "integer", "description": "Beat number (required)."},
                 "offset": {
@@ -2118,7 +2118,7 @@ TOOLS = (
             "After calling this tool, do not write markdown images, raw URLs, http/static paths, "
             "or HTML media tags.",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "include_reverse": {
                     "type": "boolean",
                     "description": "Include reverse_master_url entries. Default: true.",
@@ -2166,7 +2166,7 @@ TOOLS = (
             "or HTML media tags; "
             "the backend renders the returned media automatically.",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "include_identities": {"type": "boolean", "description": "Include identity images. Default: true."},
                 "media_kind": {
                     "type": "string",
@@ -2209,7 +2209,7 @@ TOOLS = (
             "or HTML media tags; "
             "the backend renders the returned media automatically.",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Episode number (required)."},
                 "media_type": {"type": "string", "enum": ["video", "audio"], "description": "Default: video."},
                 "beat": {"type": "integer", "description": "Show only one beat's video/audio."},
@@ -2245,7 +2245,7 @@ TOOLS = (
             "beat_indices to render ALL beats of the episode (resolved automatically). Requires sketches "
             "first. Poll dramaclaw_get_task(task_type='selected_regen', episode=N).",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Episode number (required)."},
                 "beat_indices": {
                     "type": "array",
@@ -2268,7 +2268,7 @@ TOOLS = (
             "has been removed. Poll dramaclaw_get_task(task_type='audio_generation_indextts2', "
             "episode=N).",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Episode number (required)."},
                 "mode": {
                     "type": "string",
@@ -2296,7 +2296,7 @@ TOOLS = (
             "Real endpoint POST /projects/{project}/episodes/{episode}/optimize/video-global. Poll "
             "dramaclaw_get_task(task_type='global_optimize_video', episode=N).",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Episode number (required)."},
             },
             ["episode"],
@@ -2311,7 +2311,7 @@ TOOLS = (
             "endpoint POST /projects/{project}/episodes/{episode}/videos/compose. Poll dramaclaw_get_task("
             "task_type='compose_episode', episode=N).",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Episode number (required)."},
             },
             ["episode"],
@@ -2327,7 +2327,7 @@ TOOLS = (
             "or when the user asks for the final video. If no final video exists, report that state; "
             "do not synthesize file URLs.",
             {
-                "project_id": {"type": "string", "description": "Defaults to DRAMACLAW_PROJECT_ID."},
+                "project_id": {"type": "string", "description": "Defaults to DRAMAFOUNDRY_PROJECT_ID."},
                 "episode": {"type": "integer", "description": "Episode number (required)."},
             },
             ["episode"],
@@ -2367,7 +2367,7 @@ def register(ctx) -> None:
                 schema=schema,
                 handler=handler,
                 check_fn=_available,
-                requires_env=["DRAMACLAW_API_URL", "DRAMACLAW_AGENT_TOKEN"],
+                requires_env=["DRAMAFOUNDRY_API_URL", "DRAMAFOUNDRY_AGENT_TOKEN"],
                 description=schema["description"],
                 emoji="",
             )

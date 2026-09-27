@@ -3,7 +3,7 @@
 
 # 排错
 
-> 自托管 DramaClaw CE 时的常见故障与排查。先看日志:`docker compose logs -f api`,或本地开发时看 `novelvideo api` 的终端输出。
+> 自托管 DramaFoundry CE 时的常见故障与排查。先看日志:`docker compose logs -f api`,或本地开发时看 `novelvideo api` 的终端输出。
 
 ## 启动类
 
@@ -37,8 +37,8 @@
 | 现象 | 排查 |
 |---|---|
 | **重建后数据没了** | 数据在命名卷 `ce-data`(容器内 `/data`)。`docker compose down` 保留卷,**别加 `-v`**(会删卷)。备份见 [自托管手册](self-hosting.md#5-数据在哪--备份)。 |
-| **`unable to prepare context: path ".../dramaclaw-gateway" not found`** | 源码构建要求网关 checkout 放在本仓旁边。`git clone https://github.com/dramaclaw/dramaclaw-gateway.git ../dramaclaw-gateway`，或在 `.env` 里把 `DRAMACLAW_GATEWAY_SRC` 设成你的 clone 路径或 `https://github.com/dramaclaw/dramaclaw-gateway.git#main`。 |
-| **升级后报配置错误** | 源码构建（`docker-compose.yml`）：`git -C ../dramaclaw-gateway pull && git pull && docker compose up -d --build`。镜像模式（`docker-compose.release.yml`）：`docker compose -f docker-compose.release.yml pull && docker compose -f docker-compose.release.yml up -d`（如果在 `.env` 里钉了 `DRAMACLAW_VERSION` / `DRAMACLAW_GATEWAY_VERSION`，先改版本号）。详见自托管手册 §6。 |
+| **`unable to prepare context: path ".../dramaclaw-gateway" not found`** | 源码构建要求网关 checkout 放在本仓旁边。`git clone https://github.com/dramaclaw/dramaclaw-gateway.git ../dramaclaw-gateway`，或在 `.env` 里把 `DRAMAFOUNDRY_GATEWAY_SRC` 设成你的 clone 路径或 `https://github.com/dramaclaw/dramaclaw-gateway.git#main`。 |
+| **升级后报配置错误** | 源码构建（`docker-compose.yml`）：`git -C ../dramaclaw-gateway pull && git pull && docker compose up -d --build`。镜像模式（`docker-compose.release.yml`）：`docker compose -f docker-compose.release.yml pull && docker compose -f docker-compose.release.yml up -d`（如果在 `.env` 里钉了 `DRAMAFOUNDRY_VERSION` / `DRAMAFOUNDRY_GATEWAY_VERSION`，先改版本号）。详见自托管手册 §6。 |
 
 ## world 特性(3DGS/SHARP)类
 

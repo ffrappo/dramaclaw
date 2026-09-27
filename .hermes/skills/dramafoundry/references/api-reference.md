@@ -1,7 +1,7 @@
 # DramaClaw 虾导 API 快速参考
 
-**Base URL**: `$DRAMACLAW_API_URL/api/v1`
-**认证**: `Authorization: Bearer $DRAMACLAW_AGENT_TOKEN`
+**Base URL**: `$DRAMAFOUNDRY_API_URL/api/v1`
+**认证**: `Authorization: Bearer $DRAMAFOUNDRY_AGENT_TOKEN`
 
 ---
 

@@ -81,7 +81,7 @@ export function PaymentReturnPage() {
     void queryClient.invalidateQueries({ queryKey: queryKeys.creditSummary() });
   }, [order?.order_id, queryClient, state]);
 
-  const returnToDramaClaw = () => {
+  const returnToDramaFoundry = () => {
     const returnPath = safePaymentReturnPath(sessionStorage.getItem(CHECKOUT_RETURN_KEY));
     sessionStorage.setItem(OPEN_CREDIT_CENTER_KEY, "1");
     sessionStorage.setItem(CREDIT_CENTER_TAB_KEY, "orders");
@@ -96,7 +96,7 @@ export function PaymentReturnPage() {
     <div className="flex min-h-full flex-col">
       <button
         type="button"
-        onClick={returnToDramaClaw}
+        onClick={returnToDramaFoundry}
         className="inline-flex h-9 w-fit items-center gap-2 rounded-md px-2 text-sm text-muted-foreground transition-colors hover:bg-white/[0.05] hover:text-foreground"
       >
         <ArrowLeft className="size-4" />
@@ -137,7 +137,7 @@ export function PaymentReturnPage() {
         ) : null}
         <button
           type="button"
-          onClick={returnToDramaClaw}
+          onClick={returnToDramaFoundry}
           className="mt-8 h-11 min-w-44 rounded-md bg-primary px-5 text-sm font-semibold text-primary-foreground hover:bg-primary/90"
         >
           {t("paymentReturn.returnButton")}

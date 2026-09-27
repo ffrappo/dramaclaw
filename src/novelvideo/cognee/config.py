@@ -213,7 +213,7 @@ def _import_cognee_without_logging_takeover():
                 # guard every later setup call.
                 detached_handlers = _detach_cognee_private_file_handlers(logging_utils)
                 logger.warning(
-                    "Cognee was imported before DramaClaw installed its logging "
+                    "Cognee was imported before DramaFoundry installed its logging "
                     "guard; application logging may already have been replaced; "
                     "detached %d private file handler(s)",
                     detached_handlers,
@@ -1334,7 +1334,7 @@ def init_cognee() -> None:
     if cognee_gateway_restart_required():
         raise RuntimeError(
             "模型网关配置已更新，Cognee 仍持有启动时的旧配置；"
-            "请重启 DramaClaw 后再使用小说知识库。"
+            "请重启 DramaFoundry 后再使用小说知识库。"
         )
 
     from novelvideo.model_gateway_runtime import current_model_gateway_context
@@ -1355,7 +1355,7 @@ def init_cognee() -> None:
     )
     if not api_key:
         raise ValueError(
-            "未设置 Cognee LLM Key。请配置 DramaClaw 模型网关；"
+            "未设置 Cognee LLM Key。请配置 DramaFoundry 模型网关；"
             "CE 在设置页配置，EE 通过 NEWAPI_API_KEY 配置。"
         )
 

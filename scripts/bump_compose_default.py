@@ -13,7 +13,7 @@ count).
 
 This repo ships the script but no workflow that calls it: the release
 packaging workflow in the (private) SuperTale repo clones ``main``, bumps
-``DRAMACLAW_VERSION`` and ``DRAMACLAW_GATEWAY_VERSION`` in
+``DRAMAFOUNDRY_VERSION`` and ``DRAMAFOUNDRY_GATEWAY_VERSION`` in
 ``docker-compose.release.yml`` after each published compose bundle, and opens a
 PR here rather than pushing straight to ``main``. Keeping the caller there keeps
 the CE-writing token out of this public repo.
@@ -25,7 +25,7 @@ Exit codes:
     2   ``VAR`` has no ``${VAR:-...}`` default form anywhere in the file
         (nothing is written). Same in both modes — this is a real error,
         e.g. running against ``docker-compose.yml``, which has no
-        ``DRAMACLAW_VERSION`` default (its versions come from the build
+        ``DRAMAFOUNDRY_VERSION`` default (its versions come from the build
         context, not a pulled image tag).
     3   only with ``--check-only``: the default already equals
         <new-default>, so no PR is needed. The file is never written in

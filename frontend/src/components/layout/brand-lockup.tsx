@@ -33,7 +33,7 @@ export function BrandLockup({ value }: {
   return (
     <span className="flex min-w-0 shrink-0 items-center">
       <img
-        src="/brand/dramaclaw-wordmark.png"
+        src="/brand/dramafoundry-wordmark.png"
         alt=""
         aria-hidden="true"
         className="h-[22.7px] w-auto max-w-[113px] object-contain"

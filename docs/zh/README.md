@@ -25,7 +25,7 @@
 
 | 文档 | 内容 |
 |---|---|
-| [功能总览](concepts/features.md) | DramaClaw 能做什么 |
+| [功能总览](concepts/features.md) | DramaFoundry 能做什么 |
 | [架构](concepts/architecture.md) | 系统怎么运作 |
 
 ## 参考

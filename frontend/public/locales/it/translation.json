@@ -25,8 +25,8 @@
     "totalMaxDuration": "Durata totale dei riferimenti: {{actual}} s; massima: {{expected}} s."
   },
   "app": {
-    "title": "SuperTale",
-    "subtitle": "Workbench di generazione candidati e commit degli asset di SuperTale",
+    "title": "DramaFoundry",
+    "subtitle": "Workbench di generazione candidati e commit degli asset di DramaFoundry",
     "updateRequired": {
       "title": "App aggiornata",
       "description": "Questa pagina fa riferimento a un file dell'app scaduto. Aggiorna per caricare l'ultima versione.",
@@ -123,8 +123,8 @@
       "qrAlt": "Codice QR WeChat aziendale",
       "items": {
         "difference": {
-          "question": "In cosa DramaClaw è diverso da un normale generatore di video AI?",
-          "answer": "I normali strumenti ruotano attorno a un singolo prompt, una singola clip o una singola immagine. DramaClaw è costruito attorno a un progetto completo: importazione del testo, creazione degli asset, pianificazione degli episodi, produzione delle inquadrature e composizione finale — un ciclo di produzione tracciabile, collaborativo e riutilizzabile."
+          "question": "In cosa DramaFoundry è diverso da un normale generatore di video AI?",
+          "answer": "I normali strumenti ruotano attorno a un singolo prompt, una singola clip o una singola immagine. DramaFoundry è costruito attorno a un progetto completo: importazione del testo, creazione degli asset, pianificazione degli episodi, produzione delle inquadrature e composizione finale — un ciclo di produzione tracciabile, collaborativo e riutilizzabile."
         },
         "gettingStarted": {
           "question": "Da dove iniziare la prima volta?",
@@ -143,7 +143,7 @@
           "answer": "La causa abituale del lavoro da rifare nei video AI non è la fase di generazione finale — sono i personaggi instabili, le scene vaghe, gli oggetti senza riferimenti e le voci incoerenti a monte. Trasformarli in asset in Shrimp Pond elimina gran parte del caos nella fase delle inquadrature."
         },
         "contentTypes": {
-          "question": "A quali tipi di contenuto è adatto DramaClaw?",
+          "question": "A quali tipi di contenuto è adatto DramaFoundry?",
           "answer": "Webserie AI, drammi a fumetti, promo di romanzi, programmi di commento, pubblicità e video formativi — oltre ai progetti di team che mantengono personaggi IP e contenuti a serie nel tempo. I creatori solitari possono gestire l'intera pipeline; i team possono produrre in modo collaborativo."
         },
         "teamRoles": {
@@ -156,7 +156,7 @@
         },
         "dcUniverse": {
           "question": "Cosa significa \"Make Your DC Universe.\"?",
-          "answer": "DC non è solo l'abbreviazione di DramaClaw — rappresenta anche l'universo di contenuti di ogni singolo creatore. DramaClaw vuole aiutarti a partire da una storia e costruire personaggi, mondo, asset di scena e la capacità di produrre una serie."
+          "answer": "DC non è solo l'abbreviazione di DramaFoundry — rappresenta anche l'universo di contenuti di ogni singolo creatore. DramaFoundry vuole aiutarti a partire da una storia e costruire personaggi, mondo, asset di scena e la capacità di produrre una serie."
         },
         "afterLogin": {
           "question": "Dove arrivo dopo il login?",
@@ -199,12 +199,12 @@
     },
     "fifth": {
       "heading": "Trasforma mille idee in asset",
-      "lead1": "DramaClaw le organizza in una libreria di asset di progetto,",
+      "lead1": "DramaFoundry le organizza in una libreria di asset di progetto,",
       "lead2": "così la generazione delle inquadrature potrà farvi riferimento, mantenerle in un unico punto e ripristinare una versione quando serve."
     },
     "seventh": {
       "heading": "Dai colpi del gacha a una vera pipeline",
-      "lead": "DramaClaw scompone l'incertezza dei video AI su testo, asset, inquadrature e flusso di attività",
+      "lead": "DramaFoundry scompone l'incertezza dei video AI su testo, asset, inquadrature e flusso di attività",
       "steps": {
         "01": {
           "title": "Premessa in ingresso",
@@ -234,7 +234,7 @@
     },
     "eighth": {
       "heading": "Progettato per produzioni complete",
-      "lead": "DramaClaw riguarda il modo in cui una serie continua a essere prodotta: testo in ingresso, coerenza dei personaggi, riuso delle scene, avanzamento delle inquadrature, consegna del team.",
+      "lead": "DramaFoundry riguarda il modo in cui una serie continua a essere prodotta: testo in ingresso, coerenza dei personaggi, riuso delle scene, avanzamento delle inquadrature, consegna del team.",
       "statementTitle": "Protocollo Notte di Passaggio · Sequenza inquadrature 08",
       "statementBody": "Una nave cargo non registrata trascina il segreto di un'intera città nello strato della notte.",
       "decisions": {
@@ -259,7 +259,7 @@
     "ninth": {
       "headingTop": "Una riga, dritta nelle",
       "headingAccent": "inquadrature",
-      "lead": "Non ti serve uno script finito. Dai una direzione e DramaClaw la scompone in personaggi, conflitto, ambientazioni e una catena di inquadrature che puoi continuare a sviluppare.",
+      "lead": "Non ti serve uno script finito. Dai una direzione e DramaFoundry la scompone in personaggi, conflitto, ambientazioni e una catena di inquadrature che puoi continuare a sviluppare.",
       "featuredWork": "L'Arte di Luban",
       "steps": {
         "01": {
@@ -286,7 +286,7 @@
     },
     "twelfth": {
       "heading": "Trasforma una riga in un universo da guardare",
-      "lead": "Dagli un conflitto tra personaggi o un mondo, e lascia che DramaClaw lo scomponga in nodi di inquadratura continuando a svilupparlo",
+      "lead": "Dagli un conflitto tra personaggi o un mondo, e lascia che DramaFoundry lo scomponga in nodi di inquadratura continuando a svilupparlo",
       "primaryCta": "Inizia a creare",
       "secondaryCta": "Richiedi un account"
     },
@@ -299,7 +299,7 @@
     },
     "second": {
       "title": "Dall'idea al progetto",
-      "subtitle": "In DramaClaw, creare non si ferma più a un prompt e a un risultato"
+      "subtitle": "In DramaFoundry, creare non si ferma più a un prompt e a un risultato"
     },
     "third": {
       "title": "La storia come punto di partenza",
@@ -341,8 +341,8 @@
       "eyebrow": "Interfaccia",
       "title": "Una pipeline guidata e una canvas libera",
       "lede": "La linea principale suddivide un romanzo in episodi, personaggi, storyboard, primi frame, video e montaggio finale, con una pagina per ogni fase. La canvas proietta qualsiasi inquadratura su un grafo di nodi, dove puoi rielaborarla liberamente e sincronizzare il risultato. Entrambe leggono dagli stessi asset.",
-      "windowTitle": "DramaClaw — Episodio 03 · Canvas",
-      "alt": "Schizzo della canvas desktop di DramaClaw: schede degli episodi in alto, struttura delle inquadrature a sinistra, canvas dei nodi al centro, pannello dei parametri a destra.",
+      "windowTitle": "DramaFoundry — Episodio 03 · Canvas",
+      "alt": "Schizzo della canvas desktop di DramaFoundry: schede degli episodi in alto, struttura delle inquadrature a sinistra, canvas dei nodi al centro, pannello dei parametri a destra.",
       "caption": "Illustrazione (vista canvas)"
     },
     "capability": {
@@ -408,7 +408,7 @@
       },
       "v120": {
         "title": "Crediti per le funzionalità trasparenti, benvenuti agli agenti esterni",
-        "description": "Prezzi delle funzionalità, addebiti stimati e cronologia di utilizzo sono in un unico posto, e agenti locali come Claude Code possono pilotare DramaClaw CE tramite MCP."
+        "description": "Prezzi delle funzionalità, addebiti stimati e cronologia di utilizzo sono in un unico posto, e agenti locali come Claude Code possono pilotare DramaFoundry CE tramite MCP."
       }
     },
     "faq": {
@@ -417,7 +417,7 @@
       "items": {
         "macGatekeeper": {
           "question": "macOS dice che lo sviluppatore non può essere verificato. Cosa fare?",
-          "answer": "Trova DramaClaw nel Finder → Applicazioni, fai clic tenendo premuto Ctrl sull'icona, scegli Apri, poi conferma con Apri nella finestra di dialogo. Devi farlo solo una volta; dopo partirà normalmente."
+          "answer": "Trova DramaFoundry nel Finder → Applicazioni, fai clic tenendo premuto Ctrl sull'icona, scegli Apri, poi conferma con Apri nella finestra di dialogo. Devi farlo solo una volta; dopo partirà normalmente."
         },
         "winSmartScreen": {
           "question": "Windows dice che ha protetto il mio PC. Cosa fare adesso?",
@@ -439,7 +439,7 @@
         "openSource": {
           "question": "È open source?",
           "answer": "È distribuito con licenza Elastic-2.0: usa, modifica ed esegui in self-hosting liberamente, ma non rivenderlo come servizio ospitato. Il codice sorgente si trova su",
-          "linkLabel": "github.com/dramaclaw/dramaclaw"
+          "linkLabel": "dramafoundry.fornace.net"
         }
       }
     },
@@ -870,7 +870,7 @@
     "ingestAutomationMissingFile": "Impossibile leggere il file del romanzo caricato. Selezionalo di nuovo.",
     "attachmentOnlyPrompt": "Analizza il file che ho caricato, per favore.",
     "attachmentAnalysisUploading": "Caricamento del file per l'analisi: {{filename}}",
-    "settingsHint": "Account e accesso sono gestiti da SuperTale. Queste impostazioni controllano solo la visualizzazione della chat e il comportamento degli allegati.",
+    "settingsHint": "Account e accesso sono gestiti da DramaFoundry. Queste impostazioni controllano solo la visualizzazione della chat e il comportamento degli allegati.",
     "scrollToBottom": "Torna in fondo",
     "taskCompleteNotice": "✅ {{label}} completato. Chiedimi di mostrare il risultato o passa al passaggio successivo.",
     "taskFailedNotice": "{{label}} non riuscito: {{reason}}\nCorreggi ciò che indica l'errore prima di continuare.",
@@ -1672,8 +1672,8 @@
     "retryQuote": "Aggiorna il preventivo"
   },
   "paymentReturn": {
-    "back": "Torna a DramaClaw",
-    "returnButton": "Torna a DramaClaw",
+    "back": "Torna a DramaFoundry",
+    "returnButton": "Torna a DramaFoundry",
     "orderNumber": "Numero ordine commerciante",
     "retry": "Verifica di nuovo",
     "states": {
@@ -1683,7 +1683,7 @@
       },
       "credited": {
         "title": "Crediti aggiunti",
-        "description": "Sia il pagamento che l'accredito dei crediti sono stati confermati dal server. Puoi tornare a DramaClaw."
+        "description": "Sia il pagamento che l'accredito dei crediti sono stati confermati dal server. Puoi tornare a DramaFoundry."
       },
       "closed": {
         "title": "Ordine chiuso",
@@ -2122,8 +2122,8 @@
       "noAccount": "Ti serve un account?",
       "applyAccount": "Richiedi l'accesso",
       "otpRegistration": "Il primo accesso verificato con il telefono crea automaticamente un account",
-      "showcaseLabel": "Showcase DramaClaw",
-      "showcaseEyebrow": "CREATO CON DRAMACLAW",
+      "showcaseLabel": "Showcase DramaFoundry",
+      "showcaseEyebrow": "CREATO CON DRAMAFOUNDRY",
       "showcaseMeta": "Produzione in movimento",
       "showcaseTitle": "Immaginazione a tutta velocità",
       "showcaseDescription": "Personaggi, storyboard, audio e inquadrature avanzano in un'unica linea di produzione"
@@ -2189,7 +2189,7 @@
     },
     "community": {
       "label": "Opere della community",
-      "heading": "DramaClaw TV",
+      "heading": "DramaFoundry TV",
       "likes": "{{count}} mi piace",
       "openWork": "Apri l'opera \"{{title}}\"",
       "works": {
@@ -2781,7 +2781,7 @@
     "novelFormat": {
       "button": "Guida al formato premium drama",
       "title": "Formato premium drama",
-      "intro": "Gli script premium drama richiedono limiti espliciti di episodio e scena. DramaClaw suddivide lo script in base alle intestazioni di scena prima di generare visivi, dialoghi e audio riga per riga; non inventa interruzioni di scena per prosa senza intestazioni.",
+      "intro": "Gli script premium drama richiedono limiti espliciti di episodio e scena. DramaFoundry suddivide lo script in base alle intestazioni di scena prima di generare visivi, dialoghi e audio riga per riga; non inventa interruzioni di scena per prosa senza intestazioni.",
       "standardStatus": "Standard · pronto per l'importazione",
       "standardStatusHint": "Sono supportati diversi formati del settore. I metadati completi di luogo, ora e INT/EXT possono essere analizzati in modo affidabile.",
       "warningStatus": "Riparabile · importazione consentita",
@@ -4852,7 +4852,7 @@
           "style": {
             "label": "Stile",
             "options": {
-              "supertale_production": "Produzione SuperTale",
+              "supertale_production": "Produzione DramaFoundry",
               "cinematic_realistic": "Cinematografico realistico",
               "clean_sketch": "Schizzo pulito",
               "spiderverse_mixed": "Tecnica mista"
@@ -7059,7 +7059,7 @@
         "mediaCatalogCheckFailed": "Impossibile verificare il catalogo dei modelli media ufficiali. Riprova più tardi."
       },
       "custom": {
-        "description": "CE utilizza un NewAPI locale basato su SQLite. DramaClaw collega il database, crea un token di runtime e attiva automaticamente il canale locale.",
+        "description": "CE utilizza un NewAPI locale basato su SQLite. DramaFoundry collega il database, crea un token di runtime e attiva automaticamente il canale locale.",
         "init": "Inizializza NewAPI locale",
         "repair": "Verifica e ripara",
         "initialized": "Il NewAPI locale è pronto.",
@@ -7078,7 +7078,7 @@
         "setupConfirmPassword": "Conferma password",
         "setupPasswordPlaceholder": "Almeno 8 caratteri",
         "setupConfirmPasswordPlaceholder": "Inseriscila di nuovo",
-        "setupPasswordOnlyOnce": "Questo nome utente e questa password vengono inviati alla tua istanza NewAPI solo quando crei il primo amministratore su una nuova installazione di NewAPI. Se NewAPI è già inizializzato, inserire una password qui non modificherà la password esistente dell'amministratore. DramaClaw non salva la password né la utilizza per operazioni successive; conservala per accedere alla console di amministrazione di NewAPI dopo la configurazione iniziale.",
+        "setupPasswordOnlyOnce": "Questo nome utente e questa password vengono inviati alla tua istanza NewAPI solo quando crei il primo amministratore su una nuova installazione di NewAPI. Se NewAPI è già inizializzato, inserire una password qui non modificherà la password esistente dell'amministratore. DramaFoundry non salva la password né la utilizza per operazioni successive; conservala per accedere alla console di amministrazione di NewAPI dopo la configurazione iniziale.",
         "setupRequired": "Il NewAPI locale non è ancora stato inizializzato. Inserisci la password di configurazione e la conferma, poi riprova.",
         "setupAlreadyInitializedPasswordIgnored": "La tua istanza NewAPI è già inizializzata. Questa esecuzione non ha chiamato l'endpoint di configurazione di NewAPI e non ha modificato la password esistente dell'amministratore; la password inserita è stata ignorata e cancellata.",
         "setupPasswordMissingUsername": "Inserisci il nome utente amministratore.",
@@ -7441,7 +7441,7 @@
     "missingAnyApiKeyMessage": "Il provider di backend non è configurato.",
     "openProvidersSettings": "Visualizza provider",
     "aboutAppName": "Beat Workbench",
-    "aboutIntro": "Workbench per la generazione di candidati SuperTale, la sperimentazione libera di immagini e il commit degli asset.",
+    "aboutIntro": "Workbench per la generazione di candidati DramaFoundry, la sperimentazione libera di immagini e il commit degli asset.",
     "aboutVersionLabel": "Versione",
     "aboutVersionUnknown": "Sconosciuta",
     "aboutAuthorLabel": "Autore",

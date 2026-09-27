@@ -1,7 +1,7 @@
 """Project-scoped Ladybug read/write access for Cognee.
 
 Ladybug permits either one read-write ``Database`` object or multiple read-only
-``Database`` objects for the same on-disk database.  DramaClaw writes the graph
+``Database`` objects for the same on-disk database.  DramaFoundry writes the graph
 only while importing a novel; all later graph operations are read-only.
 
 This module bridges that lifecycle into Cognee 1.0.x, whose Ladybug adapter
@@ -54,7 +54,7 @@ _project_context_patch_installed = False
 _process_writer_lock = Lock()
 _json_extension_install_lock = Lock()
 _json_extension_lock_path = (
-    Path(tempfile.gettempdir()) / "dramaclaw-ladybug-json-extension.lock"
+    Path(tempfile.gettempdir()) / "dramafoundry-ladybug-json-extension.lock"
 )
 
 
@@ -76,7 +76,7 @@ def install_cognee_project_context_patch() -> None:
     """Add task-local base/relational storage routing to Cognee 1.0.5.
 
     Cognee already scopes graph, vector, and file storage with ContextVars, but
-    its base and relational configurations are process-global. DramaClaw keeps
+    its base and relational configurations are process-global. DramaFoundry keeps
     a complete Cognee database under each project, so concurrent reads need the
     two missing project-local configuration layers as well.
     """
@@ -89,7 +89,7 @@ def install_cognee_project_context_patch() -> None:
         installed_version = version("cognee")
         if installed_version != "1.0.5":
             raise RuntimeError(
-                "DramaClaw's project-scoped Cognee patch only supports cognee==1.0.5; "
+                "DramaFoundry's project-scoped Cognee patch only supports cognee==1.0.5; "
                 f"found {installed_version}"
             )
 
@@ -297,7 +297,7 @@ def _install_ladybug_json_extension(database_class: type, connection_class: type
         _json_extension_lock_path.parent.mkdir(parents=True, exist_ok=True)
         with portalocker.Lock(str(_json_extension_lock_path), timeout=120):
             with tempfile.TemporaryDirectory(
-                prefix="dramaclaw-ladybug-json-"
+                prefix="dramafoundry-ladybug-json-"
             ) as temp_dir:
                 extension_db = None
                 extension_connection = None

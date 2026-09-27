@@ -58,7 +58,7 @@ class HermesDrainingError(RuntimeError):
 
 
 def _load_api_url() -> str:
-    explicit = os.environ.get("DRAMACLAW_API_URL", "").strip()
+    explicit = os.environ.get("DRAMAFOUNDRY_API_URL", "").strip()
     if explicit:
         return explicit.rstrip("/")
 
@@ -73,7 +73,7 @@ def _load_api_url() -> str:
             host = "127.0.0.1"
         return f"http://{host}:{api_port}"
 
-    legacy = os.environ.get("SUPERTALE_API_URL", "").strip()
+    legacy = os.environ.get("DRAMAFOUNDRY_API_URL", "").strip()
     if legacy:
         return legacy.rstrip("/")
 
@@ -158,7 +158,7 @@ class _ManagedHermesThread:
 class HermesPool:
     """Process-wide pool of per-user hermes workers.
 
-    Single instance per DramaClaw process (see ``pool`` singleton at module bottom).
+    Single instance per DramaFoundry process (see ``pool`` singleton at module bottom).
     """
 
     def __init__(
@@ -528,16 +528,16 @@ class HermesPool:
             )
             require_project_home_node(ctx, operation="resolve hermes project files")
             return {
-                "DRAMACLAW_PROJECT_NAME": ctx.project_name,
-                "DRAMACLAW_PROJECT_OWNER": ctx.owner_username,
-                "DRAMACLAW_PROJECT_OUTPUT_DIR": str(ctx.output_dir),
-                "DRAMACLAW_PROJECT_STATE_DIR": str(ctx.state_dir),
-                "DRAMACLAW_PROJECT_RUNTIME_DIR": str(ctx.runtime_dir),
-                "SUPERTALE_PROJECT_NAME": ctx.project_name,
-                "SUPERTALE_PROJECT_OWNER": ctx.owner_username,
-                "SUPERTALE_PROJECT_OUTPUT_DIR": str(ctx.output_dir),
-                "SUPERTALE_PROJECT_STATE_DIR": str(ctx.state_dir),
-                "SUPERTALE_PROJECT_RUNTIME_DIR": str(ctx.runtime_dir),
+                "DRAMAFOUNDRY_PROJECT_NAME": ctx.project_name,
+                "DRAMAFOUNDRY_PROJECT_OWNER": ctx.owner_username,
+                "DRAMAFOUNDRY_PROJECT_OUTPUT_DIR": str(ctx.output_dir),
+                "DRAMAFOUNDRY_PROJECT_STATE_DIR": str(ctx.state_dir),
+                "DRAMAFOUNDRY_PROJECT_RUNTIME_DIR": str(ctx.runtime_dir),
+                "DRAMAFOUNDRY_PROJECT_NAME": ctx.project_name,
+                "DRAMAFOUNDRY_PROJECT_OWNER": ctx.owner_username,
+                "DRAMAFOUNDRY_PROJECT_OUTPUT_DIR": str(ctx.output_dir),
+                "DRAMAFOUNDRY_PROJECT_STATE_DIR": str(ctx.state_dir),
+                "DRAMAFOUNDRY_PROJECT_RUNTIME_DIR": str(ctx.runtime_dir),
             }
         except Exception as exc:
             _log.warning(
@@ -576,14 +576,14 @@ class HermesPool:
             if not requester_user_id:
                 raise EgressBoundaryError("TASK_ENVELOPE_INVALID")
             agent_token_env = {
-                "DRAMACLAW_AGENT_TOKEN": token.value,
-                "DRAMACLAW_AGENT_TOKEN_TYPE": "Bearer",
-                "DRAMACLAW_AGENT_TOKEN_SESSION_ID": token.session_id,
-                "DRAMACLAW_AGENT_TOKEN_EXPIRES_AT": str(token.exp),
-                "SUPERTALE_AGENT_TOKEN": token.value,
-                "SUPERTALE_AGENT_TOKEN_TYPE": "Bearer",
-                "SUPERTALE_AGENT_TOKEN_SESSION_ID": token.session_id,
-                "SUPERTALE_AGENT_TOKEN_EXPIRES_AT": str(token.exp),
+                "DRAMAFOUNDRY_AGENT_TOKEN": token.value,
+                "DRAMAFOUNDRY_AGENT_TOKEN_TYPE": "Bearer",
+                "DRAMAFOUNDRY_AGENT_TOKEN_SESSION_ID": token.session_id,
+                "DRAMAFOUNDRY_AGENT_TOKEN_EXPIRES_AT": str(token.exp),
+                "DRAMAFOUNDRY_AGENT_TOKEN": token.value,
+                "DRAMAFOUNDRY_AGENT_TOKEN_TYPE": "Bearer",
+                "DRAMAFOUNDRY_AGENT_TOKEN_SESSION_ID": token.session_id,
+                "DRAMAFOUNDRY_AGENT_TOKEN_EXPIRES_AT": str(token.exp),
             }
             return build_hermes_child_env(
                 home=home,
@@ -603,25 +603,25 @@ class HermesPool:
             "HOME": str(home),
             "HERMES_HOME": str(home),
             "TMPDIR": str(home / "tmp"),
-            "DRAMACLAW_USER": username,
-            "DRAMACLAW_AGENT_TOKEN": token.value,
-            "DRAMACLAW_AGENT_TOKEN_TYPE": "Bearer",
-            "DRAMACLAW_AGENT_TOKEN_SESSION_ID": token.session_id,
-            "DRAMACLAW_AGENT_TOKEN_EXPIRES_AT": str(token.exp),
-            "DRAMACLAW_API_URL": self._api_url,
-            "SUPERTALE_USER": username,
-            "SUPERTALE_AGENT_TOKEN": token.value,
-            "SUPERTALE_AGENT_TOKEN_TYPE": "Bearer",
-            "SUPERTALE_AGENT_TOKEN_SESSION_ID": token.session_id,
-            "SUPERTALE_AGENT_TOKEN_EXPIRES_AT": str(token.exp),
-            "SUPERTALE_API_URL": self._api_url,
+            "DRAMAFOUNDRY_USER": username,
+            "DRAMAFOUNDRY_AGENT_TOKEN": token.value,
+            "DRAMAFOUNDRY_AGENT_TOKEN_TYPE": "Bearer",
+            "DRAMAFOUNDRY_AGENT_TOKEN_SESSION_ID": token.session_id,
+            "DRAMAFOUNDRY_AGENT_TOKEN_EXPIRES_AT": str(token.exp),
+            "DRAMAFOUNDRY_API_URL": self._api_url,
+            "DRAMAFOUNDRY_USER": username,
+            "DRAMAFOUNDRY_AGENT_TOKEN": token.value,
+            "DRAMAFOUNDRY_AGENT_TOKEN_TYPE": "Bearer",
+            "DRAMAFOUNDRY_AGENT_TOKEN_SESSION_ID": token.session_id,
+            "DRAMAFOUNDRY_AGENT_TOKEN_EXPIRES_AT": str(token.exp),
+            "DRAMAFOUNDRY_API_URL": self._api_url,
         }
         if project_id:
-            env["DRAMACLAW_PROJECT_ID"] = project_id
-            env["DRAMACLAW_PROJECT"] = project_id
-            env["SUPERTALE_PROJECT_ID"] = project_id
+            env["DRAMAFOUNDRY_PROJECT_ID"] = project_id
+            env["DRAMAFOUNDRY_PROJECT"] = project_id
+            env["DRAMAFOUNDRY_PROJECT_ID"] = project_id
             # Backward-compatible alias for older skill references.
-            env["SUPERTALE_PROJECT"] = project_id
+            env["DRAMAFOUNDRY_PROJECT"] = project_id
         if project_env:
             env.update(project_env)
         api_key, _base_url = effective_gateway_credentials()

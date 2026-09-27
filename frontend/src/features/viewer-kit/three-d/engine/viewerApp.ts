@@ -1642,7 +1642,7 @@ export async function createViewerApp(options: ViewerAppOptions): Promise<Viewer
         translateGizmoCreateFailed = true;
         return null;
       }
-      translateGizmoLayer = GizmoCtor.createLayer(app, 'SuperTale Translate Gizmo');
+      translateGizmoLayer = GizmoCtor.createLayer(app, 'DramaFoundry Translate Gizmo');
       const gizmo = new TranslateGizmoCtor(camera.camera, translateGizmoLayer);
       gizmo.coordSpace = 'world';
       gizmo.size = 1.08;

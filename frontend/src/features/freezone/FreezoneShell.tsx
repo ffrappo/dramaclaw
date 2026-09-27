@@ -394,7 +394,7 @@ function stringOrUndefined(value: unknown): string | undefined {
 }
 
 /**
- * Mounts the shared xyflow canvas inside the SuperTale Beat Workbench shell.
+ * Mounts the shared xyflow canvas inside the DramaFoundry Beat Workbench shell.
  * Canvas switching lives inside the left AssetLibraryPanel (主线资产 / 画布 tabs).
  * Commit still lives on eligible canvas nodes. Sync status is
  * intentionally not shown — `useCanvasSync` still loads + persists via

@@ -2,7 +2,7 @@
 
 Standalone React SPA for SuperTale — the original creator frontend for the novel-to-video pipeline. Replaces the in-repo NiceGUI UI shipped from [`supertale-be`](https://github.com/claymorelab/SuperTale) and talks to its REST API exclusively.
 
-This is the "traditional web UI" generation of SuperTale. The next-gen chat-driven pipeline lives in `superchat` + `dramaclaw`.
+This is the "traditional web UI" generation of DramaFoundry. The next-gen chat-driven pipeline lives in `superchat`.
 
 ## Stack
 
@@ -100,10 +100,10 @@ Hosted on Cloudflare Workers across four tag-driven environments:
 
 | Env | URL | Trigger |
 | --- | --- | --- |
-| dev     | <https://tale-dev.dramaclaw.ai>     | push to `main` |
-| test    | <https://tale-test.dramaclaw.ai>    | push tag `vX.Y.Z` |
-| preview | <https://tale-preview.dramaclaw.ai> | `gh workflow run deploy.yml -f action=preview -f version=vX.Y.Z` (shadow-prod, Zero Trust gated) |
-| prod    | <https://tale.dramaclaw.ai>         | `gh workflow run deploy.yml -f action=promote-prod -f version=vX.Y.Z` (5% canary, manual ramp) |
+| dev     | internal: docker compose on the Hetzner box     | push to `main` |
+| test    | internal    | push tag `vX.Y.Z` |
+| preview | internal | `gh workflow run deploy.yml -f action=preview -f version=vX.Y.Z` (shadow-prod, Zero Trust gated) |
+| prod    | https://dramafoundry.fornace.net         | `gh workflow run deploy.yml -f action=promote-prod -f version=vX.Y.Z` (5% canary, manual ramp) |
 
 Full runbook — secrets setup, canary ramp/rollback, Cloudflare Zero Trust config, version-stamping recipe, caveats — in [`DEPLOY.md`](./DEPLOY.md).
 
@@ -118,7 +118,7 @@ Full runbook — secrets setup, canary ramp/rollback, Cloudflare Zero Trust conf
 ## Related repos
 
 - [`claymorelab/SuperTale`](https://github.com/claymorelab/SuperTale) — `supertale-be`, FastAPI + NovelVideo pipeline
-- `dramaclaw` / `superchat` — next-gen chat-driven creator pipeline (internal)
+- `superchat` — next-gen chat-driven creator pipeline
 
 ## Local multi-region dev
 

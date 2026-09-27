@@ -342,7 +342,7 @@ export function CheckoutPage() {
             </div>
           </div>
 
-          <div className="text-xs text-white/28">DramaClaw · Secure checkout</div>
+          <div className="text-xs text-white/28">DramaFoundry · Secure checkout</div>
         </section>
 
         <section className="flex items-center px-6 py-10 lg:px-12 xl:px-20">

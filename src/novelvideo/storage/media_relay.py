@@ -659,7 +659,7 @@ def _normalize_ai_reference_image(
             normalized = buffer.getvalue()
     except (UnidentifiedImageError, OSError, ValueError) as exc:
         logger.info(
-            "DramaClawAPI reference image normalize skipped: ext=%s bytes=%d error=%s",
+            "DramaFoundryAPI reference image normalize skipped: ext=%s bytes=%d error=%s",
             original_ext,
             len(data),
             exc,
@@ -667,7 +667,7 @@ def _normalize_ai_reference_image(
         return data, original_ext
 
     logger.info(
-        "DramaClawAPI reference image normalized: %s %dx%d %s %.1fKB -> "
+        "DramaFoundryAPI reference image normalized: %s %dx%d %s %.1fKB -> "
         "JPEG %dx%d RGB %.1fKB q=%d",
         original_format,
         original_size[0],

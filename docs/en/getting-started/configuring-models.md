@@ -3,7 +3,7 @@
 
 # Configuring Models
 
-DramaClaw CE uses a NewAPI-compatible gateway for text, vision, embedding, image, video, and audio models. Model settings are stored in the local CE `settings.db`. Secrets are never returned to the browser; only masked saved-state previews are shown.
+DramaFoundry CE uses a NewAPI-compatible gateway for text, vision, embedding, image, video, and audio models. Model settings are stored in the local CE `settings.db`. Secrets are never returned to the browser; only masked saved-state previews are shown.
 
 After startup, open `http://localhost:8080` and go to **Settings → Models & Channels**. The “Active” badge at the top shows the actual runtime mode, not merely the tab currently being viewed.
 
@@ -25,7 +25,7 @@ Official mode is the shortest setup path:
 2. Enter your RelayClaw DC Key.
 3. Click **Save & Enable**.
 
-DramaClaw manages the official gateway URL. RelayClaw already provides the `DC-*-LLM`, `DC-cognee-embedding`, and official media model mappings, so CE-side upstream mappings are unnecessary.
+DramaFoundry manages the official gateway URL. RelayClaw already provides the `DC-*-LLM`, `DC-cognee-embedding`, and official media model mappings, so CE-side upstream mappings are unnecessary.
 
 The official image/video list and its resolutions, aspect ratios, durations, and reference-media capabilities come from the bundled `src/novelvideo/official_media_models.json`.
 
@@ -33,10 +33,10 @@ The official image/video list and its resolutions, aspect ratios, durations, and
 
 Official and Local + Official Hybrid modes show the current catalog version, model count, and source:
 
-- Click **Check for Updates** to fetch the latest catalog from DramaClaw's official publishing URL and apply it immediately.
+- Click **Check for Updates** to fetch the latest catalog from DramaFoundry's official publishing URL and apply it immediately.
 - **Automatically update the official model catalog** is off by default. When enabled, the backend checks every five minutes by default and also checks immediately when the corresponding settings panel opens.
 - Downloaded catalogs are stored locally at `state/local/official_media_models.json` and remain active after restart.
-- DramaClaw rejects a remote catalog older than the active version. After an application upgrade, a newer bundled catalog takes precedence over an older local cache.
+- DramaFoundry rejects a remote catalog older than the active version. After an application upgrade, a newer bundled catalog takes precedence over an older local cache.
 - After a successful update, an open XiaHua browser observes the catalog status every minute while automatic updates are enabled and refreshes its image and video model lists when the content SHA256 changes.
 - The status API reports the active content SHA256, publishing Git revision, publication time, remote URL, and latest update error so each instance can be audited.
 
@@ -63,9 +63,9 @@ Use the repository compose file (the bundled NewAPI is always part of it):
 docker compose up -d
 ```
 
-It starts the DramaClaw API, web frontend, and bundled NewAPI. DramaClaw normally reaches NewAPI through the container network. The browser-facing host port may differ and does not need to replace the internal URL.
+It starts the DramaFoundry API, web frontend, and bundled NewAPI. DramaFoundry normally reaches NewAPI through the container network. The browser-facing host port may differ and does not need to replace the internal URL.
 
-The repository compose file enables the setup and channel-management features required by the settings UI. The bundled NewAPI SQLite database is stored in the Compose `newapi-data` volume. Its path is `/data/one-api.db` inside the NewAPI container, while the DramaClaw API manages it through the shared `/newapi-data/one-api.db` mount. Normally you do not enter a SQLite path or DSN manually.
+The repository compose file enables the setup and channel-management features required by the settings UI. The bundled NewAPI SQLite database is stored in the Compose `newapi-data` volume. Its path is `/data/one-api.db` inside the NewAPI container, while the DramaFoundry API manages it through the shared `/newapi-data/one-api.db` mount. Normally you do not enter a SQLite path or DSN manually.
 
 ### 2. Initialize Local NewAPI
 
@@ -81,20 +81,20 @@ Initialization:
 - Stores the runtime URL and token in CE local settings.
 - Verifies the SQLite database and management access.
 
-DramaClaw does not store the root password. Keep it for signing in to NewAPI. Entering a password for an already initialized instance does not reset the existing password.
+DramaFoundry does not store the root password. Keep it for signing in to NewAPI. Entering a password for an already initialized instance does not reset the existing password.
 
 ### 3. Apply the recommended profile
 
 After initialization, start with **Recommended**. One profile configures:
 
 - Provider channels and upstream keys.
-- DramaClaw feature-model mappings.
+- DramaFoundry feature-model mappings.
 - Cognee embedding model, dimensions, and batch size.
 - Image, video, and audio model mappings.
 
 Enter each provider key separately, then click **Save & Apply All**. Keys are stored separately and never written into profile JSON. Leave an already saved key blank; entering a new value replaces it.
 
-The current recommended template includes OpenRouter, VolcEngine, fal.ai, and DoubaoAudio. The recommended speech mapping keeps `index-tts-2` as DramaClaw's model ID while routing it through the DoubaoAudio channel to the upstream `seed-audio-1.0` model.
+The current recommended template includes OpenRouter, VolcEngine, fal.ai, and DoubaoAudio. The recommended speech mapping keeps `index-tts-2` as DramaFoundry's model ID while routing it through the DoubaoAudio channel to the upstream `seed-audio-1.0` model.
 
 The built-in recommended profile is read-only. Switch to **My Config** to edit and persist your own JSON. The main shape is:
 
@@ -160,7 +160,7 @@ After a profile is saved, a channel key should show “Saved” and a masked pre
 
 #### Feature models
 
-DramaClaw uses stable logical names such as `DC-character-builder-LLM`, `DC-scene-builder-LLM` and `DC-freezone-vision-LLM`. In Custom mode, keep those internal names and map them to real upstream models in NewAPI.
+DramaFoundry uses stable logical names such as `DC-character-builder-LLM`, `DC-scene-builder-LLM` and `DC-freezone-vision-LLM`. In Custom mode, keep those internal names and map them to real upstream models in NewAPI.
 
 - Text features can use text-only models.
 - Vision features send images or video and require a suitable multimodal model.
@@ -195,7 +195,7 @@ Media model configuration controls:
 
 Built-in mainline models provide the default capability baseline and cannot be removed from the configuration. My Config may add image or video models and edit custom-model capabilities. Save the complete configuration and refresh XiaHua to load the latest catalog and controls.
 
-The **Model ID** is DramaClaw’s stable identifier. **Upstream Model** is the actual model used by the NewAPI channel; the two may differ.
+The **Model ID** is DramaFoundry’s stable identifier. **Upstream Model** is the actual model used by the NewAPI channel; the two may differ.
 
 ### 5. ComfyUI Configuration
 
@@ -205,14 +205,14 @@ Click **Manage Channels** and add ComfyUI from the provider catalog to reveal th
 
 Each ComfyUI channel configuration needs:
 
-- One model name used by DramaClaw. It is registered in Local NewAPI and displayed in XiaHua.
+- One model name used by DramaFoundry. It is registered in Local NewAPI and displayed in XiaHua.
 - The ComfyUI service URL; the local default is `http://127.0.0.1:8188`.
 - One or more workflows. Each workflow has a unique **Workflow ID** and a ComfyUI **API Format Workflow JSON** export; browser workflow JSON is not accepted.
 - Media capabilities for the model, including modes, ratios, resolutions, durations, and reference-media limits.
 
 A normal local ComfyUI instance does not require an API key, so leave it empty. Authentication is relevant only when ComfyUI is placed behind an authenticated proxy.
 
-One model name can bind multiple workflows. DramaClaw saves the model name, Workflow IDs, and Workflow JSON to NewAPI, while RelayClaw selects the workflow for each request. XiaHua displays one unified model rather than one model per workflow.
+One model name can bind multiple workflows. DramaFoundry saves the model name, Workflow IDs, and Workflow JSON to NewAPI, while RelayClaw selects the workflow for each request. XiaHua displays one unified model rather than one model per workflow.
 
 The MiniMax H3 template uses the model name `MiniMax-H3-local` and includes text-to-video, first-frame, and all-reference workflows. Its initial media capabilities enable those three modes, resolutions `480p`, `768p`, and `1080p`, and ratios `21:9`, `16:9`, `4:3`, `1:1`, `3:4`, and `9:16`. These are starter values and remain editable in media model capabilities.
 
@@ -233,7 +233,7 @@ The ComfyUI API key is optional. Workflows must use API Format, not the browser 
 
 While the ComfyUI channel exists, the MiniMax H3 template button remains in that channel's **ComfyUI Workflows** area so missing templates can be restored. Loading it again merges the templates into existing workflows and preserves user-configured workflows with the same Workflow IDs. If the ComfyUI URL is empty, the UI fills `http://127.0.0.1:8188`; it does not replace a non-empty custom URL.
 
-Routing is based on model ID. A Local ComfyUI model may appear in XiaHua as a new model; if it shares an ID with an official video model, the local model overrides that official model. All other models continue through RelayClaw. Saving video configuration persists the ComfyUI channel first and then its media models. DramaClaw does not automatically fall back to the official model after a local failure. The user chooses whether to retry or switch models. Hybrid mode manages Local ComfyUI video models only, so it does not require OpenRouter, VolcEngine, or other official upstream provider settings.
+Routing is based on model ID. A Local ComfyUI model may appear in XiaHua as a new model; if it shares an ID with an official video model, the local model overrides that official model. All other models continue through RelayClaw. Saving video configuration persists the ComfyUI channel first and then its media models. DramaFoundry does not automatically fall back to the official model after a local failure. The user chooses whether to retry or switch models. Hybrid mode manages Local ComfyUI video models only, so it does not require OpenRouter, VolcEngine, or other official upstream provider settings.
 
 ## Reference media storage
 
@@ -251,7 +251,7 @@ Provide a Bucket and an AccessKey with read/write permission for that Bucket. A 
 | AccessKey Secret | `OSS_RELAY_SK` | Matching SK |
 | TTL | `MEDIA_RELAY_TTL_SECONDS` | Default: 1800 seconds |
 
-The Bucket does not need public-read access. DramaClaw generates temporary signed URLs for upstream access.
+The Bucket does not need public-read access. DramaFoundry generates temporary signed URLs for upstream access.
 
 ### Cloudinary
 
@@ -271,7 +271,7 @@ Enter Cloud name, API Key, API Secret, and an optional folder. Find them under *
 | Knowledge-graph embedding fails | Check the key, upstream model, dimensions, and batch size. HTTP 429 means upstream rate limiting. |
 | Reference media cannot be read | Verify media storage and that the upstream service can reach the temporary public URL. |
 | Hybrid local video fails without official fallback | Expected: Hybrid mode has no automatic failure fallback. |
-| ComfyUI cannot connect to `127.0.0.1:8188` | `127.0.0.1` means the environment running the DramaClaw backend. For containers or remote deployments, use a host or LAN address reachable from that backend. |
+| ComfyUI cannot connect to `127.0.0.1:8188` | `127.0.0.1` means the environment running the DramaFoundry backend. For containers or remote deployments, use a host or LAN address reachable from that backend. |
 | A MiniMax H3 workflow reports missing nodes or models | Install the custom nodes and model files referenced by the recommended workflow, then adjust the workflow for local filenames and versions. |
 
 ## Related files

@@ -16,7 +16,7 @@ interface Props {
 
 // 把 workflow_default_id 映射到 (短词, commit 后晋升的节点 id)。
 //
-// **必须跟 `SuperTale/src/novelvideo/freezone/presets.py` 里实际 emit 的
+// **必须跟 `DramaFoundry/src/novelvideo/freezone/presets.py` 里实际 emit 的
 // `workflow_default_id=...` 完全对齐**(line 3603/3628/3653/3678/3703 附近)。
 // 用 exact-match 字典而非前缀/后缀模糊匹配 — preset 改名时立刻 silent miss
 // 而不是误匹配到错的槽位文案。

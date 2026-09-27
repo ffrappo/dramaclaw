@@ -26,8 +26,8 @@ from typing import Iterable
 _log = logging.getLogger(__name__)
 
 # SuperTale repo root: src/novelvideo/security/sandbox_wrap.py → parents[3]
-SUPERTALE_ROOT = Path(__file__).resolve().parents[3]
-SANDBOX_PROFILES_DIR = SUPERTALE_ROOT / "deploy" / "sandbox"
+DRAMAFOUNDRY_ROOT = Path(__file__).resolve().parents[3]
+SANDBOX_PROFILES_DIR = DRAMAFOUNDRY_ROOT / "deploy" / "sandbox"
 SEATBELT_BASE_POLICY = SANDBOX_PROFILES_DIR / "seatbelt_base_policy.sbpl"
 SEATBELT_NETWORK_POLICY = SANDBOX_PROFILES_DIR / "seatbelt_network_policy.sbpl"
 
@@ -36,7 +36,7 @@ def _data_dir(kind: str) -> Path:
     env = os.environ.get(f"NOVELVIDEO_{kind.upper()}_DIR", "").strip()
     if env:
         return Path(env).expanduser()
-    return SUPERTALE_ROOT / kind
+    return DRAMAFOUNDRY_ROOT / kind
 
 
 @dataclass
@@ -67,10 +67,10 @@ class SandboxSpec:
         """Project-wide read-only resources."""
         paths: list[Path] = [
             _data_dir("state") / "_shared",
-            SUPERTALE_ROOT / "src",
-            SUPERTALE_ROOT / "integrations",
-            SUPERTALE_ROOT / ".hermes",  # repo-pinned Hermes skills
-            SUPERTALE_ROOT / ".venv",  # SuperTale's main venv for skill scripts
+            DRAMAFOUNDRY_ROOT / "src",
+            DRAMAFOUNDRY_ROOT / "integrations",
+            DRAMAFOUNDRY_ROOT / ".hermes",  # repo-pinned Hermes skills
+            DRAMAFOUNDRY_ROOT / ".venv",  # SuperTale's main venv for skill scripts
         ]
         return paths
 
@@ -98,7 +98,7 @@ def wrap_command(cmd: list[str], spec: SandboxSpec) -> list[str]:
     Other (e.g. Windows): no sandbox backend → fallback path below.
 
     Fallback (sandbox binary missing or no backend for this OS):
-    - SUPERTALE_ENV=production → raise (must sandbox in prod).
+    - DRAMAFOUNDRY_ENV=production → raise (must sandbox in prod).
     - Otherwise → warn and return raw cmd (dev convenience).
     """
     system = platform.system()
@@ -284,7 +284,7 @@ def _deny_write_block(paths: Iterable[Path]) -> str:
 
 
 def _fallback_or_raise(cmd: list[str], reason: str) -> list[str]:
-    if os.environ.get("SUPERTALE_ENV", "").lower() == "production":
+    if os.environ.get("DRAMAFOUNDRY_ENV", "").lower() == "production":
         raise RuntimeError(f"sandbox required in production but {reason}")
     msg = f"sandbox unavailable ({reason}); running unsandboxed — dev only"
     _log.warning(msg)

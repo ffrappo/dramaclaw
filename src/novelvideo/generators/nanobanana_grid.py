@@ -3092,7 +3092,7 @@ async def _generate_image(
         )
         if not image_bytes and not delivery_state.get("copied"):
             raise ValueError(
-                f"DramaClawAPI image generation failed: {error_detail or 'empty image'}"
+                f"DramaFoundryAPI image generation failed: {error_detail or 'empty image'}"
             )
     else:
         from google import genai
@@ -3620,7 +3620,7 @@ async def _call_newapi_image_api(
 
     context = _validate_egress_context(egress_context)
     if not api_key:
-        return None, "", "DramaClawAPI API key is missing"
+        return None, "", "DramaFoundryAPI API key is missing"
 
     image_config = image_config or {}
     aspect_ratio = str(image_config.get("aspect_ratio") or "1:1").strip().lower() or "1:1"
@@ -3738,7 +3738,7 @@ async def _call_newapi_image_api(
         payload=payload,
         prompt=prompt,
     )
-    logger.info("DramaClawAPI image request: %s", request_context)
+    logger.info("DramaFoundryAPI image request: %s", request_context)
     headers = {
         "Authorization": f"Bearer {api_key}",
         "Content-Type": "application/json",
@@ -3827,14 +3827,14 @@ async def _call_newapi_image_api(
             timeout=NEWAPI_IMAGE_HTTP_TIMEOUT_SECONDS,
             follow_redirects=True,
         ) as client:
-            logger.info("DramaClawAPI image POST start: %s", request_context.get("endpoint"))
+            logger.info("DramaFoundryAPI image POST start: %s", request_context.get("endpoint"))
             response = await client.post(
                 f"{endpoint}{request_path}",
                 headers=headers,
                 json=payload,
             )
             logger.info(
-                "DramaClawAPI image POST response: status=%s bytes=%s",
+                "DramaFoundryAPI image POST response: status=%s bytes=%s",
                 getattr(response, "status_code", "?"),
                 (getattr(response, "headers", None) or {}).get("content-length", "?"),
             )
@@ -3846,7 +3846,7 @@ async def _call_newapi_image_api(
                 response_payload=result,
             )
             logger.info(
-                "DramaClawAPI image POST parsed: data_count=%d keys=%s",
+                "DramaFoundryAPI image POST parsed: data_count=%d keys=%s",
                 len(result.get("data") or []),
                 sorted(result.keys())[:5],
             )
@@ -3869,7 +3869,7 @@ async def _call_newapi_image_api(
                     "missing_data",
                     request_id=provider_request_id,
                 )
-                return None, "", f"DramaClawAPI Images response missing data: {sorted(result.keys())}"
+                return None, "", f"DramaFoundryAPI Images response missing data: {sorted(result.keys())}"
 
             first = data[0] or {}
             if delivery_path is not None:
@@ -3919,11 +3919,11 @@ async def _call_newapi_image_api(
                 # "newapi 已生成但任务还在 await" hang 点 —— 用单独的短 timeout
                 # (60s),避免落入外层 client 的 600s global timeout 拖很久。
                 # 加 phase log 让 hang 时能定位卡在哪。
-                logger.info("DramaClawAPI image GET url start: %s", image_url[:120])
+                logger.info("DramaFoundryAPI image GET url start: %s", image_url[:120])
                 async with httpx.AsyncClient(timeout=60.0, follow_redirects=True) as fetch:
                     image_response = await fetch.get(image_url)
                 logger.info(
-                    "DramaClawAPI image GET url done: status=%d bytes=%d",
+                    "DramaFoundryAPI image GET url done: status=%d bytes=%d",
                     image_response.status_code,
                     len(image_response.content),
                 )
@@ -3942,7 +3942,7 @@ async def _call_newapi_image_api(
                 "missing_image_payload",
                 request_id=provider_request_id,
             )
-            return None, "", f"DramaClawAPI Images response missing b64_json/url: {first}"
+            return None, "", f"DramaFoundryAPI Images response missing b64_json/url: {first}"
     except httpx.HTTPStatusError as exc:
         body = (exc.response.text or "")[:2000]
         response_headers = getattr(exc.response, "headers", {}) or {}
@@ -3984,7 +3984,7 @@ async def _call_newapi_image_api(
             else ""
         )
         logger.warning(
-            "DramaClawAPI image failed: status=%s; %s%s; body=%s",
+            "DramaFoundryAPI image failed: status=%s; %s%s; body=%s",
             exc.response.status_code,
             header_context,
             error_context,
@@ -4009,7 +4009,7 @@ async def _call_newapi_image_api(
             raise
         error_context = _newapi_context_for_error(request_context)
         detail = f"{type(exc).__name__}: {exc!r}; {error_context}"
-        logger.warning("DramaClawAPI image request exception: %s", detail)
+        logger.warning("DramaFoundryAPI image request exception: %s", detail)
         return None, "", f"请求异常: {detail}"
 
 
@@ -5089,7 +5089,7 @@ class NanoBananaGridGenerator:
                     image_size, provider="newapi"
                 )
                 print(
-                    f"[DramaClawAPI Images] 调用 {self.model} 生成网格图 "
+                    f"[DramaFoundryAPI Images] 调用 {self.model} 生成网格图 "
                     f"(分辨率: {effective_image_size}, 比例: {aspect_ratio})..."
                 )
                 prompt_text, ref_bytes = self._extract_ref_bytes_from_contents(
@@ -5118,7 +5118,7 @@ class NanoBananaGridGenerator:
                     delivery_state=(image_delivery_state := {}),
                 )
                 if not image_bytes:
-                    message = "DramaClawAPI Images 未返回图像数据"
+                    message = "DramaFoundryAPI Images 未返回图像数据"
                     if newapi_error:
                         message = f"{message}: {newapi_error}"
                     return _usage_fail(message)
@@ -5450,7 +5450,7 @@ class NanoBananaGridGenerator:
                 if not image_bytes:
                     return GridGenerationResult(
                         success=False,
-                        error=f"DramaClawAPI Images 未返回图片: {error_detail or ''}".strip(),
+                        error=f"DramaFoundryAPI Images 未返回图片: {error_detail or ''}".strip(),
                         generation_time=time.time() - start_time,
                     )
             else:
@@ -5686,7 +5686,7 @@ class NanoBananaGridGenerator:
                         generation_time=time.time() - start_time,
                     )
             elif self.provider == "newapi":
-                print(f"[Reformat] 调用 DramaClawAPI Images ({self.model}) 转换 → {target_aspect} ...")
+                print(f"[Reformat] 调用 DramaFoundryAPI Images ({self.model}) 转换 → {target_aspect} ...")
                 prompt_text, ref_bytes = self._extract_ref_bytes_from_contents(
                     contents,
                     include_mime=True,
@@ -5710,9 +5710,9 @@ class NanoBananaGridGenerator:
                     return GridGenerationResult(
                         success=False,
                         error=(
-                            f"[Reformat] DramaClawAPI Images 未返回图像数据: {newapi_error}"
+                            f"[Reformat] DramaFoundryAPI Images 未返回图像数据: {newapi_error}"
                             if newapi_error
-                            else "[Reformat] DramaClawAPI Images 未返回图像数据"
+                            else "[Reformat] DramaFoundryAPI Images 未返回图像数据"
                         ),
                         generation_time=time.time() - start_time,
                     )
@@ -7261,7 +7261,7 @@ CRITICAL: Keep exact composition from sketch. Only add color, texture, and light
                             f.write(image_bytes)
                     return output_path
                 if error_detail:
-                    print(f"[DramaClawAPI Render] 失败: {error_detail}")
+                    print(f"[DramaFoundryAPI Render] 失败: {error_detail}")
                 return None
             else:
                 # ===== Google 直连分支 =====
@@ -7476,9 +7476,9 @@ CRITICAL: The output must look like a higher-resolution vertical crop/extension 
                 )
                 if not image_bytes and not image_delivery_state.get("copied"):
                     raise ValueError(
-                        f"DramaClawAPI Images 未返回图像数据: {newapi_error}"
+                        f"DramaFoundryAPI Images 未返回图像数据: {newapi_error}"
                         if newapi_error
-                        else "DramaClawAPI Images 未返回图像数据"
+                        else "DramaFoundryAPI Images 未返回图像数据"
                     )
 
                 temp_path = output_path + ".tmp.png"
@@ -7645,7 +7645,7 @@ OUTPUT: Single high-quality image, no watermarks, no text overlays.
                 if not image_bytes and error_detail:
                     print(f"[StylePreview] OpenAI 失败详情: {error_detail}")
             elif self.provider == "newapi":
-                print(f"[StylePreview] 调用 DramaClawAPI Images ({self.model}) 生成预览图...")
+                print(f"[StylePreview] 调用 DramaFoundryAPI Images ({self.model}) 生成预览图...")
                 prompt_text, ref_bytes = self._extract_ref_bytes_from_contents(
                     contents,
                     include_mime=True,
@@ -7666,7 +7666,7 @@ OUTPUT: Single high-quality image, no watermarks, no text overlays.
                     delivery_state=(image_delivery_state := {}),
                 )
                 if not image_bytes and error_detail:
-                    print(f"[StylePreview] DramaClawAPI 失败详情: {error_detail}")
+                    print(f"[StylePreview] DramaFoundryAPI 失败详情: {error_detail}")
             else:
                 # ===== Google 直连分支 =====
                 from google import genai

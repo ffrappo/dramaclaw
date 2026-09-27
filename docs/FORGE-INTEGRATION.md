@@ -1,9 +1,9 @@
-# DramaClaw × Fornace integration plan
+# DramaFoundry × Fornace integration plan
 
 Date: 2026-09-26. Owner: Francesco. Executor: this worker session, reviewed by the
 pi-fornace-supervisor-stack supervisor.
 
-## What DramaClaw is (studied, not guessed)
+## What DramaFoundry is (studied, not guessed)
 
 - Source: github.com/dramaclaw/dramaclaw (Elastic-2.0, "SuperTale CE" python pkg
   `novelvideo`) + gateway repo github.com/dramaclaw/dramaclaw-gateway (Go, NewAPI fork,
@@ -66,7 +66,7 @@ pi-fornace-supervisor-stack supervisor.
 
 ## Non-goals / guardrails
 
-- No traditional VFX anywhere (repo RULE ONE untouched; DramaClaw only generates via
+- No traditional VFX anywhere (repo RULE ONE untouched; DramaFoundry only generates via
   models + deterministic cut/mux plumbing, same philosophy).
 - Upstream mergeability: keep our changes as clean local commits, avoid rewriting
   upstream files wholesale where a surgical patch works.

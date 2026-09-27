@@ -168,7 +168,7 @@ def build_hermes_child_env(
 
     ``project_id`` and ``egress_project_id`` are deliberately separate: the
     former is the session/project identity handed to the child process as
-    ``DRAMACLAW_PROJECT_ID`` (absent in home scope), the latter is the identity
+    ``DRAMAFOUNDRY_PROJECT_ID`` (absent in home scope), the latter is the identity
     compared against the trusted egress context. In home scope they differ.
     """
 
@@ -183,8 +183,8 @@ def build_hermes_child_env(
         "HOME": str(home),
         "HERMES_HOME": str(home),
         "TMPDIR": str(home / "tmp"),
-        "DRAMACLAW_USER": username,
-        "DRAMACLAW_API_URL": api_url,
+        "DRAMAFOUNDRY_USER": username,
+        "DRAMAFOUNDRY_API_URL": api_url,
         "NEWAPI_API_KEY": authorization.credential.api_key,
         "NEWAPI_BASE_URL": authorization.credential.base_url,
     }
@@ -192,16 +192,16 @@ def build_hermes_child_env(
         {
             key: value
             for key, value in agent_token_env.items()
-            if key.startswith(("DRAMACLAW_AGENT_", "SUPERTALE_AGENT_"))
+            if key.startswith(("DRAMAFOUNDRY_AGENT_", "DRAMAFOUNDRY_AGENT_"))
         }
     )
     if project_id:
-        env["DRAMACLAW_PROJECT_ID"] = project_id
+        env["DRAMAFOUNDRY_PROJECT_ID"] = project_id
     env.update(
         {
             key: value
             for key, value in (project_env or {}).items()
-            if key.startswith("DRAMACLAW_PROJECT_")
+            if key.startswith("DRAMAFOUNDRY_PROJECT_")
         }
     )
     return env

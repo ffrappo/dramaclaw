@@ -3,7 +3,7 @@
 
 # 许可证
 
-DramaClaw 社区版（CE）采用 [Elastic License 2.0（ELv2）](../../LICENSES/Elastic-2.0.txt)，**源码可得（source available）**。本文通俗解释你能做什么、不能做什么。
+DramaFoundry 社区版（CE）采用 [Elastic License 2.0（ELv2）](../../LICENSES/Elastic-2.0.txt)，**源码可得（source available）**。本文通俗解释你能做什么、不能做什么。
 
 ## 这算开源吗？ <!-- banned-word-allow -->
 
@@ -13,14 +13,14 @@ DramaClaw 社区版（CE）采用 [Elastic License 2.0（ELv2）](../../LICENSES
 
 - 本地 / 自托管运行，个人或公司内部使用
 - 修改源码、二次开发
-- 基于 DramaClaw 构建你自己的应用、为你的客户交付作品
+- 基于 DramaFoundry 构建你自己的应用、为你的客户交付作品
 - 通过 API / CLI 集成进你自己的产品
 
 ## 哪些受限（需商业授权）
 
 ELv2 的核心限制只有一条：
 
-- **不得把 DramaClaw 作为托管 / 管理服务提供给第三方**（即把 CE 直接做成 SaaS 对外转售）。
+- **不得把 DramaFoundry 作为托管 / 管理服务提供给第三方**（即把 CE 直接做成 SaaS 对外转售）。
 
 此外不得移除许可证 / 版权声明，不得规避许可证密钥机制（若有）。
 

@@ -71,7 +71,7 @@ export ST_CELERY_RESULT_BACKEND=
 export NOVELVIDEO_API_HOST="$api_host"
 export NOVELVIDEO_API_PORT="$api_port"
 export NOVELVIDEO_API_URL="http://127.0.0.1:${api_port}"
-export DRAMACLAW_API_URL="$NOVELVIDEO_API_URL"
+export DRAMAFOUNDRY_API_URL="$NOVELVIDEO_API_URL"
 export SUPERTALE_API_URL="$NOVELVIDEO_API_URL"
 
 if [ "${NEWAPI_API_KEY:-}" = "your_newapi_token" ] || [ -z "${NEWAPI_API_KEY:-}" ]; then

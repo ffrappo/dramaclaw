@@ -25,8 +25,8 @@
     "totalMaxDuration": "Total reference duration: {{actual}} s; maximum: {{expected}} s."
   },
   "app": {
-    "title": "SuperTale",
-    "subtitle": "SuperTale candidate generation and asset commit workbench",
+    "title": "DramaFoundry",
+    "subtitle": "DramaFoundry candidate generation and asset commit workbench",
     "updateRequired": {
       "title": "App updated",
       "description": "This page is referencing an expired app file. Refresh to load the latest version.",
@@ -123,8 +123,8 @@
       "qrAlt": "Business WeChat QR code",
       "items": {
         "difference": {
-          "question": "How is DramaClaw different from an ordinary AI video generator?",
-          "answer": "Ordinary tools work around a single prompt, a single clip, or a single image. DramaClaw is built around a complete project: text import, asset build-up, episode planning, shot production and final compositing — a traceable, collaborative, reusable production loop."
+          "question": "How is DramaFoundry different from an ordinary AI video generator?",
+          "answer": "Ordinary tools work around a single prompt, a single clip, or a single image. DramaFoundry is built around a complete project: text import, asset build-up, episode planning, shot production and final compositing — a traceable, collaborative, reusable production loop."
         },
         "gettingStarted": {
           "question": "Where should I start the first time?",
@@ -143,7 +143,7 @@
           "answer": "The usual cause of rework in AI video isn't the final generation step — it's unstable characters, vague scenes, props without references and inconsistent voices upstream. Turning those into assets in Shrimp Pond removes a lot of chaos from the shot stage."
         },
         "contentTypes": {
-          "question": "What kinds of content is DramaClaw suited to?",
+          "question": "What kinds of content is DramaFoundry suited to?",
           "answer": "AI short dramas, comic dramas, novel promos, commentary shows, ads, and training videos — plus team projects that maintain IP characters and serialised content over time. Solo creators can run the whole pipeline; teams can produce collaboratively."
         },
         "teamRoles": {
@@ -156,7 +156,7 @@
         },
         "dcUniverse": {
           "question": "What does “Make Your DC Universe.” mean?",
-          "answer": "DC isn't only short for DramaClaw — it also stands for each creator's own content universe. DramaClaw is meant to help you start from one story and build up characters, world, scene assets and the ability to produce a series."
+          "answer": "DC isn't only short for DramaFoundry — it also stands for each creator's own content universe. DramaFoundry is meant to help you start from one story and build up characters, world, scene assets and the ability to produce a series."
         },
         "afterLogin": {
           "question": "Where do I land after logging in?",
@@ -199,12 +199,12 @@
     },
     "fifth": {
       "heading": "Turn a thousand ideas into assets",
-      "lead1": "DramaClaw organises them into a project asset library,",
+      "lead1": "DramaFoundry organises them into a project asset library,",
       "lead2": "so later shot generation can reference them, maintain them in one place, and roll back a version when needed."
     },
     "seventh": {
       "heading": "From gacha pulls to a real pipeline",
-      "lead": "DramaClaw breaks the uncertainty of AI video down across text, assets, shots and task flow",
+      "lead": "DramaFoundry breaks the uncertainty of AI video down across text, assets, shots and task flow",
       "steps": {
         "01": {
           "title": "Premise in",
@@ -234,7 +234,7 @@
     },
     "eighth": {
       "heading": "Built for complete productions",
-      "lead": "DramaClaw is about how a series keeps getting made: text in, character consistency, scene reuse, shot progress, team delivery.",
+      "lead": "DramaFoundry is about how a series keeps getting made: text in, character consistency, scene reuse, shot progress, team delivery.",
       "statementTitle": "Night Passage Protocol · Shot sequence 08",
       "statementBody": "An unregistered freighter drags the whole city's secret down into the night layer.",
       "decisions": {
@@ -259,7 +259,7 @@
     "ninth": {
       "headingTop": "One line, straight into",
       "headingAccent": "shots",
-      "lead": "You don't need a finished script. Give a direction and DramaClaw breaks it into characters, conflict, settings and a shot chain you can keep pushing.",
+      "lead": "You don't need a finished script. Give a direction and DramaFoundry breaks it into characters, conflict, settings and a shot chain you can keep pushing.",
       "featuredWork": "Luban's Craft",
       "steps": {
         "01": {
@@ -286,7 +286,7 @@
     },
     "twelfth": {
       "heading": "Push one line into a universe you can watch",
-      "lead": "Give it a character conflict or a world, and let DramaClaw break it into shot nodes and keep extending",
+      "lead": "Give it a character conflict or a world, and let DramaFoundry break it into shot nodes and keep extending",
       "primaryCta": "Start creating",
       "secondaryCta": "Request an account"
     },
@@ -299,7 +299,7 @@
     },
     "second": {
       "title": "From idea to project",
-      "subtitle": "In DramaClaw, creating no longer stops at one prompt and one result"
+      "subtitle": "In DramaFoundry, creating no longer stops at one prompt and one result"
     },
     "third": {
       "title": "Let the story be the starting point",
@@ -341,8 +341,8 @@
       "eyebrow": "Interface",
       "title": "A guided pipeline and a free-form canvas",
       "lede": "The mainline breaks a novel into episodes, characters, storyboards, first frames, video, and the final cut, one page per step. The canvas projects any of those shots onto a node graph where you can rework them freely and sync the result back. Both sides read from the same assets.",
-      "windowTitle": "DramaClaw — Episode 03 · Canvas",
-      "alt": "Sketch of the DramaClaw desktop canvas: episode tabs across the top, shot outline on the left, node canvas in the middle, parameter panel on the right.",
+      "windowTitle": "DramaFoundry — Episode 03 · Canvas",
+      "alt": "Sketch of the DramaFoundry desktop canvas: episode tabs across the top, shot outline on the left, node canvas in the middle, parameter panel on the right.",
       "caption": "Illustration (canvas view)"
     },
     "capability": {
@@ -408,7 +408,7 @@
       },
       "v120": {
         "title": "Transparent feature credits, external agents welcome",
-        "description": "Feature prices, estimated charges, and usage history live in one place, and local agents such as Claude Code can drive DramaClaw CE over MCP."
+        "description": "Feature prices, estimated charges, and usage history live in one place, and local agents such as Claude Code can drive DramaFoundry CE over MCP."
       }
     },
     "faq": {
@@ -417,7 +417,7 @@
       "items": {
         "macGatekeeper": {
           "question": "macOS says the developer cannot be verified. Now what?",
-          "answer": "Find DramaClaw in Finder → Applications, Control-click the icon, choose Open, then confirm with Open in the dialog. You only do this once; after that it launches normally."
+          "answer": "Find DramaFoundry in Finder → Applications, Control-click the icon, choose Open, then confirm with Open in the dialog. You only do this once; after that it launches normally."
         },
         "winSmartScreen": {
           "question": "Windows says it protected my PC. Now what?",
@@ -439,7 +439,7 @@
         "openSource": {
           "question": "Is it open source?",
           "answer": "It is licensed under Elastic-2.0: use, modify and self-host freely, but don't resell it as a hosted service. The source lives at",
-          "linkLabel": "github.com/dramaclaw/dramaclaw"
+          "linkLabel": "dramafoundry.fornace.net"
         }
       }
     },
@@ -876,7 +876,7 @@
     "ingestAutomationMissingFile": "Could not read the uploaded novel file. Select it again.",
     "attachmentOnlyPrompt": "Please analyze the file I uploaded.",
     "attachmentAnalysisUploading": "Uploading file for analysis: {{filename}}",
-    "settingsHint": "Account and login are managed by SuperTale. These settings only control chat display and attachment behavior.",
+    "settingsHint": "Account and login are managed by DramaFoundry. These settings only control chat display and attachment behavior.",
     "scrollToBottom": "Back to bottom",
     "taskCompleteNotice": "✅ {{label}} is complete. Ask me to show the result, or move on to the next step.",
     "taskFailedNotice": "{{label}} failed: {{reason}}\nFix what the error points at before continuing.",
@@ -1678,8 +1678,8 @@
     "retryQuote": "Refresh quote"
   },
   "paymentReturn": {
-    "back": "Back to DramaClaw",
-    "returnButton": "Back to DramaClaw",
+    "back": "Back to DramaFoundry",
+    "returnButton": "Back to DramaFoundry",
     "orderNumber": "Merchant order number",
     "retry": "Check again",
     "states": {
@@ -1689,7 +1689,7 @@
       },
       "credited": {
         "title": "Credits added",
-        "description": "Both payment and credit fulfillment have been confirmed by the server. You can return to DramaClaw."
+        "description": "Both payment and credit fulfillment have been confirmed by the server. You can return to DramaFoundry."
       },
       "closed": {
         "title": "Order closed",
@@ -2128,8 +2128,8 @@
       "noAccount": "Need an account?",
       "applyAccount": "Request access",
       "otpRegistration": "Your first verified phone sign-in creates an account automatically",
-      "showcaseLabel": "DramaClaw showcase",
-      "showcaseEyebrow": "MADE WITH DRAMACLAW",
+      "showcaseLabel": "DramaFoundry showcase",
+      "showcaseEyebrow": "MADE WITH DRAMAFOUNDRY",
       "showcaseMeta": "Production in motion",
       "showcaseTitle": "Imagination, rolling at full speed",
       "showcaseDescription": "Characters, storyboards, sound, and shots move forward in one production line"
@@ -2195,7 +2195,7 @@
     },
     "community": {
       "label": "Community works",
-      "heading": "DramaClaw TV",
+      "heading": "DramaFoundry TV",
       "likes": "{{count}} likes",
       "openWork": "Open work \"{{title}}\"",
       "works": {
@@ -2787,7 +2787,7 @@
     "novelFormat": {
       "button": "Premium drama format guide",
       "title": "Premium drama format",
-      "intro": "Premium drama scripts need explicit episode and scene boundaries. DramaClaw splits the script by scene headers before generating visuals, dialogue, and audio line by line; it does not invent scene breaks for headerless prose.",
+      "intro": "Premium drama scripts need explicit episode and scene boundaries. DramaFoundry splits the script by scene headers before generating visuals, dialogue, and audio line by line; it does not invent scene breaks for headerless prose.",
       "standardStatus": "Standard · ready to import",
       "standardStatusHint": "Several industry formats are supported. Complete location, time, and INT/EXT metadata can be parsed reliably.",
       "warningStatus": "Repairable · import allowed",
@@ -4858,7 +4858,7 @@
           "style": {
             "label": "Style",
             "options": {
-              "supertale_production": "SuperTale production",
+              "supertale_production": "DramaFoundry production",
               "cinematic_realistic": "Cinematic realistic",
               "clean_sketch": "Clean sketch",
               "spiderverse_mixed": "Mixed media"
@@ -7065,7 +7065,7 @@
         "mediaCatalogCheckFailed": "Could not check the official media model catalog. Try again later."
       },
       "custom": {
-        "description": "CE uses a local SQLite-backed NewAPI. DramaClaw connects the database, creates a runtime token, and enables the local channel automatically.",
+        "description": "CE uses a local SQLite-backed NewAPI. DramaFoundry connects the database, creates a runtime token, and enables the local channel automatically.",
         "init": "Initialize Local NewAPI",
         "repair": "Check & Repair",
         "initialized": "Local NewAPI is ready.",
@@ -7084,7 +7084,7 @@
         "setupConfirmPassword": "Confirm Password",
         "setupPasswordPlaceholder": "At least 8 characters",
         "setupConfirmPasswordPlaceholder": "Enter it again",
-        "setupPasswordOnlyOnce": "This username and password are sent to your NewAPI instance only when creating the first admin on a fresh NewAPI install. If NewAPI is already initialized, entering a password here will not change the existing admin password. DramaClaw does not save the password or use it for later operations; keep it for logging into the NewAPI admin console after first-time setup.",
+        "setupPasswordOnlyOnce": "This username and password are sent to your NewAPI instance only when creating the first admin on a fresh NewAPI install. If NewAPI is already initialized, entering a password here will not change the existing admin password. DramaFoundry does not save the password or use it for later operations; keep it for logging into the NewAPI admin console after first-time setup.",
         "setupRequired": "Local NewAPI has not been initialized yet. Enter the setup password and confirmation, then try again.",
         "setupAlreadyInitializedPasswordIgnored": "Your NewAPI instance is already initialized. This run did not call the NewAPI setup endpoint and did not change the existing admin password; the password you entered was ignored and cleared.",
         "setupPasswordMissingUsername": "Enter the admin username.",
@@ -7447,7 +7447,7 @@
     "missingAnyApiKeyMessage": "Backend provider is not configured.",
     "openProvidersSettings": "View providers",
     "aboutAppName": "Beat Workbench",
-    "aboutIntro": "SuperTale candidate generation, free image experimentation, and asset commit workbench.",
+    "aboutIntro": "DramaFoundry candidate generation, free image experimentation, and asset commit workbench.",
     "aboutVersionLabel": "Version",
     "aboutVersionUnknown": "Unknown",
     "aboutAuthorLabel": "Author",

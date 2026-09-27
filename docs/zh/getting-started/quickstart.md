@@ -3,9 +3,9 @@
 
 # 快速开始
 
-> 本地跑起 DramaClaw,产出第一个结果。
+> 本地跑起 DramaFoundry,产出第一个结果。
 
-DramaClaw 是社区版(CE),单机运行、无需 PostgreSQL / Redis。默认 `docker compose` 起三个服务:`api`(创作后端,:8780)、`newapi`(内置网关,切到自定义/本地 + 官方混合模式前闲置)、`web`(浏览器界面,:8080);模型默认走 **DramaClaw 官方网关(RelayClaw)**,填一个 DC key 即用。
+DramaFoundry 是社区版(CE),单机运行、无需 PostgreSQL / Redis。默认 `docker compose` 起三个服务:`api`(创作后端,:8780)、`newapi`(内置网关,切到自定义/本地 + 官方混合模式前闲置)、`web`(浏览器界面,:8080);模型默认走 **DramaFoundry 官方网关(RelayClaw)**,填一个 DC key 即用。
 
 ## 前置
 
@@ -15,7 +15,7 @@ DramaClaw 是社区版(CE),单机运行、无需 PostgreSQL / Redis。默认 `do
 ## 步骤
 
 ```bash
-# 1. 取得代码 —— DramaClaw 和内置网关并排放
+# 1. 取得代码 —— DramaFoundry 和内置网关并排放
 git clone https://github.com/dramaclaw/dramaclaw.git
 git clone https://github.com/dramaclaw/dramaclaw-gateway.git
 cd dramaclaw
@@ -35,7 +35,7 @@ docker compose ps   # api、newapi、web 均应 running
 
 ## 填入 DC key(必做一次)
 
-1. 浏览器打开 **`http://localhost:8080`** —— 这就是 DramaClaw 的界面。
+1. 浏览器打开 **`http://localhost:8080`** —— 这就是 DramaFoundry 的界面。
 2. 进入设置 → **模型配置 → 官方渠道**。网关地址已预填 `https://relayclaw.cdnfg.com/v1`。
 3. **粘贴你的 DC key**,点「保存并启用」。立即可用,**无需映射任何模型**(RelayClaw 后台已配齐)。
 

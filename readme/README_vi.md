@@ -300,7 +300,7 @@ cp .env.example .env
 docker compose up -d --build   # build và khởi động ba dịch vụ: api / newapi (gateway đi kèm) / web
 ```
 
-Cả hai checkout đều là repo git bình thường: sửa, `git pull`, build lại. Chỉ mã DramaClaw thay đổi? `docker compose up -d --build api web`. Chỉ gateway? `docker compose up -d --build newapi`. Clone gateway ở nơi khác, hoặc muốn Docker tự lấy từ git? Đặt `DRAMACLAW_GATEWAY_SRC` trong `.env` thành đường dẫn đó hoặc `https://github.com/dramaclaw/dramaclaw-gateway.git#main`.
+Cả hai checkout đều là repo git bình thường: sửa, `git pull`, build lại. Chỉ mã DramaClaw thay đổi? `docker compose up -d --build api web`. Chỉ gateway? `docker compose up -d --build newapi`. Clone gateway ở nơi khác, hoặc muốn Docker tự lấy từ git? Đặt `DRAMAFOUNDRY_GATEWAY_SRC` trong `.env` thành đường dẫn đó hoặc `https://github.com/dramaclaw/dramaclaw-gateway.git#main`.
 
 **Không build** — kéo image đã phát hành thay thế (không cần clone gateway):
 
@@ -316,7 +316,7 @@ Mở ứng dụng tại <http://localhost:8080>; REST API ở <http://localhost:
 
 Các bước đầy đủ trong [Bắt đầu nhanh](../docs/en/getting-started/quickstart.md).
 
-Ghim phiên bản hoặc đổi registry trong `.env` (`DRAMACLAW_VERSION`, `DRAMACLAW_GATEWAY_VERSION`, `DRAMACLAW_IMAGE_PREFIX`) — các giá trị này chỉ áp dụng cho chế độ image (`docker-compose.release.yml`). Trung Quốc đại lục: đặt `DRAMACLAW_IMAGE_PREFIX=claymore-registry.cn-chengdu.cr.aliyuncs.com/dramaclaw` và ghim cả hai phiên bản (mirror ACR chỉ có các tag đã ghim).
+Ghim phiên bản hoặc đổi registry trong `.env` (`DRAMAFOUNDRY_VERSION`, `DRAMAFOUNDRY_GATEWAY_VERSION`, `DRAMAFOUNDRY_IMAGE_PREFIX`) — các giá trị này chỉ áp dụng cho chế độ image (`docker-compose.release.yml`). Trung Quốc đại lục: đặt `DRAMAFOUNDRY_IMAGE_PREFIX=claymore-registry.cn-chengdu.cr.aliyuncs.com/dramaclaw` và ghim cả hai phiên bản (mirror ACR chỉ có các tag đã ghim).
 
 > Di chuyển từ một checkout cũ? Với build từ mã nguồn, trước tiên `git clone https://github.com/dramaclaw/dramaclaw-gateway.git ../dramaclaw-gateway` (gateway giờ được build từ checkout kế bên đó; thiếu nó, build sẽ dừng với `unable to prepare context`). `docker-compose.selfhosted.yml` / `docker-compose.selfhosted.release.yml` đã bị gỡ — dùng `docker-compose.yml` (build từ mã nguồn) / `docker-compose.release.yml` (image). Tên dịch vụ và các volume `ce-data` / `newapi-data` không đổi; dữ liệu hiện có được dùng lại nguyên trạng. Cổng của gateway đi kèm giờ mặc định chỉ bind vào `127.0.0.1`; đặt `ST_NEWAPI_BIND=0.0.0.0` trong `.env` nếu bạn cần truy cập từ xa.
 
@@ -359,7 +359,7 @@ Hướng dẫn đầy đủ trong [Cấu hình model](../docs/en/getting-started
 
 ### Gateway đi kèm: dramaclaw-gateway
 
-Dịch vụ `newapi` trong `docker-compose.yml` là [**dramaclaw-gateway**](https://github.com/dramaclaw/dramaclaw-gateway), fork riêng của DramaClaw từ [New API](https://github.com/QuantumNous/new-api). Nó hiểu giao thức **DC-Media** mà DramaClaw dùng cho ảnh / video / âm thanh (vai trò media, tham chiếu, khung hình đầu / cuối) và chuyển đổi mỗi yêu cầu sang API gốc của nhà cung cấp. Image: [`claymorelab/dramaclaw-gateway`](https://hub.docker.com/r/claymorelab/dramaclaw-gateway) trên Docker Hub, ghim bởi `DRAMACLAW_GATEWAY_VERSION` trong `.env`. Nó ở trạng thái chờ trong chế độ Official và chỉ được dùng khi bạn chuyển sang **Custom** hoặc **Local + Official Hybrid**.
+Dịch vụ `newapi` trong `docker-compose.yml` là [**dramaclaw-gateway**](https://github.com/dramaclaw/dramaclaw-gateway), fork riêng của DramaClaw từ [New API](https://github.com/QuantumNous/new-api). Nó hiểu giao thức **DC-Media** mà DramaClaw dùng cho ảnh / video / âm thanh (vai trò media, tham chiếu, khung hình đầu / cuối) và chuyển đổi mỗi yêu cầu sang API gốc của nhà cung cấp. Image: [`claymorelab/dramaclaw-gateway`](https://hub.docker.com/r/claymorelab/dramaclaw-gateway) trên Docker Hub, ghim bởi `DRAMAFOUNDRY_GATEWAY_VERSION` trong `.env`. Nó ở trạng thái chờ trong chế độ Official và chỉ được dùng khi bạn chuyển sang **Custom** hoặc **Local + Official Hybrid**.
 
 Các adapter nhà cung cấp có sẵn trong gateway hiện nay (xem [ma trận hỗ trợ kênh](https://github.com/dramaclaw/dramaclaw-gateway/blob/main/docs/providers/en/README.md) để biết trạng thái xác minh): ComfyUI · MiniMax / Hailuo · VolcEngine Doubao / Seedance · fal.ai · Alibaba · Kling · Jimeng · Vertex AI · Gemini · OpenAI / Sora · Suno. Muốn thêm nhà cung cấp khác? Gateway có [trình tạo scaffold và hướng dẫn đóng góp](https://github.com/dramaclaw/dramaclaw-gateway/blob/main/CONTRIBUTING.md).
 
