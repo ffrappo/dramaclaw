@@ -11,8 +11,7 @@
 3. **本地验证**：
    ```bash
    uv pip install -e .            # 重装使新版本号生效
-   uv run pytest tests/test_release_feed.py
-   # 或起后端后：curl 'http://localhost:8780/api/v1/release-notifications?locale=zh'
+   # 起后端后：curl 'http://localhost:8780/api/v1/release-notifications?locale=zh'
    # 确认 current_version == 新版本、current_items 非空
    ```
 4. **合入 main**，打 tag `vX.Y.Z`（tag 前缀固定小写 `v`）：

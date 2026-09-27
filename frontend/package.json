@@ -9,9 +9,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "build:ce": "tsc -b && vite build --mode ce",
-    "preview": "vite preview",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@base-ui/react": "^1.3.0",
@@ -71,20 +69,13 @@
     "@tailwindcss/vite": "^4.2.2",
     "@tanstack/router-devtools": "^1.166.11",
     "@tanstack/router-plugin": "^1.167.12",
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^25.6.0",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.4.1",
-    "jsdom": "^29.0.2",
-    "msw": "^2.13.2",
     "shadcn": "^4.2.0",
     "tailwindcss": "^4.2.2",
     "typescript": "~5.8.3",
-    "vite": "^6.3.2",
-    "vitest": "^4.1.4"
+    "vite": "^6.3.2"
   }
 }

@@ -9,10 +9,9 @@ from __future__ import annotations
 
 import asyncio
 import json
-import os
-import sys
 import urllib.request
 from pathlib import Path
+from typing import Any
 
 MANTICE_KEY = Path("~/.agent_credentials/tokens/mantice.env").expanduser().read_text().strip()
 ENDPOINT = "https://llm.fornace.net/v1/chat/completions"

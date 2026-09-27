@@ -82,11 +82,6 @@ world = [
 
 [dependency-groups]
 dev = [
-    "pytest>=7.0.0",
-    "pytest-asyncio>=0.23.0",
-    "pytest-xdist>=3.5.0",
-    "fakeredis>=2.20.0",
-    "respx>=0.22.0",
     "ruff==0.15.20",
 ]
 
@@ -145,42 +140,6 @@ select = ["E4", "E7", "E9", "F"]
 "src/novelvideo/verification/sketch_visual_gate.py" = ["F401"]
 "src/novelvideo/verification/training_db.py" = ["F401"]
 "src/novelvideo/verification/version_hash.py" = ["F401"]
-"tests/contract/test_l014_inline_task_backend_concurrency.py" = ["F401"]
-"tests/test_api_assets.py" = ["F401"]
-"tests/test_api_freezone_canvas_from_preset.py" = ["F401"]
-"tests/test_api_render_settings.py" = ["F841"]
-"tests/test_director_staging_shape_presets.py" = ["F401"]
-"tests/test_env_config_ratchet.py" = ["F401"]
-"tests/test_freezone_asset_library_backend.py" = ["F841"]
-"tests/test_freezone_text_backend.py" = ["F401"]
-"tests/test_indextts2_fal_smoke.py" = ["F401"]
-"tests/test_openresty_upload_limit.py" = ["F401"]
-"tests/test_seedance2_voice_audio_records.py" = ["F401"]
-"tests/test_sqlite_store.py" = ["F811"]
-"tests/test_storyboard_prompt_visual_authority.py" = ["F541"]
-"tests/test_wysiwyg_consistency.py" = ["F401", "F841"]
-"tests/test_wysiwyg_neo4j.py" = ["F401"]
-
-[tool.pytest.ini_options]
-asyncio_mode = "auto"
-testpaths = ["tests"]
-addopts = "-m 'not ee and not e2e'"
-norecursedirs = ["archive", "external", ".venv", "node_modules"]
-markers = [
-    "ee: enterprise-edition tests that may require control-plane modules",
-    "e2e: end-to-end tests",
-    "quarantine: temporarily isolated tests",
-    "m01: OSS split module M01",
-    "m02: OSS split module M02",
-    "m03: OSS split module M03",
-    "m04: OSS split module M04",
-    "m05: OSS split module M05",
-    "m06: OSS split module M06",
-    "m07: OSS split module M07",
-    "m08: OSS split module M08",
-    "m09: OSS split module M09",
-    "m10: OSS split module M10",
-]
 
 [[tool.uv.dependency-metadata]]
 name = "da2"

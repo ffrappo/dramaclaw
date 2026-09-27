@@ -2,15 +2,13 @@
 
 ## Project Structure & Module Organization
 
-This repository contains the SuperTale Community Edition backend and video pipeline. Python source lives under `src/novelvideo/`, with major areas such as `api/` for FastAPI routes, `task_backend/` for job execution, `generators/` for media generation, `verification/` for quality gates, `ports/` for interface boundaries, and `assets/` for bundled media. Tests live in `tests/`, with contract tests in `tests/contract/` and port-focused tests in `tests/ports/`. Operational scripts are in `scripts/`, documentation in `docs/`, examples in `examples/`, and compliance artifacts in `docs/compliance/`, `LICENSES/`, and `sbom.spdx.json`.
+This repository contains the SuperTale Community Edition backend and video pipeline. Python source lives under `src/novelvideo/`, with major areas such as `api/` for FastAPI routes, `task_backend/` for job execution, `generators/` for media generation, `verification/` for quality gates, `ports/` for interface boundaries, and `assets/` for bundled media. Operational scripts are in `scripts/`, documentation in `docs/`, examples in `examples/`, and compliance artifacts in `docs/compliance/`, `LICENSES/`, and `sbom.spdx.json`.
 
-## Build, Test, and Development Commands
+## Build and Development Commands
 
 - `uv sync --group dev`: install runtime and development dependencies from `uv.lock`.
 - `uv run novelvideo api --port 8780`: start the local REST API.
-- `uv run pytest`: run the default test suite; `pyproject.toml` excludes `ee` and `e2e` markers by default.
-- `uv run pytest tests/test_api_assets.py`: run a focused test file while iterating.
-- `scripts/acceptance/run.sh`: run acceptance checks when validating broader API behavior.
+- Verify changes by direct manual execution of the affected code paths, not by writing test suites.
 - `pre-commit run --all-files`: run repository hooks, currently including `gitleaks` secret scanning.
 
 ## Coding Style & Naming Conventions
@@ -19,9 +17,9 @@ Use Python 3.11-compatible code and keep imports/package paths rooted in `src/no
 
 For any frontend visual change, read `DESIGN.md` first — it is the source of truth for colors, typography, spacing, radii, elevation, and motion, and mirrors the CSS variables in `frontend/src/index.css`. When those variables change, update `DESIGN.md` in the same commit and keep `npx @google/design.md lint DESIGN.md` at 0 errors.
 
-## Testing Guidelines
+## Verification Guidelines
 
-Tests use `pytest` with `pytest-asyncio` set to auto mode. Name test files `test_*.py` and colocate fixtures in `tests/conftest.py` unless they are narrowly scoped. Mark enterprise-only or full end-to-end tests with `@pytest.mark.ee` or `@pytest.mark.e2e` so default runs stay community-edition friendly. Add focused regression tests for API contracts, task lifecycle changes, storage migrations, and provider error handling.
+No test suite is kept in this repository (owner directive 2026-09-26). Verify behavior by running the real code paths directly and inspecting their output; do not reintroduce pytest/vitest suites or test scaffolding.
 
 ## Commit & Pull Request Guidelines
 

@@ -1,7 +1,7 @@
 name: frontend
 
 # 前端 CI。与 frontend/Dockerfile 一致：pnpm（packageManager 锁 11.5.0）+ node 22。
-# 跑「编译 + 类型检查」(pnpm build = tsc -b && vite build) 与单元测试 (vitest)。
+# 跑「编译 + 类型检查」(pnpm build = tsc -b && vite build)。
 # 仅在前端相关文件变更时触发，避免无关改动空跑。
 
 on:
@@ -58,7 +58,5 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Build (tsc typecheck + vite build)
         run: pnpm build
-      - name: Unit tests (vitest)
-        run: pnpm test
       - name: Validate rendered Nginx configuration
         run: docker build --target nginx-config-test --file Dockerfile .

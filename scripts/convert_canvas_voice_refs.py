@@ -16,8 +16,7 @@ B2 §4 第 3 条：块二（音频节点解耦）把音色解析上移到账号�
 4. 把节点的 `voiceRef` 改写成 `{"scope": "user_custom", "voiceId": ...}`。
 
 **可重入**：改写后的节点 scope 已是 `user_custom`，第二遍不再命中，既不解析、
-也不登记、也不落盘 —— 第二遍是 no-op（`tests/test_convert_canvas_voice_refs_script.py`
-断言之）。
+也不登记、也不落盘 —— 第二遍是 no-op。
 
 **默认 dry-run**，`--apply` 才写。写入走 `canvas_write_lock` ——
 B2 §4 第 3 条要求本转换在块一之后做，靠互斥保证它与用户并发保存不打架。

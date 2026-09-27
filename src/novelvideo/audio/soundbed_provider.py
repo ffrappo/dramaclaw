@@ -7,14 +7,12 @@ thinksound-native (Metal 4), with pluggable architecture for future soundbed mod
 from __future__ import annotations
 
 import asyncio
-import json
 import logging
 import os
 import shutil
 import subprocess
-from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Protocol
+from typing import Protocol
 
 logger = logging.getLogger(__name__)
 
