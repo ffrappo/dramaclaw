@@ -114,6 +114,52 @@ class MediaRelayConfigError(RuntimeError):
     """Raised when the media relay is not configured for URL input."""
 
 
+class DataURIRelay:
+    """Local relay: inline media as ``data:`` URIs. No external storage.
+
+    Fully self-hosted deployments use this when upstream providers (fal,
+    OpenAI-compatible gateways) accept data URIs as reference media. The
+    relay contract is unchanged: bytes in, reference URL string out.
+    """
+
+    _MIME_BY_EXT = {
+        "png": "image/png",
+        "jpg": "image/jpeg",
+        "jpeg": "image/jpeg",
+        "webp": "image/webp",
+        "gif": "image/gif",
+        "mp3": "audio/mpeg",
+        "wav": "audio/wav",
+        "m4a": "audio/mp4",
+        "mp4": "video/mp4",
+        "webm": "video/webm",
+    }
+
+    def upload_bytes(
+        self,
+        data: bytes,
+        *,
+        ext: str = "png",
+        ttl: int = 1800,
+        resource_type: str = "image",
+        object_key: str | None = None,
+    ) -> str:
+        if not data:
+            raise ValueError("cannot relay empty media bytes")
+        ext = _normalize_ext(ext)
+        mime = self._MIME_BY_EXT.get(ext, "application/octet-stream")
+        encoded = base64.b64encode(data).decode("ascii")
+        return f"data:{mime};base64,{encoded}"
+
+    def upload_file(self, path: str | Path, *, ttl: int = 1800) -> str:
+        file_path = Path(path)
+        return self.upload_bytes(
+            file_path.read_bytes(),
+            ext=file_path.suffix.lstrip(".") or "png",
+            ttl=ttl,
+        )
+
+
 class AliyunOSSRelay:
     """Upload transient bytes to Aliyun OSS and return a short-lived signed URL."""
 
@@ -299,6 +345,8 @@ def get_media_relay() -> AliyunOSSRelay | CloudinaryRelay:
         env_cloudinary_folder=getattr(config, "CLOUDINARY_RELAY_FOLDER", ""),
     )
     provider = relay_config.provider
+    if provider == "data_uri":
+        return DataURIRelay()
     if provider == "cloudinary":
         return CloudinaryRelay(
             cloud_name=relay_config.cloud_name,
