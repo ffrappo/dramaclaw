@@ -67,19 +67,19 @@ const PARTIAL_REASON_COPY: Record<
 > = {
   project: {
     key: "episode.renderPlan.partial.reason.project",
-    defaultValue: "当前项目并发已满：剩余 {{fail}} 格要等该项目已有任务完成",
+    defaultValue: "Project concurrency limit reached: {{fail}} remaining slot(s) must wait for current tasks in this project to complete",
   },
   channel: {
     key: "episode.renderPlan.partial.reason.channel",
-    defaultValue: "渠道并发已满：剩余 {{fail}} 格要等同渠道的任务腾出位置",
+    defaultValue: "Channel concurrency limit reached: {{fail}} remaining slot(s) must wait for channel capacity to free up",
   },
   platform: {
     key: "episode.renderPlan.partial.reason.platform",
-    defaultValue: "平台整体并发已满：剩余 {{fail}} 格要等平台腾出位置",
+    defaultValue: "Platform overall concurrency limit reached: {{fail}} remaining slot(s) must wait for platform capacity to free up",
   },
   user: {
     key: "episode.renderPlan.partial.reason.user",
-    defaultValue: "你的并发已满：剩余 {{fail}} 格要等你自己的任务先跑完",
+    defaultValue: "Your concurrency limit reached: {{fail}} remaining slot(s) must wait for your existing tasks to finish",
   },
 };
 
@@ -414,8 +414,7 @@ export function RenderPlanDialog({
       const fail = partial.rejected.filter((item) => item.reason === reason).length;
       const copy = PARTIAL_REASON_COPY[reason];
       if (!copy) {
-        return t("episode.renderPlan.partial.reason.unknown", {
-          defaultValue: "部分任务暂未投递",
+        return t("episode.renderPlan.partial.reason.unknown", { defaultValue: "Some tasks have not been dispatched yet",
         });
       }
       return t(copy.key, { defaultValue: copy.defaultValue, fail });
@@ -497,8 +496,7 @@ export function RenderPlanDialog({
             className="rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-xs text-amber-700 dark:text-amber-300"
           >
             <AlertTriangle className="mr-1 inline size-3" />
-            {t("episode.renderPlan.partial.summary", {
-              defaultValue: "已投 {{ok}} / 被拒 {{fail}}",
+            {t("episode.renderPlan.partial.summary", { defaultValue: "Dispatched {{ok}} / Rejected {{fail}}",
               ok: partial.ok,
               fail: partial.rejected.length,
             })}
@@ -537,7 +535,7 @@ export function RenderPlanDialog({
               onClick={() => void redispatch(partial)}
               disabled={retrying || loading}
             >
-              {t("episode.renderPlan.partial.continue", { defaultValue: "继续" })}
+              {t("episode.renderPlan.partial.continue", { defaultValue: "Continue" })}
             </AlertDialogAction>
           )}
           <AlertDialogAction

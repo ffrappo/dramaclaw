@@ -2697,7 +2697,8 @@
     "pause": "暂停",
     "retry": "重试",
     "requestId": "请求ID",
-    "listSeparator": "、"
+    "listSeparator": "、",
+    "processing": "处理中..."
   },
   "ingest": {
     "title": "虾料",
@@ -4369,7 +4370,18 @@
         "invalidBeats": "选中的 beats 不在当前集范围内",
         "noBeats": "当前集暂无 beats"
       },
-      "paddingCount": "+{{count}}空"
+      "paddingCount": "+{{count}}空",
+      "partial": {
+        "continue": "继续",
+        "summary": "已投 {{ok}} / 被拒 {{fail}}",
+        "reason": {
+          "unknown": "部分任务暂未投递",
+          "project": "当前项目并发已满：剩余 {{fail}} 格要等该项目已有任务完成",
+          "channel": "渠道并发已满：剩余 {{fail}} 格要等同渠道的任务腾出位置",
+          "platform": "平台整体并发已满：剩余 {{fail}} 格要等平台腾出位置",
+          "user": "你的并发已满：剩余 {{fail}} 格要等你自己的任务先跑完"
+        }
+      }
     },
     "renderSettings": {
       "model": "渲染模型",

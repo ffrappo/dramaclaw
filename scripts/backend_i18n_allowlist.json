@@ -14,7 +14,7 @@
   "src/novelvideo/cognee/event_extractor.py": 5,
   "src/novelvideo/cognee/pipeline.py": 56,
   "src/novelvideo/cognee/store.py": 89,
-  "src/novelvideo/generators/video_generator.py": 91,
+  "src/novelvideo/generators/video_generator.py": 90,
   "src/novelvideo/ports/local/tasks.py": 2,
   "src/novelvideo/sqlite_store.py": 12,
   "src/novelvideo/stage_asset_tasks.py": 14,

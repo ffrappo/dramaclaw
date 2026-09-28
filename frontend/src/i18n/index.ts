@@ -9,25 +9,50 @@ import { SUPPORTED, normalize, type Supported } from "./languages";
 
 export { SUPPORTED, normalize, type Supported };
 
+function detectBrowserLanguage(): Supported {
+  if (typeof navigator === "undefined") return "en";
+  const candidates: string[] = [];
+  if (Array.isArray(navigator.languages)) {
+    candidates.push(...navigator.languages);
+  }
+  if (navigator.language) {
+    candidates.push(navigator.language);
+  }
+  for (const candidate of candidates) {
+    if (!candidate) continue;
+    const tag = candidate.toLowerCase().trim();
+    if (tag.startsWith("it")) return "it";
+    if (tag.startsWith("en")) return "en";
+    if (tag.startsWith("zh")) return "zh";
+    if (tag.startsWith("vi")) return "vi";
+  }
+  return "en";
+}
+
 function initialLanguage(): Supported {
   if (typeof window !== "undefined") {
     const queryLanguage = new URLSearchParams(window.location.search).get("lng");
     if (queryLanguage) return normalize(queryLanguage);
   }
-  return normalize(useAppStore.getState().language || "zh");
+  const state = useAppStore.getState();
+  if (state.hasUserSetLanguage && state.language) {
+    return normalize(state.language);
+  }
+  return detectBrowserLanguage();
 }
 
 i18n
   .use(HttpBackend)
   .use(initReactI18next)
   .init({
-    // Default to Chinese unless the user explicitly selects another supported
-    // language via URL or the app language setting.
+    // Default to English (or detected browser language / saved user preference)
+    // unless the user explicitly selects another supported language via URL
+    // or the app language setting.
     lng: initialLanguage(),
-    fallbackLng: "zh",
+    fallbackLng: "en",
     supportedLngs: [...SUPPORTED],
-    // `zh-CN` / `en-US` / `vi-VN` collapse to `zh` / `en` / `vi`, so the
-    // backend loader only has to serve one translation file per language.
+    // `zh-CN` / `en-US` / `vi-VN` / `it-IT` collapse to `zh` / `en` / `vi` / `it`,
+    // so the backend loader only has to serve one translation file per language.
     load: "languageOnly",
     defaultNS: "translation",
     backend: {

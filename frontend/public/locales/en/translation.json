@@ -2697,7 +2697,8 @@
     "pause": "Pause",
     "retry": "Retry",
     "requestId": "Request ID",
-    "listSeparator": ", "
+    "listSeparator": ", ",
+    "processing": "Processing..."
   },
   "ingest": {
     "title": "Story Source",
@@ -4242,7 +4243,7 @@
       "exportZip": "Export ZIP",
       "composeEpisode": "Compose Episode",
       "recomposeEpisode": "Re-compose",
-      "composeTitle": "Confirm compose 「{{title}}」",
+      "composeTitle": "Confirm compose \"{{title}}\"",
       "composeDesc": "Concatenate all beat video clips into a complete episode. This may take a few minutes.",
       "composeDescSubtitles": " (with subtitles)",
       "composeDescBgm": " (with BGM)",
@@ -4369,7 +4370,18 @@
         "invalidBeats": "Selected beats are not in this episode",
         "noBeats": "This episode has no beats yet"
       },
-      "paddingCount": "+{{count}} empty"
+      "paddingCount": "+{{count}} empty",
+      "partial": {
+        "continue": "Continue",
+        "summary": "Dispatched {{ok}} / Rejected {{fail}}",
+        "reason": {
+          "unknown": "Some tasks have not been dispatched yet",
+          "project": "Project concurrency limit reached: {{fail}} remaining slot(s) must wait for current tasks in this project to complete",
+          "channel": "Channel concurrency limit reached: {{fail}} remaining slot(s) must wait for channel capacity to free up",
+          "platform": "Platform overall concurrency limit reached: {{fail}} remaining slot(s) must wait for platform capacity to free up",
+          "user": "Your concurrency limit reached: {{fail}} remaining slot(s) must wait for your existing tasks to finish"
+        }
+      }
     },
     "renderSettings": {
       "model": "Render model",
@@ -7341,7 +7353,7 @@
       "provider": "Provider",
       "providerAliyunOss": "Aliyun OSS",
       "providerCloudinary": "Cloudinary (Free)",
-      "providerHint": "With this provider we suggest leaving 「Fully-managed asset upload」 off; the free tier has a bandwidth quota, so use it only for point-to-point editing / uploads.",
+      "providerHint": "With this provider we suggest leaving \"Fully-managed asset upload\" off; the free tier has a bandwidth quota, so use it only for point-to-point editing / uploads.",
       "currentPlan": "Current upload plan",
       "status": "Current config",
       "source": "Source: {{source}}",

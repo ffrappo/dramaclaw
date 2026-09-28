@@ -360,8 +360,7 @@ export function BeatsTabContent() {
     );
     if (dispatchableItems.length === 0) {
       toast.warning(
-        t("episode.workbench.batch.sketchGroupRunning", {
-          defaultValue: "相同草图组正在运行中",
+        t("episode.workbench.batch.sketchGroupRunning", { defaultValue: "Matching sketch group is already running",
         }),
       );
       return;
@@ -871,8 +870,7 @@ export function BeatsTabContent() {
                   </div>
                   <div className="truncate text-[10px] text-muted-foreground">
                     {lockedSketchItemIds.has(item.id)
-                      ? t("episode.workbench.batch.sketchGroupRunning", {
-                          defaultValue: "相同草图组正在运行中",
+                      ? t("episode.workbench.batch.sketchGroupRunning", { defaultValue: "Matching sketch group is already running",
                         })
                       : item.modeLabel}
                   </div>

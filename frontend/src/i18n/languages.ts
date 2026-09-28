@@ -11,10 +11,10 @@
  * Adding a locale: add the tag here, add `locales/<tag>/translation.json`, and
  * add its label key to `LANGUAGE_LABEL_KEYS` in `components/layout/header.tsx`.
  */
-export const SUPPORTED = ["zh", "en", "vi", "it"] as const;
+export const SUPPORTED = ["en", "it", "zh", "vi"] as const;
 export type Supported = (typeof SUPPORTED)[number];
 
 export function normalize(lng: string | undefined): Supported {
   const two = (lng ?? "").slice(0, 2).toLowerCase();
-  return (SUPPORTED as readonly string[]).includes(two) ? (two as Supported) : "zh";
+  return (SUPPORTED as readonly string[]).includes(two) ? (two as Supported) : "en";
 }

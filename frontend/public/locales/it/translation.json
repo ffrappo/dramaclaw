@@ -375,7 +375,7 @@
         "version": "Versione",
         "pending": "Verifica in corso",
         "released": "Rilasciata",
-        "macValue": "12+ · Apple silicon",
+        "macValue": "12+ · Apple Silicon",
         "windowsValue": "10+ · x64",
         "autoUpdate": "Aggiornamento automatico",
         "autoUpdateValue": "Attivo",
@@ -559,8 +559,8 @@
       "desc": "Seleziona un file spritesheet.webp (obbligatorio) e un pet. (facoltativo) scaricati da petdex; saranno disponibili nella galleria.",
       "spritesheetTitle": "Clicca o trascina spritesheet.webp",
       "spritesheetHint": "Obbligatorio · spritesheet webp / png",
-      "jsonTitle": "Click or drop pet.json",
-      "jsonHint": "Optional · used for the name",
+      "jsonTitle": "Fai clic o trascina pet.json",
+      "jsonHint": "Opzionale · usato per il nome",
       "choose": "Scegli file",
       "replace": "Sostituisci",
       "gridError": "Lo spritesheet {{w}}×{{h}} non è un multiplo di una griglia {{cols}}×{{rows}}, quindi i frame non verranno ritagliati correttamente. Usa uno standard 8×9 oppure dichiara le colonne/righe corrette in pet..",
@@ -582,9 +582,9 @@
     },
     "debug": {
       "suffix": " Debug",
-      "auto": "Auto",
+      "auto": "Automatico",
       "companionPicker": "Compagno",
-      "festivalPreview": "Festival",
+      "festivalPreview": "Anteprima festival",
       "noFestival": "Nessun festival",
       "stateSimulation": "Simulazione stato",
       "accessoryPreview": "Accessorio",
@@ -925,7 +925,7 @@
       "restore": "Sincronizza",
       "restoreBusy": "Sincronizzazione in corso",
       "restoreMenu": "Sincronizza vista mainline",
-      "sourceCanvas": "Mainline",
+      "sourceCanvas": "Principale",
       "sourceCanvasTitle": "Torna alla tela mainline di origine: {{canvasId}}",
       "backToSource": "Torna alla tela mainline di origine",
       "conflictCopy": "Copia di conflitto",
@@ -1009,7 +1009,7 @@
       },
       "roles": {
         "current_sketch": "Schizzo",
-        "current_frame": "Frame",
+        "current_frame": "Fotogramma",
         "current_video": "Video",
         "current_audio": "Audio",
         "selected_background": "Sfondo",
@@ -1055,7 +1055,7 @@
       "cancel": "Annulla",
       "currentFrame": "Frame corrente",
       "sentToCanvas": "Inviato alla canvas: {{name}}",
-      "unnamedAsset": "asset",
+      "unnamedAsset": "risorsa",
       "replaceTargetUnknown": "Impossibile determinare una destinazione di commit per \"{{label}}\" (tipo={{kind}} / ruolo={{role}})",
       "replaceCommitted": "Eseguito commit su \"{{label}}\"",
       "replaceDone": "\"{{label}}\" sostituito con il nodo della canvas",
@@ -1140,7 +1140,7 @@
     "commit": {
       "title": "Esegui commit nell'asset principale",
       "projectLine": "Progetto: {{project}}",
-      "submit": "Commit",
+      "submit": "Applica",
       "submitting": "Commit in corso",
       "targetIncomplete": "Destinazione incompleta",
       "directorWorldState": "Stato del mondo director",
@@ -1336,7 +1336,7 @@
       "download": "Scarica",
       "deleted": "{{name}} eliminato",
       "deleteFailed": "Eliminazione non riuscita: {{detail}}",
-      "itemFallbackName": "asset",
+      "itemFallbackName": "risorsa",
       "assetName": "Nome dell'asset",
       "assetNamePlaceholder": "Inserisci un nome per l'asset"
     },
@@ -1455,7 +1455,7 @@
       "completed": "Completato"
     },
     "domain": {
-      "mainline": "Mainline",
+      "mainline": "Principale",
       "freezone": "Freezone",
       "all": "Mainline e Freezone"
     },
@@ -1563,7 +1563,7 @@
       "pendingConfiguration": "Configurazione in attesa",
       "packageViews": {
         "packages": "Pacchetti di crediti",
-        "enterprise": "Enterprise"
+        "enterprise": "Aziendale"
       },
       "packageTiers": {
         "choose": "Scegli un'opzione di acquisto {{tier}}",
@@ -2305,7 +2305,7 @@
     },
     "roleLabel": {
       "viewer": "Visualizzatore",
-      "editor": "Editor",
+      "editor": "Redattore",
       "admin": "Amministratore",
       "owner": "Proprietario"
     },
@@ -2428,7 +2428,7 @@
     },
     "role": {
       "viewer": "Visualizzatore",
-      "editor": "Editor",
+      "editor": "Redattore",
       "admin": "Amministratore",
       "owner": "Proprietario"
     }
@@ -2691,7 +2691,8 @@
     "pause": "Pausa",
     "retry": "Riprova",
     "requestId": "ID richiesta",
-    "listSeparator": ", "
+    "listSeparator": ", ",
+    "processing": "Elaborazione in corso..."
   },
   "ingest": {
     "title": "Fonte della storia",
@@ -2831,7 +2832,7 @@
     "projectTypeLocked": "Il tipo di progetto è bloccato dopo l'importazione. Reimporta per cambiarlo.",
     "projectTypes": {
       "narrated": "Con narrazione",
-      "drama": "Premium drama"
+      "drama": "Serie drammatica"
     },
     "visualStyles": {
       "anime": "Anime",
@@ -3031,7 +3032,7 @@
       "freezone_analyze": "Analizza video",
       "freezone_video_story": "Leggi video",
       "freezone_video_erase": "Rimuovi dal video",
-      "freezone_video_upscale": "Upscale video",
+      "freezone_video_upscale": "Miglioramento risoluzione video",
       "freezone_audio_separate": "Separa audio",
       "freezone_video_compose": "Componi video",
       "freezone_text_translate": "Traduci sottotitoli",
@@ -3222,7 +3223,7 @@
       "currentStoryboard": "Storyboard attuale",
       "directorComposite": "Composizione regista",
       "inputReference": "Riferimento in ingresso",
-      "masterReverse": "Master + reverse",
+      "masterReverse": "Master + controcampo",
       "pano360": "Panoramica a 360°",
       "sceneMasterReverse": "Scena master + reverse",
       "sketchBackgroundIdentityProps": "Schizzo + sfondo + personaggi/elementi",
@@ -3262,7 +3263,7 @@
       "reconnecting": "Riconnessione…",
       "polling": "Interrogazione…",
       "failed": "Connessione non riuscita",
-      "offline": "Offline",
+      "offline": "Non in linea",
       "running": "{{count}} in corso",
       "lastDone": "Ultima: {{label}} {{relative}}",
       "generationRunning": "Generazione in corso",
@@ -3589,9 +3590,9 @@
       "deleteManualShotSuccess": "Shot manuale Beat #{{n}} eliminata",
       "deleteManualShotFailed": "Impossibile eliminare la shot manuale",
       "insertBefore": "Inserisci shot manuale prima della Beat #{{n}}",
-      "insertBeforeShort": "Pre",
+      "insertBeforeShort": "Prima",
       "insertAfter": "Inserisci shot manuale dopo la Beat #{{n}}",
-      "insertAfterShort": "Post",
+      "insertAfterShort": "Dopo",
       "openFreezone": "Apri XiPaint Beat Workbench",
       "openFreezoneTip": "Modifica in Freezone",
       "openFreezoneFailed": "Impossibile aprire XiPaint",
@@ -3660,7 +3661,7 @@
         "keyframePrompt": "Prompt del keyframe",
         "videoPrompt": "Prompt del video",
         "firstFrame": "Primo fotogramma",
-        "keyframe": "Keyframe",
+        "keyframe": "Fotogramma chiave",
         "speaker": "Parlante",
         "narrator": "Narratore",
         "projectNarrator": "Narratore del progetto",
@@ -3826,7 +3827,7 @@
         "seedance2GuidanceSubject": "Soggetto",
         "seedance2GuidanceScene": "Scena",
         "seedance2GuidanceLighting": "Illuminazione",
-        "seedance2GuidanceCamera": "Camera",
+        "seedance2GuidanceCamera": "Telecamera",
         "seedance2GuidanceStyle": "Stile",
         "seedance2GuidanceNoSubtitle": "Nessun sottotitolo",
         "seedance2GuidanceSubjectTemplate": "Soggetto: definisci il personaggio o l'oggetto principale, la sua azione e stato attuale, ed evita soggetti focali in competizione.",
@@ -3930,7 +3931,7 @@
         "colorBindings": "Associazioni colori",
         "reassignColors": "Riassegna colori",
         "identityColors": "Identità",
-        "propColors": "Props",
+        "propColors": "Oggetti di scena",
         "aiDetectResults": "Risultati IA",
         "aiDetectResultCounts": "{{beats}} beat / {{identities}} identità / {{props}} prop",
         "openGridGallery": "Griglia bozze",
@@ -4236,7 +4237,7 @@
       "exportZip": "Esporta ZIP",
       "composeEpisode": "Componi episodio",
       "recomposeEpisode": "Ricomponi",
-      "composeTitle": "Conferma composizione di 「{{title}}」",
+      "composeTitle": "Conferma composizione di \"{{title}}\"",
       "composeDesc": "Concatena tutte le clip video dei beat in un episodio completo. L'operazione potrebbe richiedere alcuni minuti.",
       "composeDescSubtitles": " (con sottotitoli)",
       "composeDescBgm": " (con BGM)",
@@ -4363,7 +4364,18 @@
         "invalidBeats": "Le battute selezionate non appartengono a questo episodio",
         "noBeats": "Questo episodio non ha ancora battute"
       },
-      "paddingCount": "+{{count}} vuote"
+      "paddingCount": "+{{count}} vuote",
+      "partial": {
+        "continue": "Continua",
+        "summary": "Inviati {{ok}} / Rifiutati {{fail}}",
+        "reason": {
+          "unknown": "Alcune attività non sono state ancora inviate",
+          "project": "Limite di concorrenza del progetto raggiunto: {{fail}} slot rimanente/i in attesa del completamento delle attività in corso",
+          "channel": "Limite di concorrenza del canale raggiunto: {{fail}} slot rimanente/i in attesa che si liberi capacità nel canale",
+          "platform": "Limite di concorrenza globale della piattaforma raggiunto: {{fail}} slot rimanente/i in attesa che la piattaforma si liberi",
+          "user": "Limite di concorrenza personale raggiunto: {{fail}} slot rimanente/i in attesa che le tue attività attuali terminino"
+        }
+      }
     },
     "renderSettings": {
       "model": "Modello di rendering",
@@ -4392,15 +4404,15 @@
   "styles": {
     "createStyle": "Crea stile",
     "projectDefault": "Predefinito del progetto",
-    "preset": "Preset",
+    "preset": "Predefinito",
     "custom": "Personalizzato",
     "customPreviewEmpty": "Nessuna immagine di riferimento caricata",
     "uploadedPreview": "Anteprima dell'immagine di riferimento caricata",
     "analyzingPreview": "Analisi dell'immagine di riferimento…",
     "styleIdRequiredBeforeUpload": "Inserisci un ID stile prima di caricare un'immagine di riferimento",
     "unsupportedPreviewType": "Usa un'immagine PNG, JPEG, WebP o GIF.",
-    "jsonFormatError": "Invalid JSON",
-    "jsonChangesApplied": "JSON changes applied",
+    "jsonFormatError": "JSON non valido",
+    "jsonChangesApplied": "Modifiche JSON applicate",
     "styleSaved": "Stile salvato",
     "setAsDefault": "Imposta \"{{name}}\" come predefinito del progetto",
     "confirmDelete": "Eliminare lo stile personalizzato \"{{name}}\"?",
@@ -4414,9 +4426,9 @@
     "styleTag": "Tag di stile",
     "styleTagHint": "Breve identificatore di stile iniettato in modalità render",
     "styleTagPlaceholder": "es. ANIME",
-    "configJson": "Config (JSON)",
+    "configJson": "Configurazione (JSON)",
     "structuredEdit": "Modifica strutturata",
-    "jsonEdit": "JSON edit",
+    "jsonEdit": "Modifica JSON",
     "save": "Salva",
     "alreadyDefault": "Già predefinito del progetto",
     "applyToProject": "Applica al progetto",
@@ -4725,7 +4737,7 @@
       "maxSelectable": "Puoi selezionare al massimo {{count}}",
       "select": "Seleziona",
       "viewDetailsAria": "Visualizza dettagli di {{name}}",
-      "assetFallbackName": "asset",
+      "assetFallbackName": "risorsa",
       "unnamed": "(Senza titolo)",
       "emptySearchTitle": "Nessun asset corrispondente",
       "emptyAllTitle": "Nessun asset",
@@ -4741,7 +4753,7 @@
       "changeCover": "Cambia copertina",
       "pageAria": "Pagina {{page}}",
       "perPage": "{{size}} / pagina",
-      "itemCount_one": "{{count}} asset",
+      "itemCount_one": "{{count}} risorsa",
       "itemCount_other": "{{count}} asset",
       "upload": {
         "title": "Carica asset",
@@ -5044,7 +5056,7 @@
       },
       "scene_master_candidate": {
         "name": "Candidato scene master",
-        "shortName": "Scene master",
+        "shortName": "Master scena",
         "description": "Genera o ripara un candidato scene master, poi Confermalo nello slot scene_master."
       },
       "scene_360_candidate": {
@@ -5232,7 +5244,7 @@
       "free": "Candidato libero · arriva su questo nodo, scegli la risorsa di destinazione al commit"
     },
     "cameraPicker": {
-      "title": "Camera",
+      "title": "Inquadratura",
       "body": "Corpo",
       "lens": "Obiettivo",
       "focal": "Lunghezza focale",
@@ -5582,7 +5594,7 @@
   },
   "upscaleEditor": {
     "title": "Upscale HD",
-    "providerLabel": "Provider",
+    "providerLabel": "Fornitore",
     "modelLabel": "Modello",
     "qualityLabel": "Qualità",
     "scaleLabel": "Scala",
@@ -5592,7 +5604,7 @@
       "general": "Generale"
     },
     "modelPicker": {
-      "provider": "Provider",
+      "provider": "Fornitore",
       "model": "Modello",
       "empty": "Nessun modello disponibile"
     },
@@ -5629,7 +5641,7 @@
       "s9_16": "9:16"
     },
     "modelPicker": {
-      "provider": "Provider",
+      "provider": "Fornitore",
       "model": "Modello",
       "empty": "Nessun modello disponibile"
     }
@@ -5642,7 +5654,7 @@
     },
     "tabs": {
       "global": "Globale",
-      "smart": "Smart"
+      "smart": "Intelligente"
     },
     "smartToggle": "Modalità smart",
     "smartPlaceholder": "Descrivi l'illuminazione desiderata, es. luce soffusa del mattino da davanti a sinistra, atmosfera cinematografica calda.",
@@ -5652,8 +5664,8 @@
     "color": "Temperatura colore",
     "mainLight": "Luce principale",
     "rimLight": "Controluce",
-    "rimLightOn": "On",
-    "rimLightOff": "Off",
+    "rimLightOn": "Attivo",
+    "rimLightOff": "Disattivo",
     "directions": {
       "left": "Sinistra",
       "top": "Alto",
@@ -5696,17 +5708,17 @@
     }
   },
   "modelPicker": {
-    "provider": "Provider",
+    "provider": "Fornitore",
     "model": "Modello",
     "empty": "Nessun modello disponibile"
   },
   "modelParams": {
-    "provider": "Provider",
+    "provider": "Fornitore",
     "model": "Modello",
     "providerKeyRequiredTitle": "Chiave API del provider richiesta",
     "providerKeyRequiredDesc": "{{provider}} non è ancora configurato. Aggiungi la sua chiave API nelle Impostazioni prima di utilizzarlo.",
     "goConfigure": "Vai alla configurazione",
-    "autoAspectRatio": "Auto",
+    "autoAspectRatio": "Automatico",
     "quality": "Qualità",
     "aspectRatio": "Proporzioni",
     "enableWebSearch": "Abilita ricerca web",
@@ -5797,7 +5809,7 @@
         "first_last_frame": "Primo e ultimo fotogramma"
       },
       "markButton": "Contrassegna",
-      "cameraButton": "Camera",
+      "cameraButton": "Inquadratura",
       "assetLibraryTitle": "Scegli un riferimento dalla libreria delle risorse (personaggi / scene / oggetti)",
       "assetLibrary": "Libreria delle risorse",
       "insertRef": "Inserisci {{label}}"
@@ -5810,7 +5822,7 @@
         "empty": "Nessun contesto colore disponibile per questo nodo"
       },
       "aspect": {
-        "auto": "Auto"
+        "auto": "Automatico"
       },
       "quality": {
         "low": "Bassa",
@@ -5858,7 +5870,7 @@
         "resolution": "Risoluzione",
         "aspect": "Proporzioni"
       },
-      "camera": "Camera",
+      "camera": "Inquadratura",
       "countValue": "×{{count}}"
     },
     "beatContextNode": {
@@ -6034,7 +6046,7 @@
       },
       "aspect": {
         "title": "Proporzioni",
-        "auto": "Auto"
+        "auto": "Automatico"
       },
       "quality": {
         "title": "Qualità"
@@ -6198,8 +6210,8 @@
         "loadFailedDetail": "Caricamento non riuscito: {{detail}}",
         "loading": "Caricamento in corso…",
         "frontSet": "Vista corrente impostata come davanti: {{yaw}}°",
-        "jsonCopied": "Correction JSON copied to clipboard",
-        "jsonNoClipboard": "Correction JSON generated (clipboard unavailable — see console)",
+        "jsonCopied": "JSON di correzione copiato negli appunti",
+        "jsonNoClipboard": "JSON di correzione generato (appunti non disponibili — vedi console)",
         "snapDone": "Vista corrente acquisita",
         "snapFailed": "Acquisizione non riuscita",
         "snapFailedDetail": "Acquisizione non riuscita: {{detail}}",
@@ -6244,7 +6256,7 @@
       },
       "actionGroup": "Gruppo {{action}}",
       "column": {
-        "shot_no": "Shot #",
+        "shot_no": "Inquadratura n.",
         "duration": "Durata",
         "visual_description": "Descrizione visiva",
         "character_1": "Personaggio 1",
@@ -6454,7 +6466,7 @@
         "voiceAndSfx": "Voce / Effetti sonori",
         "imagePrompt": "Prompt immagine",
         "videoMotionPrompt": "Prompt di movimento video",
-        "keyframeUrl": "Keyframe"
+        "keyframeUrl": "Fotogramma chiave"
       },
       "emptyTitle": "Nessuno shot rilevato",
       "emptyDetail": "La risposta non conteneva righe di shot utilizzabili. La risposta originale è riportata di seguito così puoi verificare cosa ha restituito l'API.",
@@ -6638,7 +6650,7 @@
       "actionPropTitle": "Oggetto",
       "actionPropSub": "Cicla gli oggetti creabili / clic destro per creare",
       "actionStagingTitle": "Staging AI",
-      "actionStagingValue": "{{count}} staging",
+      "actionStagingValue": "{{count}} allestimenti",
       "actionStagingSub": "Cicla gli staging / clic destro per creazione AI",
       "actionExportTitle": "Esporta",
       "actionExportValue": "combinato + env + meta",
@@ -6669,7 +6681,7 @@
         "stage": "Scena",
         "add": "Aggiungi",
         "selection": "Selezione",
-        "output": "Output"
+        "output": "Uscita"
       },
       "sourceCalibration": {
         "title": "Calibrazione del mondo",
@@ -6936,7 +6948,7 @@
       "skillNoMasterImage": "Questa scena non ha un'immagine principale",
       "skillNoReverseImage": "Questa scena non ha un'immagine inversa",
       "skillNoDirectorBackground": "Questa inquadratura non ha ancora uno sfondo del regista",
-      "skillFallbackTitle": "Skill",
+      "skillFallbackTitle": "Abilità",
       "skillLoading": "Caricamento skill…",
       "skillUnknown": "Skill sconosciuta",
       "sceneRestored": "Ultima scena salvata ripristinata"
@@ -7099,7 +7111,7 @@
         "savedKeyPlaceholder": "Salvata · {{preview}} (inserisci un nuovo valore per sostituirla)",
         "fixJsonFirst": "Correggi prima il JSON del profilo. I campi per le chiavi dei canali appariranno qui una volta analizzato correttamente.",
         "editJson": "Visualizza o modifica il JSON del profilo",
-        "jsonHint": "channels defines providers. Feature models, embedding, and each media model select one through channel. Duplicate providers are not supported yet.",
+        "jsonHint": "channels definisce i provider. I modelli delle funzionalità, gli embedding e ciascun modello multimediale ne selezionano uno tramite channel. I provider duplicati non sono ancora supportati.",
         "recommendedJsonHint": "Il profilo consigliato è un modello integrato di sola lettura. Passa a La mia configurazione per modificare e salvare il tuo profilo.",
         "apply": "Salva e applica tutto",
         "applyHint": "Scrive l'intera configurazione in una volta sola. Usa le Impostazioni avanzate qui sotto per modifiche singole.",
@@ -7178,7 +7190,7 @@
         "syncChannel": "Aggiorna canale NewAPI",
         "syncChannelHint": "Aggiorna immediatamente la chiave e il Base URL del canale NewAPI esistente per questo provider senza modificare le mappature dei modelli.",
         "channelSynced": "Canale NewAPI aggiornato.",
-        "channelProvider": "Provider",
+        "channelProvider": "Fornitore",
         "upstreamKey": "Chiave API upstream",
         "baseUrlOverride": "Override Base URL",
         "baseUrlPlaceholder": "Di norma vuoto; usa il preset del provider",
@@ -7332,10 +7344,10 @@
       "title": "Image Host / Archiviazione media",
       "description": "Configura il relay temporaneo per i media di riferimento usato da NewAPI/modelli upstream, con Aliyun OSS o Cloudinary.",
       "fullyManagedUpload": "Upload risorse completamente gestito",
-      "provider": "Provider",
+      "provider": "Fornitore",
       "providerAliyunOss": "Aliyun OSS",
       "providerCloudinary": "Cloudinary (Gratuito)",
-      "providerHint": "Con questo provider suggeriamo di lasciare disattivato「Upload risorse completamente gestito」; il piano gratuito ha una quota di larghezza di banda, quindi usalo solo per modifiche/upload point-to-point.",
+      "providerHint": "Con questo provider suggeriamo di lasciare disattivato \"Upload risorse completamente gestito\"; il piano gratuito ha una quota di larghezza di banda, quindi usalo solo per modifiche/upload point-to-point.",
       "currentPlan": "Piano di upload corrente",
       "status": "Configurazione corrente",
       "source": "Origine: {{source}}",

@@ -2601,7 +2601,8 @@
     "pause": "Tạm dừng",
     "retry": "Thử lại",
     "requestId": "Request ID",
-    "listSeparator": ", "
+    "listSeparator": ", ",
+    "processing": "Đang xử lý..."
   },
   "ingest": {
     "title": "Nguồn truyện",
@@ -4273,7 +4274,18 @@
         "invalidBeats": "Các beat đã chọn không thuộc tập phim này",
         "noBeats": "Tập này chưa có beat nào"
       },
-      "paddingCount": "+{{count}} ô trống"
+      "paddingCount": "+{{count}} ô trống",
+      "partial": {
+        "continue": "Tiếp tục",
+        "summary": "Đã gửi {{ok}} / Bị từ chối {{fail}}",
+        "reason": {
+          "unknown": "Một số tác vụ chưa được điều phối",
+          "project": "Đã đạt giới hạn đồng thời của dự án: còn lại {{fail}} ô cần đợi các tác vụ hiện tại trong dự án hoàn thành",
+          "channel": "Đã đạt giới hạn đồng thời của kênh: còn lại {{fail}} ô cần đợi giải phóng dung lượng trên kênh",
+          "platform": "Đã đạt giới hạn đồng thời toàn nền tảng: còn lại {{fail}} ô cần đợi nền tảng giải phóng dung lượng",
+          "user": "Đã đạt giới hạn đồng thời của bạn: còn lại {{fail}} ô cần đợi các tác vụ của bạn chạy xong"
+        }
+      }
     },
     "renderSettings": {
       "model": "Model render",

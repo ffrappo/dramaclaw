@@ -469,8 +469,7 @@ export function humanizeTaskError(
 ): string {
   const fallback = raw && raw.trim() ? raw : t("common.error");
   if (raw && /billing rule is not configured/i.test(raw)) {
-    return t("common.billingRuleNotConfigured", {
-      defaultValue: "计费规则未配置，请联系管理员设置积分规则",
+    return t("common.billingRuleNotConfigured", { defaultValue: "Billing rule is not configured. Please contact an administrator to set credit pricing.",
     });
   }
   const reviewMessage = raw ? humanReviewAssetMessage(raw, t) : null;

@@ -27,6 +27,7 @@ export type DashboardView = "card" | "list";
 
 interface AppState {
   language: string;
+  hasUserSetLanguage?: boolean;
   theme: Theme;
   dashboardTab: ProjectStatus;
   dashboardView: DashboardView;
@@ -123,7 +124,8 @@ function persistedCompanionPet(pet: AppState["companionPet"]): AppState["compani
 export const useAppStore = create<AppState>()(
   persist(
     (set) => ({
-      language: "zh",
+      language: "",
+      hasUserSetLanguage: false,
       theme: "dark",
       dashboardTab: "active",
       dashboardView: "card",
@@ -137,7 +139,7 @@ export const useAppStore = create<AppState>()(
       companionHidden: false,
       toggleAiAssistant: () =>
         set((s) => ({ aiAssistantOpen: !s.aiAssistantOpen })),
-      setLanguage: (lang) => set({ language: lang }),
+      setLanguage: (lang) => set({ language: lang, hasUserSetLanguage: true }),
       setTheme: (theme) => set({ theme }),
       setDashboardTab: (tab) => set({ dashboardTab: tab }),
       setDashboardView: (view) => set({ dashboardView: view }),
@@ -168,11 +170,19 @@ export const useAppStore = create<AppState>()(
     {
       name: "supertale-app",
       storage: createJSONStorage(() => quotaSafeStateStorage),
-      version: 7,
+      version: 8,
       migrate: (persisted: unknown, fromVersion: number) => {
         const base = (persisted ?? {}) as Record<string, unknown>;
         delete base.sidebarCollapsed;
         delete base.sidebarWidth;
+        if (fromVersion < 8) {
+          if (base.language && base.language !== "zh") {
+            base.hasUserSetLanguage = true;
+          } else {
+            base.hasUserSetLanguage = false;
+            base.language = "";
+          }
+        }
         if (fromVersion < 6) {
           base.companionXPercent = null;
           base.companionYPercent = null;
